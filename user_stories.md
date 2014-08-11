@@ -1,6 +1,7 @@
 User Stories for Ticket To Ride
 
 As a user, I can host a new game
+As a user, I can see a list of games I can join
 As a user, I can join an existing game
 
 As a host, I can start the game

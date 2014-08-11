@@ -1,19 +1,53 @@
-Player
-  has many cards_in_hand
-  has many destination cards
+User
+  A user of the site
+  email
+  devise stuff
+  games
 
-RailcarCard
+Player
+  A player in a Game
+
+  has a user
+  has Rail Car Cards in hand
+  has accepted dest tickets
+  has rail car count
+
+Game
+  A game of Ticket to Ride
+
+  has users
+  has a game state
+  join game!
+
+GameState
+  The persistent state of a game
+
+  has players
+  has cities
+  has routes
+  has RailCarDeck
+  has current_player???? - need to think about how to handle turns
+
+RailCarDeck
+  cards
+  draw!
+
+RailCarCard
   color
 
-DestinationCard
-  route
-  route_value
+DestinationTicket
+  city_a
+  city_b
+  points
 
 City
-  has many routes
+  name
+  location
+  routes
 
 Route
-  origin_city
-  destination_city
-  owner, default: unclaimed
+  city_a
+  city_b
   color
+  cost
+  owner (Player)
