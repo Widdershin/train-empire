@@ -23,11 +23,8 @@ RSpec.describe GamesController, :type => :controller do
     end
   end
 
-  describe "GET create" do
-    it "returns http success" do
-      get :create
-      expect(response).to be_success
-    end
+  describe "POST create" do
+    it ""
   end
 
 end

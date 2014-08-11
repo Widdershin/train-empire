@@ -16,3 +16,5 @@ Is it important for players to see what other players did?
 
 
 How are turns handled? How is midturn state handled? (ie, I draw one specific card, and now can draw another)
+
+How should I handle authorization?
