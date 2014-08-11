@@ -43,6 +43,8 @@ gem 'devise'
 group :test, :development do
   gem 'rspec-rails'
   gem 'cucumber'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
 group :test do

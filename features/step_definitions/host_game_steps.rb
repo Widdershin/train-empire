@@ -1,11 +1,7 @@
 Given(/^I am logged in$/) do
   test_password = 'foo@bar.com'
 
-  @user = User.create!(
-    email: 'foo@bar.com',
-    password: test_password,
-    password_confirmation: test_password
-  )
+  @user = create :user
 
   visit '/users/sign_in'
   fill_in 'Email', with: 'foo@bar.com'

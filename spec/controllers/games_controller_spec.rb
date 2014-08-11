@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe GamesController, :type => :controller do
 
+  let (:user) { create :user }
+  before { sign_in user }
+
   describe "GET show" do
     it "returns http success" do
       get :show, id: 1
