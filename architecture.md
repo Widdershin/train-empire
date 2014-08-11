@@ -4,6 +4,9 @@ User
   devise stuff
   games
 
+  can join a game
+  can host a game
+
 Player
   A player in a Game
 
