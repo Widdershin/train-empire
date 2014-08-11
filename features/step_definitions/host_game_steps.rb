@@ -1,11 +1,9 @@
 Given(/^I am logged in$/) do
-  test_password = 'foo@bar.com'
-
   @user = create :user
 
   visit '/users/sign_in'
-  fill_in 'Email', with: 'foo@bar.com'
-  fill_in 'Password', with: test_password
+  fill_in 'Email', with: @user.email
+  fill_in 'Password', with: 'swordfish'
   click_button 'Sign in'
 end
 
