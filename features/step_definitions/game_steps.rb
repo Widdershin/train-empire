@@ -7,6 +7,11 @@ Given(/^I am logged in$/) do
   click_button 'Sign in'
 end
 
+Given(/^someone else has hosted a game$/) do
+  @other_user = create :user
+  @game = @other_user.host_game
+end
+
 Given(/^I am in a game$/) do
   @game = @user.host_game
 end
