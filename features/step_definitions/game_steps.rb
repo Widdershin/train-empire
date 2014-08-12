@@ -26,3 +26,11 @@ end
 Then(/^I should see the game I am in$/) do
   expect(page).to have_content "Game: #{@game.id}"
 end
+
+When(/^I click on the game$/) do
+  click_link "Game: #{@game.id}"
+end
+
+Then(/^I should see the page for the game$/) do
+  expect(current_path).to eq game_path(@game)
+end
