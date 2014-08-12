@@ -39,3 +39,7 @@ end
 Then(/^I should see the page for the game$/) do
   expect(current_path).to eq game_path(@game)
 end
+
+Then(/^I should see my username$/) do
+  expect(page).to have_content @user.username
+end
