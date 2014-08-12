@@ -1,12 +1,3 @@
-Given(/^I am logged in$/) do
-  @user = create :user
-
-  visit '/users/sign_in'
-  fill_in 'Email', with: @user.email
-  fill_in 'Password', with: 'swordfish'
-  click_button 'Sign in'
-end
-
 Given(/^someone else has hosted a game$/) do
   @other_user = create :user
   @game = @other_user.host_game
