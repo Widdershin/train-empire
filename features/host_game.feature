@@ -6,5 +6,5 @@ Feature: Hosting Games
     Scenario: Hosting a new game
         Given I am logged in
         When I visit the games page
-        And click on the host game button
+        And I click on the host game button
         Then I should see a new game

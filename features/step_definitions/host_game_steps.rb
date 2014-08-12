@@ -11,7 +11,7 @@ When(/^I visit the games page$/) do
   visit '/games'
 end
 
-When(/^click on the host game button$/) do
+When(/^I click on the host game button$/) do
   click_link 'Host Game'
 end
 
