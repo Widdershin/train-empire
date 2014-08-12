@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   it { should have_many :games }
 
-  let (:user) { User.create }
+  let (:user) { create :user }
   let (:game) { Game.create }
 
   it 'hosts a new game' do

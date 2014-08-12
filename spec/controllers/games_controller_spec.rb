@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe GamesController, :type => :controller do
 
+  let (:user) { create :user }
+  before { sign_in user }
+
   describe "GET show" do
     it "returns http success" do
       get :show, id: 1
@@ -24,7 +27,13 @@ RSpec.describe GamesController, :type => :controller do
   end
 
   describe "POST create" do
-    it ""
+    before { post :create }
+
+    it "creates a game" do
+      expect(user.games.first).to be_a Game
+    end
+
+    it { should redirect_to game_path(user.games.first) }
   end
 
 end

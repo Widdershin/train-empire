@@ -1,15 +1,9 @@
 Given(/^I am logged in$/) do
-  test_password = 'foo@bar.com'
-
-  @user = User.create!(
-    email: 'foo@bar.com',
-    password: test_password,
-    password_confirmation: test_password
-  )
+  @user = create :user
 
   visit '/users/sign_in'
-  fill_in 'Email', with: 'foo@bar.com'
-  fill_in 'Password', with: test_password
+  fill_in 'Email', with: @user.email
+  fill_in 'Password', with: 'swordfish'
   click_button 'Sign in'
 end
 
@@ -17,7 +11,7 @@ When(/^I visit the games page$/) do
   visit '/games'
 end
 
-When(/^click on the host game button$/) do
+When(/^I click on the host game button$/) do
   click_link 'Host Game'
 end
 

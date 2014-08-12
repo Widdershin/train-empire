@@ -11,5 +11,8 @@ class GamesController < ApplicationController
   end
 
   def create
+    new_game = current_user.host_game
+
+    redirect_to new_game
   end
 end
