@@ -8,6 +8,8 @@ class GamesController < ApplicationController
   end
 
   def index
+    @active_games = current_user.games
+    @joinable_games = Game.all - @active_games
   end
 
   def create
