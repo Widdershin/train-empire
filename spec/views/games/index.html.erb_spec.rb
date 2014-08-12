@@ -1,12 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe "games/index.html.erb", :type => :view do
-  it "displays the games you are currently in" do
-    game = Game.create
-    assign :active_games, [game]
+  let (:game1) { Game.create }
+  let (:game2) { Game.create }
 
+  before do
+    assign :active_games, [game1]
+    assign :joinable_games, [game2]
     render
+  end
 
-    expect(rendered).to include "Game: #{game.id}"
+  it "displays the games you are currently in" do
+    expect(rendered).to include "Game: #{game1.id}"
+  end
+
+  it "displays the games you can join" do
+    expect(rendered).to include "Game: #{game2.id}"
   end
 end
