@@ -27,11 +27,13 @@ RSpec.describe GamesController, :type => :controller do
   end
 
   describe "POST create" do
-    it "creates a game" do
-      post :create
+    before { post :create }
 
+    it "creates a game" do
       expect(user.games.first).to be_a Game
     end
+
+    it { should redirect_to game_path(user.games.first) }
   end
 
 end
