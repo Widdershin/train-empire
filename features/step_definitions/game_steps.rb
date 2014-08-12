@@ -7,6 +7,10 @@ Given(/^I am logged in$/) do
   click_button 'Sign in'
 end
 
+Given(/^I am in a game$/) do
+  @game = @user.host_game
+end
+
 When(/^I visit the games page$/) do
   visit '/games'
 end
@@ -17,4 +21,8 @@ end
 
 Then(/^I should see a new game$/) do
   expect(page).to have_content 'Welcome to your new game'
+end
+
+Then(/^I should see the game I am in$/) do
+  expect(page).to have_content "Game: #{@game.id}"
 end
