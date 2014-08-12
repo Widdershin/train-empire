@@ -24,6 +24,10 @@ When(/^I click on the host game button$/) do
   click_link 'Host Game'
 end
 
+When(/^I visit that game$/) do
+  visit game_path @game
+end
+
 Then(/^I should see a new game$/) do
   expect(page).to have_content 'Welcome to your new game'
 end

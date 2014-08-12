@@ -6,5 +6,5 @@ Feature: Player List
     Scenario: Finding my name
         Given I am logged in
         And I am in a game
-        When I visit the games page
+        When I visit that game
         Then I should see my username
