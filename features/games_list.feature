@@ -3,7 +3,7 @@ Feature: Games List
     As a user
     I want to see games I can play
 
-    Scenario: Games I am in
+    Scenario: Seeing games I am in
         Given I am logged in
         And I am in a game
         When I visit the games page

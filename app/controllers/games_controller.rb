@@ -8,6 +8,7 @@ class GamesController < ApplicationController
   end
 
   def index
+    @active_games = current_user.games
   end
 
   def create
