@@ -27,7 +27,11 @@ RSpec.describe GamesController, :type => :controller do
   end
 
   describe "POST create" do
-    it ""
+    it "creates a game" do
+      post :create
+
+      expect(user.games.first).to be_a Game
+    end
   end
 
 end

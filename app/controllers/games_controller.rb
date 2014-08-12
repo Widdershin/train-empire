@@ -11,5 +11,6 @@ class GamesController < ApplicationController
   end
 
   def create
+    current_user.host_game
   end
 end
