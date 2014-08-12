@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "games/show.html.erb", :type => :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { create :user }
+
+  before do
+    assign :users, [user]
+    render
+  end
+
+  it 'displays a list of users in the game' do
+    expect(rendered).to include user.username
+  end
 end

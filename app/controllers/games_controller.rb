@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @game = Game.find_by_id params[:id]
+    @users = @game.users
   end
 
   def new

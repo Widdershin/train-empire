@@ -1,12 +1,3 @@
-Given(/^I am logged in$/) do
-  @user = create :user
-
-  visit '/users/sign_in'
-  fill_in 'Email', with: @user.email
-  fill_in 'Password', with: 'swordfish'
-  click_button 'Sign in'
-end
-
 Given(/^someone else has hosted a game$/) do
   @other_user = create :user
   @game = @other_user.host_game
@@ -24,6 +15,10 @@ When(/^I click on the host game button$/) do
   click_link 'Host Game'
 end
 
+When(/^I visit that game$/) do
+  visit game_path @game
+end
+
 Then(/^I should see a new game$/) do
   expect(page).to have_content 'Welcome to your new game'
 end
@@ -38,4 +33,8 @@ end
 
 Then(/^I should see the page for the game$/) do
   expect(current_path).to eq game_path(@game)
+end
+
+Then(/^I should see my username$/) do
+  expect(page).to have_content @user.username
 end
