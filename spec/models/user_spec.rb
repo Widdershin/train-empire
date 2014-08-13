@@ -14,9 +14,19 @@ RSpec.describe User, :type => :model do
     expect(user.games).to_not be_empty
   end
 
-  it 'joins a game' do
-    user.join_game game
+  describe "joining games" do
+    it 'joins a game' do
+      user.join_game game
 
-    expect(user.games).to include game
+      expect(user.games).to include game
+    end
+
+    it "doesn't join the same game twice" do
+      user.join_game game
+
+      user.join_game game
+
+      expect(user.games.count game.id).to eq 1
+     end
   end
 end
