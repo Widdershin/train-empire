@@ -5,5 +5,9 @@ Rails.application.routes.draw do
 
   resources :games do
     resources :players
+
+    member do
+      post '/actions/:action'
+    end
   end
 end
