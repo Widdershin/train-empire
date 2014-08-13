@@ -40,7 +40,7 @@ Then(/^I should see my username$/) do
 end
 
 When(/^I click on the join button$/) do
-  click_button 'Join Game'
+  click_link 'Join Game'
 end
 
 Then(/^I should be in the game$/) do

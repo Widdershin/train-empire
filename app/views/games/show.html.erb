@@ -2,3 +2,5 @@
 
 <h4>Players:</h4>
 <%= render @users %>
+
+<%= link_to("Join Game", game_players_path(@game), method: :post) %>
