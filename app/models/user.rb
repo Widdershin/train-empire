@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
   end
 
   def join_game(game)
-    if !in_game? game
-      games << game
-      save
-    end
+    return if in_game? game
+
+    games << game
+    save
   end
 
   def in_game?(game)
