@@ -15,10 +15,3 @@ Feature: Games List
         When I visit the games page
         And I click on the game
         Then I should see the page for the game
-
-    Scenario: Joining a game
-        Given I am logged in
-        And someone else has hosted a game
-        When I visit the games page
-        And I click on the game
-        Then I should see the page for the game
