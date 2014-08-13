@@ -29,4 +29,16 @@ RSpec.describe User, :type => :model do
       expect(user.games.count game.id).to eq 1
      end
   end
+
+  describe "in_game?" do
+    it 'returns true if in a given game' do
+      user.games << game
+
+      expect(user.in_game? game).to be true
+    end
+
+    it "returns false if not in a given game " do
+      expect(user.in_game? game).to be false
+    end
+  end
 end
