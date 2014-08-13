@@ -38,3 +38,11 @@ end
 Then(/^I should see my username$/) do
   expect(page).to have_content @user.username
 end
+
+When(/^I click on the join button$/) do
+  click_link 'Join Game'
+end
+
+Then(/^I should be in the game$/) do
+  expect(page).to have_content @user.username
+end

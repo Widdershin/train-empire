@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "games/show.html.erb", :type => :view do
+  let(:game) { Game.create }
   let(:user) { create :user }
 
   before do
     assign :users, [user]
+    assign :game, [game]
     render
   end
 
