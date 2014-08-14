@@ -36,7 +36,7 @@ What might game state look like?
 
 {
     current_player: baz
-    
+
     players: [
         {
             name: 'baz',
