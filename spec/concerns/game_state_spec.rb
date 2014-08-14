@@ -7,7 +7,7 @@ RSpec.describe GameState, :type => :model do
 
       expect(PlayerState).to receive(:new).with(players.first)
 
-      game_state = GameState.new players
+      GameState.new players
     end
   end
 end
