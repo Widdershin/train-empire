@@ -16,5 +16,9 @@ RSpec.describe PlayerState, :type => :model do
     it 'has a name' do
       expect(player_state.name).to eq test_name
     end
+
+    it 'has an empty hand' do
+      expect(player_state.hand).to eq []
+    end
   end
 end

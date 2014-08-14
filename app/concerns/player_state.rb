@@ -1,6 +1,7 @@
 class PlayerState
-  attr_reader :player, :name
+  attr_reader :name, :hand
   def initialize(player)
     @name = player.name
+    @hand = []
   end
 end
