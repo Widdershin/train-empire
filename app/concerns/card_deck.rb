@@ -1,5 +1,7 @@
 class CardDeck
-  def initialize(random: Random.new)
+  attr_reader :cards
+  def initialize(cards, random: Random.new)
+    @cards = cards
     @random = random
   end
 end
