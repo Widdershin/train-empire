@@ -4,4 +4,8 @@ class CardDeck
     @cards = cards
     @random = random
   end
+
+  def draw
+    cards.pop
+  end
 end
