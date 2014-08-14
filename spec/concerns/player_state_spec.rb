@@ -24,5 +24,9 @@ RSpec.describe PlayerState, :type => :model do
     it 'has a train count that starts at 45' do
       expect(player_state.trains).to eq INITIAL_TRAIN_COUNT
     end
+
+    it 'has an empty list of routes' do
+      expect(player_state.routes).to eq []
+    end
   end
 end
