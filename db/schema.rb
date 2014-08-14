@@ -13,25 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20140813233338) do
 
-  create_table "game_states", force: true do |t|
-    t.integer  "game_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "games", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "players", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "game_state_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_games", force: true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
     t.datetime "created_at"
