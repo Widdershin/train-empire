@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe GameState, :type => :model do
+RSpec.describe GameState do
   describe 'creation' do
     it 'takes players and turns them into player state' do
       players = [double(:player)]
