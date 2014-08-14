@@ -19,16 +19,3 @@ class GameComputerService
     GameState.new
   end
 end
-
-class GameState
-end
-
-
-# #compute
-# Create a game state object
-# For each action
-#   call the action's modifier on the game
-# Return the game
-# 
-# 
-# 

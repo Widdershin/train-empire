@@ -30,3 +30,36 @@ How are turns handled? How is midturn state handled? (ie, I draw one specific ca
     /games/id/actions/claim_route, route_id
 
 How should I handle authorization?
+
+
+What might game state look like?
+
+{
+    current_player: baz
+    
+    players: [
+        {
+            name: 'baz',
+            hand: [railcard, railcard, railcard]
+            trains: 43
+            routes: [routecard, routecard, routecard]
+        },
+        ...
+    ]
+
+    visible_railcards: [
+        railcard, railcard, railcard...
+    ]
+
+    routes: [
+        {
+            city_a: 'Toronto',
+            city_b: 'Philadelpha',
+            cost: 8,
+            color: 'red',
+            owner: 'baz'
+        },
+        ...
+    ]
+
+}

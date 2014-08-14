@@ -14,6 +14,4 @@ RSpec.describe GameComputerService do
       game_computer.compute
     end
   end
-
-
 end
