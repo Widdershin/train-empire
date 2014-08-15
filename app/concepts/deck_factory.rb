@@ -18,7 +18,7 @@ class DeckFactory
   def create_train_deck
     cards = make_train_cards
 
-    CardDeck.new cards
+    CardDeck.new cards, random: Random.new
   end
 
   private
