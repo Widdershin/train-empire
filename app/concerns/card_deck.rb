@@ -1,6 +1,7 @@
 class CardDeck
-  attr_reader :cards, :random
-  def initialize(cards, random: Random.new)
+  attr_reader :random
+
+  def initialize(cards, random:)
     @cards = cards
     @random = random
   end
@@ -11,9 +12,15 @@ class CardDeck
 
   def shuffle
     cards.shuffle!(random: random)
+
+    self
   end
 
-  def top(*args)
-    cards.last(*args)
+  def top(count = nil)
+    count ? cards.last(count) : cards.last
+  end
+
+  private def cards
+    @cards
   end
 end

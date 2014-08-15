@@ -20,14 +20,14 @@ RSpec.describe DeckFactory do
     end
 
     it 'has a map of cards needed' do
-      expect(factory.train_cards_needed[:red]).to eq 12
+      expect(DeckFactory::TRAIN_CARDS[:red]).to eq 12
     end
 
-    it 'creates a deck with the number of cards from train_cards_needed' do
+    it 'creates a deck with the number of cards from TRAIN_CARDS' do
       deck = factory.make :train
       red_cards = deck.cards.count { |card| card.color == :red }
 
-      expect(red_cards).to eq factory.train_cards_needed[:red]
+      expect(red_cards).to eq DeckFactory::TRAIN_CARDS[:red]
     end
   end
 end
