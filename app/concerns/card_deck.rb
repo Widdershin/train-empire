@@ -12,4 +12,8 @@ class CardDeck
   def shuffle
     cards.shuffle(random: random)
   end
+
+  def top(*args)
+    cards.last *args
+  end
 end

@@ -19,4 +19,14 @@ RSpec.describe CardDeck do
 
     deck.shuffle
   end
+
+  it 'gives you the top card' do
+    expect(deck.top).to eq card
+  end
+
+  it 'gives you the top x cards' do
+    bigger_deck = CardDeck.new cards * 3, random: random
+
+    expect(bigger_deck.top(2)).to eq [card, card]
+  end
 end
