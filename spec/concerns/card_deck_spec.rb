@@ -15,7 +15,7 @@ RSpec.describe CardDeck do
   end
 
   it 'shuffles the cards' do
-    expect(cards).to receive(:shuffle).with(random: random)
+    expect(cards).to receive(:shuffle!).with(random: random)
 
     deck.shuffle
   end

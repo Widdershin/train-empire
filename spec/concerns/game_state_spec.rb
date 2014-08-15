@@ -12,8 +12,12 @@ RSpec.describe GameState do
       game_state
     end
 
-    it 'has a deck full of train cards' do
-      expect(game_state.train_deck.top).to be_a TrainCard
+    it 'asks DeckFactory for a train deck' do
+      deck = double :train_deck
+      factory = double :factory, make: deck
+      expect(DeckFactory).to receive(:new).and_return(factory)
+
+      game_state
     end
   end
 end

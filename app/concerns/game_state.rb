@@ -12,7 +12,6 @@ private
   end
 
   def create_train_deck
-    cards = (1..10).map { TrainCard.new :red }
-    deck = CardDeck.new cards
+    DeckFactory.new.make :train
   end
 end

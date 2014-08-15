@@ -10,7 +10,7 @@ class CardDeck
   end
 
   def shuffle
-    cards.shuffle(random: random)
+    cards.shuffle!(random: random)
   end
 
   def top(*args)
