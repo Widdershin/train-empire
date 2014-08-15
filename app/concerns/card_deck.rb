@@ -14,6 +14,6 @@ class CardDeck
   end
 
   def top(*args)
-    cards.last *args
+    cards.last(*args)
   end
 end
