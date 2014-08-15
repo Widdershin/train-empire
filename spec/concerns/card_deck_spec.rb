@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe CardDeck do
   let (:card) { double :card }
   let (:cards) { [card] }
-  let (:deck) { CardDeck.new cards }
+  let (:random) { double :random }
+  let (:deck) { CardDeck.new cards, random: random }
 
   it 'takes an array of cards' do
     expect(deck.cards).to eq cards
@@ -13,7 +14,9 @@ RSpec.describe CardDeck do
     expect(deck.draw).to eq card
   end
 
-  it 'optionally takes an instance of random' do
-    expect { CardDeck.new(cards, random: Random.new) }.to_not raise_error
+  it 'shuffles the cards' do
+    expect(cards).to receive(:shuffle).with(random: random)
+
+    deck.shuffle
   end
-end 
+end
