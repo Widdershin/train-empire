@@ -24,10 +24,11 @@ RSpec.describe DeckFactory do
     end
 
     it 'creates a deck with the number of cards from TRAIN_CARDS' do
-      deck = factory.make :train
-      red_cards = deck.cards.count { |card| card.color == :red }
+      DeckFactory::TRAIN_CARDS.each do |color, quantity|
+        expect(TrainCard).to receive(:new).exactly(quantity).times.with(color)
+      end
 
-      expect(red_cards).to eq DeckFactory::TRAIN_CARDS[:red]
+      factory.make :train
     end
   end
 end
