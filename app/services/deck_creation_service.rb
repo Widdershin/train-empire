@@ -1,4 +1,4 @@
-class DeckFactory
+class DeckCreationService
   TRAIN_CARDS = {
     black: 12,
     white: 12,

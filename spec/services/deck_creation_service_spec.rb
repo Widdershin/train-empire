@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe DeckFactory do
-  let (:factory) { DeckFactory.new }
+RSpec.describe DeckCreationService do
+  let (:factory) { DeckCreationService.new }
 
   describe "creating a Train Deck" do
     it 'creates a train deck populated with cards' do
@@ -20,11 +20,11 @@ RSpec.describe DeckFactory do
     end
 
     it 'has a map of cards needed' do
-      expect(DeckFactory::TRAIN_CARDS[:red]).to eq 12
+      expect(DeckCreationService::TRAIN_CARDS[:red]).to eq 12
     end
 
     it 'creates a deck with the number of cards from TRAIN_CARDS' do
-      DeckFactory::TRAIN_CARDS.each do |color, quantity|
+      DeckCreationService::TRAIN_CARDS.each do |color, quantity|
         expect(TrainCard).to receive(:new).exactly(quantity).times.with(color)
       end
 
