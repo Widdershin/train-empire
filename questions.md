@@ -30,7 +30,7 @@ How are turns handled? How is midturn state handled? (ie, I draw one specific ca
     /games/id/actions/claim_route, route_id
 
 How should I handle authorization?
-
+    - Devise
 
 What might game state look like?
 
