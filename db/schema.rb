@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140818041500) do
   create_table "games", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "seed"
+    t.integer  "seed"
   end
 
   create_table "players", force: true do |t|
