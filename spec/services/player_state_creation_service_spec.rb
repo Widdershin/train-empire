@@ -2,13 +2,20 @@ require 'rails_helper'
 
 RSpec.describe PlayerStateCreationService do
   let(:player) { double :player }
+
   describe 'from_player' do
+    let(:state) { double :state }
 
     it 'creates a PlayerState from the player' do
-      state = double :state
 
-      expect(PlayerState).to receive(:from_player).with(player).and_return(state)
+      expect(PlayerState).to receive(:from_player).with(player)
       PlayerStateCreationService.from_player player
+    end
+
+    it 'returns the created PlayerState' do
+      allow(PlayerState).to receive(:from_player).and_return(state)
+
+      expect(PlayerStateCreationService.from_player player).to eq state
     end
   end
 
