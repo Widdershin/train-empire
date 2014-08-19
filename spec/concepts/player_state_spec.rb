@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe PlayerState, :type => :model do
   let (:test_name) { 'baz' }
   let (:player) { double(:player, name: test_name) }
-  let (:player_state) { PlayerState.new player }
+  let (:player_state) { PlayerState.new test_name }
 
   before do
   end
 
   describe 'creation' do
-    it 'takes a player' do
-      expect { PlayerState.new player }.to_not raise_error
+    it 'takes a name' do
+      expect { PlayerState.new test_name }.to_not raise_error
     end
 
     it 'has a name' do
@@ -27,6 +27,13 @@ RSpec.describe PlayerState, :type => :model do
 
     it 'has an empty list of routes' do
       expect(player_state.routes).to eq []
+    end
+  end
+
+  describe 'from_name' do
+    it 'can be created from a player' do
+      state_from_player = PlayerState.from_player player
+      expect(state_from_player.name).to eq player.name
     end
   end
 end

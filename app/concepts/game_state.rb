@@ -3,7 +3,6 @@ class GameState
 
   def self.make(game)
     train_deck = DeckCreationService.new.make :train, game.seed
-
     new(game.players, train_deck)
   end
 
