@@ -11,14 +11,15 @@ class DeckCreationService
     wild: 14,
   }
 
-  def make(deck_type)
+  def make(deck_type, seed)
+    @seed = seed
     create_train_deck.shuffle
   end
 
   def create_train_deck
     cards = make_train_cards
 
-    CardDeck.new cards, random: Random.new
+    CardDeck.new cards, random: Random.new(@seed)
   end
 
   private

@@ -4,8 +4,16 @@ RSpec.describe DeckCreationService do
   let (:factory) { DeckCreationService.new }
 
   describe "creating a Train Deck" do
+    let (:seed) { 2934235 }
+
+    it 'takes a seed' do
+      deck = factory.make :train, seed
+
+      expect(deck.random.seed).to eq seed
+    end
+
     it 'creates a train deck populated with cards' do
-      deck = factory.make :train
+      deck = factory.make :train, seed
 
       expect(deck.top).to be_a TrainCard
     end
@@ -16,7 +24,7 @@ RSpec.describe DeckCreationService do
 
       expect(deck).to receive(:shuffle)
 
-      factory.make :train
+      factory.make :train, seed
     end
 
     it 'has a map of cards needed' do
@@ -28,7 +36,7 @@ RSpec.describe DeckCreationService do
         expect(TrainCard).to receive(:new).exactly(quantity).times.with(color)
       end
 
-      factory.make :train
+      factory.make :train, seed
     end
   end
 end
