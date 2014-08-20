@@ -1,56 +1,37 @@
+Revised Architecture
+
 User
-  A user of the site
-  email
-  devise stuff
-  games
-
-  can join a game
-  can host a game
-
-Player
-  A player in a Game
-
-  has a user
-  has Rail Car Cards in hand
-  has accepted dest tickets
-  has rail car count
+  - username
+  - email
+  - players
+  - games
 
 Game
-  A game of Ticket to Ride
+  - players
 
-  has users
-  has a game state
-  join game!
+Player
+  - belong_to game
+  - belong_to user
+  - actions
 
-GameState
-  The persistent state of a game
+Action
+  - apply_to_game
 
-  has players
-  has cities
-  has routes
-  has RailCarDeck
-  has current_player???? - need to think about how to handle turns
-
-RailCarDeck
-  cards
-  draw!
-
-RailCarCard
-  color
-
-DestinationTicket
-  city_a
-  city_b
-  points
-
-City
-  name
-  location
-  routes
+  DrawRailcarCard
+  DrawRouteCard
+  KeepRouteCard
+  ClaimRoute
 
 Route
-  city_a
-  city_b
-  color
-  cost
-  owner (Player)
+  - city_a
+  - city_b
+  - color
+  - cost
+
+RouteCard
+  - city_a
+  - city_b
+  - points
+
+RailcarCard
+  - color

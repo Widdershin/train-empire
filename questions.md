@@ -16,5 +16,50 @@ Is it important for players to see what other players did?
 
 
 How are turns handled? How is midturn state handled? (ie, I draw one specific card, and now can draw another)
+    - The GameState class has a current_turn_user
+    - Basic flow:
+        - Player loads game.
+        - Current player makes move (POST to server)
+        - Server redirects to game
+
+    /games/id/actions/:action
+
+    /games/id/actions/draw_railcar_card, index: 0-4 | random
+    /games/id/actions/draw_destination_cards
+    /games/id/actions/keep_destination_cards, cards_to_keep: [ids]
+    /games/id/actions/claim_route, route_id
 
 How should I handle authorization?
+    - Devise
+
+What might game state look like?
+
+{
+    current_player: baz
+
+    players: [
+        {
+            name: 'baz',
+            hand: [railcard, railcard, railcard]
+            trains: 43
+            routes: [routecard, routecard, routecard]
+        },
+        ...
+    ]
+
+    visible_railcards: [
+        railcard, railcard, railcard...
+    ]
+
+    routes: [
+        {
+            city_a: 'Toronto',
+            city_b: 'Philadelpha',
+            cost: 8,
+            color: 'red',
+            owner: 'baz'
+        },
+        ...
+    ]
+
+}

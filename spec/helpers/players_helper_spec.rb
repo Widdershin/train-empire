@@ -11,5 +11,18 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PlayersHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'playing game' do
+    it 'tells you if the signed in user is in the game' do
+      user = create :user
+
+      allow(helper).to receive(:current_user).and_return user
+
+      game = double :game
+      result = double :result
+
+      allow(user).to receive(:in_game?).with(game).and_return(result)
+
+      expect(helper.playing_game? game).to be result
+    end
+  end
 end
