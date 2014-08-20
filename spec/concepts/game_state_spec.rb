@@ -40,5 +40,12 @@ RSpec.describe GameState do
       after { GameState.make game }
     end
 
+    describe "the created instance" do
+      let (:game_state) { GameState.make game }
+
+      it "has an empty list of available train cards" do
+        expect(game_state.available_train_cards).to eq []
+      end
+    end
   end
 end
