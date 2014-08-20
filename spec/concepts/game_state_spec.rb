@@ -19,11 +19,15 @@ RSpec.describe GameState do
     end
 
     it 'creates a train deck and passes it in' do
-      expect(creation_service).to receive(:make).with(:train, game.seed)
+      expect(creation_service)
+        .to receive(:make)
+        .with(:train, game.seed)
     end
 
     it "passes the game's players to PlayerStateCreationService" do
-      expect(PlayerStateCreationService).to receive(:from_players).with(game.players)
+      expect(PlayerStateCreationService)
+        .to receive(:from_players)
+        .with(game.players)
     end
 
     after { GameState.make game }
