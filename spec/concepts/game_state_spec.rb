@@ -9,8 +9,13 @@ RSpec.describe GameState do
     let(:player_states) { double :player_states }
 
     before do
-      allow(DeckCreationService).to receive(:new).and_return(creation_service)
-      allow(PlayerStateCreationService).to receive(:from_players).and_return(player_states)
+      allow(DeckCreationService)
+        .to receive(:new)
+        .and_return(creation_service)
+
+      allow(PlayerStateCreationService)
+        .to receive(:from_players)
+        .and_return(player_states)
     end
 
     it 'creates a train deck and passes it in' do
