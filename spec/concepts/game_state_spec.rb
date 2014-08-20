@@ -18,18 +18,27 @@ RSpec.describe GameState do
         .and_return(player_states)
     end
 
-    it 'creates a train deck and passes it in' do
-      expect(creation_service)
-        .to receive(:make)
-        .with(:train, game.seed)
+    describe "collaboration" do
+      it "creates a train deck with the game's seed" do
+        expect(creation_service)
+          .to receive(:make)
+          .with(:train, game.seed)
+      end
+
+      it "passes the game's players to PlayerStateCreationService" do
+        expect(PlayerStateCreationService)
+          .to receive(:from_players)
+          .with(game.players)
+      end
+
+      it "creates an instance on GameState with a deck and players" do
+        expect(GameState)
+          .to receive(:new)
+          .with(player_states, fake_deck)
+      end
+
+      after { GameState.make game }
     end
 
-    it "passes the game's players to PlayerStateCreationService" do
-      expect(PlayerStateCreationService)
-        .to receive(:from_players)
-        .with(game.players)
-    end
-
-    after { GameState.make game }
   end
 end
