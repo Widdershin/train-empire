@@ -7,6 +7,7 @@ RSpec.describe GameState do
     let (:fake_deck) { double :deck }
     let (:creation_service) { double :creation_service, make: fake_deck }
     let(:player_states) { double :player_states }
+    let (:fake_game_state) { double :game_state }
 
     before do
       allow(DeckCreationService)
@@ -16,6 +17,18 @@ RSpec.describe GameState do
       allow(PlayerStateCreationService)
         .to receive(:from_players)
         .and_return(player_states)
+
+      allow(GameState)
+        .to receive(:new)
+        .and_return(fake_game_state)
+
+      allow(fake_game_state)
+        .to receive(:replenish_available_cards)
+        .and_return(fake_game_state)
+
+      allow(fake_game_state)
+        .to receive(:replenish_available_cards)
+        .and_return(fake_game_state)
     end
 
     describe "collaboration" do
@@ -37,15 +50,30 @@ RSpec.describe GameState do
           .with(player_states, fake_deck)
       end
 
+      it "replenishes the available cards" do
+        expect(fake_game_state)
+          .to receive(:replenish_available_cards)
+      end
+
       after { GameState.make game }
     end
 
-    describe "the created instance" do
-      let (:game_state) { GameState.make game }
+    it "returns the created instance" do
+      expect(GameState.make game).to eq fake_game_state
+    end
+  end
 
-      it "has an empty list of available train cards" do
-        expect(game_state.available_train_cards).to eq []
-      end
+  describe "#replenish_available_cards" do
+    let(:card) { double :card }
+    let(:fake_deck) { double :deck, draw: card }
+    let(:game_state) { GameState.new([], fake_deck) }
+
+    it 'draws from the train_deck until full' do
+      expect(fake_deck)
+        .to receive(:draw)
+        .exactly(GameState::AVAILABLE_TRAIN_CARDS).times
+
+      game_state.replenish_available_cards
     end
   end
 end
