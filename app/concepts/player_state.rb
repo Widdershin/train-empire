@@ -13,4 +13,8 @@ class PlayerState
     @trains = INITIAL_TRAIN_COUNT
     @routes = []
   end
+
+  def add_to_hand(card)
+    @hand << card
+  end
 end

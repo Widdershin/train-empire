@@ -36,4 +36,14 @@ RSpec.describe PlayerState, :type => :model do
       expect(state_from_player.name).to eq player.name
     end
   end
+
+  describe 'add_to_hand' do
+    it 'adds the card to the hand' do
+      card = double :card
+
+      player_state.add_to_hand card
+
+      expect(player_state.hand).to include card
+    end
+  end
 end
