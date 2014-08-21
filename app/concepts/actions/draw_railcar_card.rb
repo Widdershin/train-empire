@@ -6,7 +6,7 @@ class Actions::DrawRailcarCard
   end
 
   def process
-    card = @game_state.take_available_train_card(@card_index)
+    card = @game_state.take_available_train_card @card_index
     @player.add_to_hand card
   end
 end
