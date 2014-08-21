@@ -94,11 +94,11 @@ RSpec.describe GameState do
   describe '#take_available_train_card' do
     # TODO - write test to check that popped value is returned
 
-    it 'pops the card at the given index and returns it' do
+    it 'removes the card at the given index and returns it' do
       game_state = GameState.new(double(:player_states), double(:deck))
       card_index = 2
       expect(game_state.available_train_cards)
-        .to receive(:pop).with(card_index)
+        .to receive(:remove_at).with(card_index)
 
       game_state.take_available_train_card card_index
     end

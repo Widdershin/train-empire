@@ -30,7 +30,7 @@ class GameState
   end
 
   def take_available_train_card index
-    available_train_cards.pop index
+    available_train_cards.remove_at index
   end
 
   def to_s
