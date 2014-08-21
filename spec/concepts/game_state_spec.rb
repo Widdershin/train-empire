@@ -80,4 +80,14 @@ RSpec.describe GameState do
 
     after { game_state.replenish_available_cards }
   end
+
+  it 'has a nice string representation' do
+    game_state = GameState.new(
+      [double(:player), double(:player)],
+      double(:deck, count: 105)
+    )
+
+    expect(game_state.to_s)
+      .to eq 'GameState - 2 players, 105 cards in deck'
+  end
 end

@@ -28,4 +28,8 @@ class GameState
   def available_train_cards_full?
     available_train_cards.size == AVAILABLE_TRAIN_CARDS
   end
+
+  def to_s
+    "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck"
+  end
 end
