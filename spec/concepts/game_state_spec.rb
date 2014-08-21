@@ -25,10 +25,6 @@ RSpec.describe GameState do
       allow(fake_game_state)
         .to receive(:replenish_available_cards)
         .and_return(fake_game_state)
-
-      allow(fake_game_state)
-        .to receive(:replenish_available_cards)
-        .and_return(fake_game_state)
     end
 
     describe "collaboration" do
@@ -72,8 +68,16 @@ RSpec.describe GameState do
       expect(fake_deck)
         .to receive(:draw)
         .exactly(GameState::AVAILABLE_TRAIN_CARDS).times
-
-      game_state.replenish_available_cards
     end
+
+    it 'adds the drawn cards to the available_train_cards' do
+      expect(game_state.available_train_cards)
+        .to receive(:<<)
+        .with(card)
+        .exactly(GameState::AVAILABLE_TRAIN_CARDS).times
+        .and_call_original
+    end
+
+    after { game_state.replenish_available_cards }
   end
 end
