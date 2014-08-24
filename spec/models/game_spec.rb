@@ -6,6 +6,6 @@ RSpec.describe Game, :type => :model do
   it 'has a seed' do
     game = Game.create
 
-    expect(game.seed).to_not eq nil
+    expect(game.seed).to be_a Integer
   end
 end
