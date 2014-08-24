@@ -4,7 +4,7 @@ describe Actions::DrawRailcarCard do
   let(:card_index) { 2 }
   let(:game_state) { double :game_state }
   let(:player) { double :player }
-  let(:action) { Actions::DrawRailcarCard.new player, game_state, card_index }
+  let(:action) { Actions::DrawRailcarCard.new player, card_index }
 
   describe 'process' do
     let(:fake_card) { double :card }
@@ -30,6 +30,12 @@ describe Actions::DrawRailcarCard do
         .to receive(:add_to_hand)
         .with(fake_card)
     end
-    after { action.process }
+
+    it "should return the modified game_state" do
+      expect(action.process game_state)
+        .to eq game_state
+    end
+
+    after { action.process game_state }
   end
 end
