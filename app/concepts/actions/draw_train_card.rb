@@ -1,4 +1,4 @@
-class Actions::DrawRailcarCard
+class Actions::DrawTrainCard
   def initialize(player, card_index)
     @player = player
     @card_index = card_index

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe Actions::DrawRailcarCard do
+describe Actions::DrawTrainCard do
   let(:card_index) { 2 }
   let(:game_state) { double :game_state }
   let(:player) { double :player }
-  let(:action) { Actions::DrawRailcarCard.new player, card_index }
+  let(:action) { Actions::DrawTrainCard.new player, card_index }
 
   describe 'process' do
     let(:fake_card) { double :card }
