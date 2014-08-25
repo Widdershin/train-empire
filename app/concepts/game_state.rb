@@ -4,10 +4,12 @@ class GameState
 
   def self.make(game)
     train_deck = DeckCreationService.new.make :train, game.seed
+
     game_state = new(
       PlayerStateCreationService.from_players(game.players),
       train_deck
     )
+
     game_state.replenish_available_cards
   end
 
