@@ -111,4 +111,14 @@ RSpec.describe GameState do
         .to eq desired_card
     end
   end
+
+  describe "#player" do
+    it 'returns the player state for the player with the given id' do
+      player = double :player, name: 'Tim', id: 5
+
+      game_state = GameState.new([player], double(:deck))
+
+      expect(game_state.player player.id).to eq player
+    end
+  end
 end

@@ -33,6 +33,10 @@ class GameState
     available_train_cards.delete_at index
   end
 
+  def player(id)
+    players.find { |player| player.id == id }
+  end
+
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck"
   end
