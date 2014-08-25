@@ -88,7 +88,7 @@ RSpec.describe GameState do
     )
 
     expect(game_state.to_s)
-      .to eq 'GameState - 2 players, 105 cards in deck'
+      .to eq 'GameState - 2 players, 105 cards in deck, 0 cards available'
   end
 
   describe '#take_available_train_card' do

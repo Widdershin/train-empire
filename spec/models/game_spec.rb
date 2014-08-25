@@ -8,4 +8,8 @@ RSpec.describe Game, :type => :model do
 
     expect(game.seed).to be_a Integer
   end
+
+  it 'has a state' do
+    expect(Game.create.state).to be_a GameState
+  end
 end
