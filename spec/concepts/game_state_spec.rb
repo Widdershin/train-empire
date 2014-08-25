@@ -59,28 +59,6 @@ RSpec.describe GameState do
     end
   end
 
-  describe "#replenish_available_cards" do
-    let(:card) { double :card }
-    let(:fake_deck) { double :deck, draw: card }
-    let(:game_state) { GameState.new([], fake_deck) }
-
-    it 'draws from the train_deck until full' do
-      expect(fake_deck)
-        .to receive(:draw)
-        .exactly(GameState::AVAILABLE_TRAIN_CARDS).times
-    end
-
-    it 'adds the drawn cards to the available_train_cards' do
-      expect(game_state.available_train_cards)
-        .to receive(:<<)
-        .with(card)
-        .exactly(GameState::AVAILABLE_TRAIN_CARDS).times
-        .and_call_original
-    end
-
-    after { game_state.replenish_available_cards }
-  end
-
   it 'has a nice string representation' do
     game_state = GameState.new(
       [double(:player), double(:player)],
@@ -89,27 +67,6 @@ RSpec.describe GameState do
 
     expect(game_state.to_s)
       .to eq 'GameState - 2 players, 105 cards in deck, 0 cards available'
-  end
-
-  describe '#take_available_train_card' do
-    # TODO - make this test elegant
-
-    it 'removes the card at the given index and returns it' do
-      game_state = GameState.new(double(:player_states), double(:deck))
-      card_index = 2
-
-      card = double :card
-      desired_card = double :desired_card
-
-      fake_available_train_cards = [card, card, desired_card, card, card]
-
-      allow(game_state)
-        .to receive(:available_train_cards)
-        .and_return(fake_available_train_cards)
-
-      expect(game_state.take_available_train_card card_index)
-        .to eq desired_card
-    end
   end
 
   describe "#player" do

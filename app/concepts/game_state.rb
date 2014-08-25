@@ -14,23 +14,17 @@ class GameState
   def initialize(player_states, train_deck)
     @players = player_states
     @train_deck = train_deck
-    @available_train_cards = []
+    @available_train_cards = Pile.new
   end
 
   def replenish_available_cards
-    until available_train_cards_full? do
-      available_train_cards << train_deck.draw
-    end
+    available_train_cards.refill_from train_deck
 
     self
   end
 
-  def available_train_cards_full?
-    available_train_cards.size == AVAILABLE_TRAIN_CARDS
-  end
-
   def take_available_train_card index
-    available_train_cards.delete_at index
+    available_train_cards.take index
   end
 
   def player(id)
