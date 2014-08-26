@@ -4,36 +4,34 @@ class GameState
 
   def self.make(game)
     train_deck = DeckCreationService.new.make :train, game.seed
-    game_state = new(
+
+    new(
       PlayerStateCreationService.from_players(game.players),
       train_deck
-    )
-    game_state.replenish_available_cards
+    ).replenish_available_cards
   end
 
   def initialize(player_states, train_deck)
     @players = player_states
     @train_deck = train_deck
-    @available_train_cards = []
+    @available_train_cards = Pile.new
   end
 
   def replenish_available_cards
-    until available_train_cards_full? do
-      available_train_cards << train_deck.draw
-    end
+    available_train_cards.refill_from train_deck
 
     self
   end
 
-  def available_train_cards_full?
-    available_train_cards.size == AVAILABLE_TRAIN_CARDS
+  def take_available_train_card index
+    available_train_cards.take index
   end
 
-  def take_available_train_card index
-    available_train_cards.delete_at index
+  def player(id)
+    players.find { |player| player.id == id }
   end
 
   def to_s
-    "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck"
+    "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"
   end
 end
