@@ -5,6 +5,7 @@ describe Actions::DrawTrainCard do
   let(:game_state) { double :game_state }
   let(:player_id) { 3 }
   let(:action) { Actions::DrawTrainCard.new player_id, card_index }
+  let(:player) { double :player_state }
 
   describe 'process' do
     let(:fake_card) { double :card }
@@ -13,6 +14,11 @@ describe Actions::DrawTrainCard do
       allow(game_state)
         .to receive(:take_available_train_card)
         .and_return(fake_card)
+
+      allow(game_state)
+        .to receive(:player)
+        .with(player_id)
+        .and_return(player)
 
       allow(player)
         .to receive(:add_to_hand)
