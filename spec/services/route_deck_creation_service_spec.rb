@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe RouteDeckCreationService do
   it 'makes route decks' do
-    expect(RouteDeckCreationService.new.make).to be_a CardDeck
+    seed = 1
+    expect(RouteDeckCreationService.new.make seed).to be_a CardDeck
   end
 end
