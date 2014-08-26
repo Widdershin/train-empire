@@ -1,5 +1,5 @@
 class RouteDeckCreationService
   def make(seed)
-    CardDeck.new([], random: Random.new(seed))
+    CardDeck.new(RouteCardLoaderService.new.load, random: Random.new(seed))
   end
 end
