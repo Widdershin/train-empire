@@ -8,7 +8,7 @@ RSpec.describe "games/show.html.erb", :type => :view do
     allow(view).to receive(:playing_game?).and_return false
 
     assign :users, [user]
-    assign :game, [game]
+    assign :game, game
     render
   end
 

@@ -25,4 +25,8 @@ RSpec.describe CardDeck do
 
     expect(bigger_deck.top(2)).to eq [card, card]
   end
+
+  it 'gives you the count of cards in the deck' do
+    expect(deck.count).to eq cards.size
+  end
 end

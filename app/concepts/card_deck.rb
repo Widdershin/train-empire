@@ -20,6 +20,10 @@ class CardDeck
     count ? cards.last(count) : cards.last
   end
 
+  def count
+    cards.count
+  end
+
   private def cards
     @cards
   end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :action do
-    type :draw_railcar_card
+    action :draw_railcar_card
   end
 end

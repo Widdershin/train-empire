@@ -1,11 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Game, :type => :model do
+  let(:game) { Game.create }
+
   it { should have_many :users }
+  it { should have_many :players }
+  it { should have_many :actions }
 
   it 'has a seed' do
-    game = Game.create
+    expect(game.seed).to be_a Integer
+  end
 
-    expect(game.seed).to_not eq nil
+  it 'has a state' do
+    expect(game.state).to be_a GameState
   end
 end

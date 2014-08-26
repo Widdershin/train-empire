@@ -1,21 +1,20 @@
 class GameComputerService
-  def initialize(actions)
+  def initialize(game_state, actions)
+    @game_state = game_state
     @actions = actions
   end
 
-  def compute
-    game_state = new_game_state
-
-    apply_actions game_state
-  end
-
-  def apply_actions(game_state)
-    @actions.each do |action|
-      game_state = action.apply game_state
+  def process
+    actions.reduce(game_state) do |game_state, action|
+      action.process game_state
     end
   end
 
-  def new_game_state
-    GameState.new
+  private def actions
+    @actions
+  end
+
+  private def game_state
+    @game_state
   end
 end
