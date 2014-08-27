@@ -16,7 +16,7 @@ RSpec.describe GameState do
 
   it 'has a route_deck accessible' do
     expect(game_state.route_deck)
-      .to be_a Pile
+      .to eq route_deck
   end
 
   describe "#player" do
