@@ -14,6 +14,11 @@ RSpec.describe GameState do
       .to eq 'GameState - 2 players, 105 cards in deck, 0 cards available'
   end
 
+  it 'has a route_deck accessible' do
+    expect(game_state.route_deck)
+      .to be_a Pile
+  end
+
   describe "#player" do
     it 'returns the player state for the player with the given id' do
       player = double :player, name: 'Tim', id: 5
