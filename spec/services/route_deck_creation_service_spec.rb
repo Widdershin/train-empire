@@ -4,7 +4,6 @@ describe RouteDeckCreationService do
   let(:creation_service) { RouteDeckCreationService.new }
   let (:cards) { double :cards }
   let(:seed) { 1 }
-  # TODO - isolate these tests
 
   describe 'the created deck' do
     let (:deck) { double :deck }
