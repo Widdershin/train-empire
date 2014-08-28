@@ -16,7 +16,10 @@ describe GameStateCreationService do
           train_deck: fake_train_deck,
           route_deck: fake_route_deck,
           player_states: fake_player_states,
-      )
+        )
+
+      allow(GameState)
+        .to receive(:new)
     end
 
     it 'gets a train deck' do
