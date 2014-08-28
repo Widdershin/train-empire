@@ -12,10 +12,18 @@ class Game < ActiveRecord::Base
   end
 
   def state
-    GameComputerService.new(GameState.make(self), ordered_actions).process
+    GameComputerService.new(initial_state, defrosted_actions).process
+  end
+
+  def initial_state
+    GameStateCreationService.new(self).make
   end
 
   def ordered_actions
     actions.order('id ASC')
+  end
+
+  def defrosted_actions
+    ordered_actions.map(&:defrost)
   end
 end
