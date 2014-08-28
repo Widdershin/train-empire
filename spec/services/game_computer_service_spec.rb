@@ -4,7 +4,8 @@ describe GameComputerService do
   let(:game_computer) { GameComputerService.new game_state, actions }
   let(:action) { double(:action, process: game_state) }
   let(:actions) { [action, action] }
-  let(:game_state) { double(:game_state) }
+  let(:game_state) { double(:game_state, current_player: current_player) }
+  let(:current_player) { double(:player_state) }
 
   it 'takes a gamestate and a collection of actions' do
     expect { game_computer }

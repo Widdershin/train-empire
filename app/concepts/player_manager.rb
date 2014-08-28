@@ -24,20 +24,8 @@ class PlayerManager
     players.find_index current_player
   end
 
-  def potential_next_index
-    current_index + 1
-  end
-
   def next_index
-    if next_index_out_of_bounds
-      0
-    else
-      potential_next_index
-    end
-  end
-
-  def next_index_out_of_bounds
-    potential_next_index == players.size
+    (current_index + 1) % players.size
   end
 
   def players
