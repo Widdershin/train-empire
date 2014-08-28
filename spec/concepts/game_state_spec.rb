@@ -33,27 +33,4 @@ RSpec.describe GameState do
       expect(game_state.player player.id).to eq player
     end
   end
-
-  describe "who's turn is it?" do
-
-    it 'has a current_player' do
-      expect(game_state.current_player).to eq player_state
-    end
-
-    it 'can advance the current_player' do
-      game_state.end_turn
-
-      expect(game_state.current_player).to eq player_state2
-    end
-
-    it 'cycles back to the first player after everyone has had a go' do
-      until game_state.current_player == player_states.last
-        game_state.end_turn
-      end
-
-      game_state.end_turn
-
-      expect(game_state.current_player).to eq player_states.first
-    end
-  end
 end
