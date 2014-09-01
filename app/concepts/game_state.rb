@@ -23,11 +23,6 @@ class GameState
     players.current_player
   end
 
-  # TODO - reevaluate this particular hack
-  def player(id)
-    players.find { |player| player.id == id }
-  end
-
   def end_turn
     players.advance_current_player
   end

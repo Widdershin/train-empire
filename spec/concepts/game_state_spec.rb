@@ -21,16 +21,4 @@ RSpec.describe GameState do
     expect(game_state.route_deck)
       .to eq route_deck
   end
-
-  describe "#player" do
-    it 'returns the player state for the player with the given id' do
-      player = double :player, name: 'Tim', id: 5
-
-      allow(game_state)
-        .to receive(:players)
-        .and_return([player])
-
-      expect(game_state.player player.id).to eq player
-    end
-  end
 end
