@@ -17,20 +17,10 @@ describe GameComputerService do
       actions.each do |action|
         expect(action)
           .to receive(:process)
-          .with(game_state)
+          .with(game_state, game_state.current_player)
       end
 
       game_computer.process
-    end
-
-    it 'returns the calculated gamestate' do
-      final_game_state = double :final_game_state
-
-      allow(actions.last)
-        .to receive(:process)
-        .and_return(final_game_state)
-
-      expect(game_computer.process).to eq final_game_state
     end
   end
 end

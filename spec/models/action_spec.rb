@@ -20,7 +20,7 @@ RSpec.describe Action, :type => :model do
 
       expect(Actions::DrawTrainCard)
         .to receive(:new)
-        .with(player.id, card_index)
+        .with(card_index)
         .and_return(soft_action)
 
       expect(action.defrost).to eq soft_action

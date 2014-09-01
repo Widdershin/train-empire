@@ -14,4 +14,16 @@ RSpec.describe Game, :type => :model do
   it 'has a state' do
     expect(game.state).to be_a GameState
   end
+
+  # this is really an integration test, and should live in another file
+
+  it 'can calculate a GameState' do
+    game.users << create(:user)
+    player = game.players.first
+
+    player.actions.create(action: 'draw_train_card', card_index: 0)
+
+    expect(game.state.players.current_player.hand.size).to eq 1
+
+  end
 end

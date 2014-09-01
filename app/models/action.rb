@@ -10,6 +10,6 @@ class Action < ActiveRecord::Base
   end
 
   def defrost
-    Actions::DrawTrainCard.new(player.id, card_index)
+    Actions::DrawTrainCard.new(card_index)
   end
 end
