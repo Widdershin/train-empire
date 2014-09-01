@@ -6,4 +6,10 @@ class RouteCard
     @destination = destination
     @points = points
   end
+
+  def ==(other)
+    origin == other.origin &&
+      destination == other.destination &&
+      points == other.points
+  end
 end

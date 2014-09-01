@@ -1,59 +1,27 @@
 require 'rails_helper'
 
 describe RouteDeckCreationService do
-  let(:creation_service) { RouteDeckCreationService.new }
-  let (:cards) { double :cards }
   let(:seed) { 1 }
+  let(:creation_service) { RouteDeckCreationService.new }
 
-  describe 'the created deck' do
-    let (:deck) { double :deck }
+  it 'makes route decks from a seed' do
+    deck = creation_service.make seed
 
-    before do
-      allow(creation_service)
-        .to receive(:load_cards)
-        .and_return(cards)
+    expect(deck.draw).to be_a RouteCard
 
-      allow(CardDeck)
-        .to receive(:new)
-        .and_return(deck)
+    other_deck = creation_service.make (seed + 1)
 
-      allow(deck)
-        .to receive(:shuffle)
-        .and_return(deck)
-    end
+    cards_to_draw = 10
 
-    it 'shuffles the deck' do
-      expect(deck)
-        .to receive(:shuffle)
-    end
+    expect(deck.top(cards_to_draw)).to_not eq other_deck.top(cards_to_draw)
 
-    it 'passes the loaded cards into the new deck' do
-      expect(CardDeck)
-        .to receive(:new)
-        .with(cards, anything)
-    end
+    deck = creation_service.make seed
+    deck_with_same_seed = creation_service.make seed
 
-    it 'returns the created deck' do
-      expect(creation_service.make seed).to eq deck
-    end
+    expect(deck.random.seed).to eq deck_with_same_seed.random.seed
+    expect(deck.top).to eq deck_with_same_seed.top
 
-    after { creation_service.make seed }
+
   end
 
-  describe 'load_cards' do
-    it 'loads the cards from RouteCardLoaderService and returns it' do
-      loader_service = double :loader_service
-
-      allow(RouteCardLoaderService)
-        .to receive(:new)
-        .and_return(loader_service)
-
-      expect(loader_service)
-        .to receive(:load)
-        .and_return(cards)
-
-      expect(creation_service.load_cards)
-        .to eq cards
-    end
-  end
 end
