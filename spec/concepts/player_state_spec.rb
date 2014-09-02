@@ -29,6 +29,10 @@ RSpec.describe PlayerState, :type => :model do
     it 'has an empty list of routes' do
       expect(player_state.routes).to eq []
     end
+
+    it 'has an empty list of potential routes' do
+      expect(player_state.potential_routes).to eq []
+    end
   end
 
   describe 'creating from_player' do
@@ -50,6 +54,16 @@ RSpec.describe PlayerState, :type => :model do
       player_state.add_to_hand card
 
       expect(player_state.hand).to include card
+    end
+  end
+
+  describe 'set_potential_route_cards' do
+    it 'sets the potential_routes' do
+      cards = [:card, :card, :card]
+
+      player_state.set_potential_route_cards cards
+
+      expect(player_state.potential_routes).to eq cards
     end
   end
 end
