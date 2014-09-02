@@ -16,14 +16,24 @@ RSpec.describe Game, :type => :model do
   end
 
   # this is really an integration test, and should live in another file
+  describe 'integration' do
+    before do
+      game.users << create(:user)
+    end
 
-  it 'can calculate a GameState' do
-    game.users << create(:user)
-    player = game.players.first
+    let(:player) { game.players.first }
+    let(:current_player) { game.state.current_player }
 
-    player.actions.create(action: 'draw_train_card', card_index: 0)
+    it 'can process a draw_train_card action' do
+      player.actions.create(action: 'draw_train_card', card_index: 0)
 
-    expect(game.state.players.current_player.hand.size).to eq 1
+      expect(current_player.hand.size).to eq 1
+    end
 
+    it 'can process a draw_route_cards action' do
+      player.actions.create(action: 'draw_route_cards')
+
+      expect(current_player.potential_routes.size).to_not eq []
+    end
   end
 end

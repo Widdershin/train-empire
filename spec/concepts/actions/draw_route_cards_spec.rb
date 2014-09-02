@@ -15,7 +15,11 @@ describe Actions::DrawRouteCards do
       .to receive(:set_potential_route_cards)
       .with(:cards)
 
-    action.process(game_state, current_player)
+    processed_gamestate = action.process(game_state, current_player)
+
+    expect(processed_gamestate)
+      .to eq game_state
   end
+
 
 end

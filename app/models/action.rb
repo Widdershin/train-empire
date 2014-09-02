@@ -10,6 +10,11 @@ class Action < ActiveRecord::Base
   end
 
   def defrost
-    Actions::DrawTrainCard.new(card_index)
+    case action
+    when 'draw_train_card'
+      Actions::DrawTrainCard.new(card_index)
+    when 'draw_route_cards'
+      Actions::DrawRouteCards.new
+    end
   end
 end
