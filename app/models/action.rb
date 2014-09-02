@@ -1,5 +1,6 @@
 class Action < ActiveRecord::Base
   belongs_to :player
+  serialize :route_cards_to_keep, Array
 
   scope :by_creation, -> { order :id }
 
@@ -15,6 +16,8 @@ class Action < ActiveRecord::Base
       Actions::DrawTrainCard.new(card_index)
     when 'draw_route_cards'
       Actions::DrawRouteCards.new
+    when 'keep_route_cards'
+      Actions::KeepRouteCards.new
     end
   end
 end

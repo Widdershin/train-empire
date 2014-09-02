@@ -26,7 +26,19 @@ describe Action, :type => :model do
       )
 
       expect(action.defrost).to be_a Actions::DrawRouteCards
+    end
 
+    it 'defrosts KeepRouteCards' do
+      cards_to_keep = [0, 2, 3]
+
+      action = Action.create(
+        action: 'keep_route_cards',
+        player: player,
+        route_cards_to_keep: cards_to_keep
+      )
+
+      expect(action.defrost).to be_a Actions::KeepRouteCards
+      expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
   end
 end
