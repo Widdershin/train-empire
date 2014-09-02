@@ -15,6 +15,10 @@ describe GameComputerService do
   describe 'process' do
     it 'iterates over the actions, applying them to the gamestate' do
       actions.each do |action|
+        # TODO - this should probably be a separate test or method
+        expect(game_state)
+          .to receive(:replenish_available_cards)
+
         expect(action)
           .to receive(:process)
           .with(game_state, game_state.current_player)

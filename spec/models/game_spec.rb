@@ -25,9 +25,9 @@ RSpec.describe Game, :type => :model do
     let(:current_player) { game.state.current_player }
 
     it 'can process a draw_train_card action' do
-      player.actions.create(action: 'draw_train_card', card_index: 0)
+      player.actions.create(action: 'draw_train_card', card_index: 1)
 
-      expect(current_player.hand.size).to eq 1
+      expect(current_player.hand.first).to be_a TrainCard
     end
 
     it 'can process a draw_route_cards action' do
