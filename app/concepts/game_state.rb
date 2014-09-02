@@ -1,5 +1,6 @@
 class GameState
   AVAILABLE_TRAIN_CARDS = 5
+  ROUTE_DECK_DRAW_COUNT = 3
   attr_reader :players, :train_deck, :available_train_cards, :route_deck
 
   def initialize(player_states, train_deck, route_deck)
@@ -25,6 +26,10 @@ class GameState
 
   def end_turn
     players.advance_current_player
+  end
+
+  def draw_route_cards
+    route_deck.draw(ROUTE_DECK_DRAW_COUNT)
   end
 
   def to_s

@@ -5,9 +5,14 @@ RSpec.describe CardDeck do
   let (:cards) { [card] }
   let (:random) { double :random }
   let (:deck) { CardDeck.new cards, random: random }
+  let(:bigger_deck) { CardDeck.new cards * 3, random: random }
 
   it 'can draw a card' do
     expect(deck.draw).to eq card
+  end
+
+  it 'can draw x cards' do
+    expect(bigger_deck.draw(2)).to eq [card, card]
   end
 
   it 'shuffles the cards' do
@@ -21,7 +26,6 @@ RSpec.describe CardDeck do
   end
 
   it 'gives you the top x cards' do
-    bigger_deck = CardDeck.new cards * 3, random: random
 
     expect(bigger_deck.top(2)).to eq [card, card]
   end
