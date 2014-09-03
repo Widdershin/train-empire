@@ -24,6 +24,10 @@ class CardDeck
     cards.count
   end
 
+  def add_to_bottom(card)
+    cards.unshift card
+  end
+
   private def cards
     @cards
   end

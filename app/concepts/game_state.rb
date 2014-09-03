@@ -32,6 +32,10 @@ class GameState
     route_deck.draw(ROUTE_DECK_DRAW_COUNT)
   end
 
+  def return_route_cards(cards)
+    cards.map { |card| route_deck.add_to_bottom card }
+  end
+
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"
   end

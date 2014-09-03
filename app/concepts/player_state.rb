@@ -23,4 +23,15 @@ class PlayerState
   def set_potential_route_cards(cards)
     @potential_routes = cards
   end
+
+  def keep_route_cards(card_indices)
+    card_indices.each { |i| @routes << @potential_routes.at(i) }
+    @potential_routes = @potential_routes.each_with_index.select do |route_card, index|
+      !card_indices.include? index
+    end.map { |route, index| route }
+ end
+
+  def return_unkept_route_cards
+    @potential_routes.clear
+  end
 end

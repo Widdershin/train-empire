@@ -33,4 +33,8 @@ RSpec.describe CardDeck do
   it 'gives you the count of cards in the deck' do
     expect(deck.count).to eq cards.size
   end
+
+  it 'adds cards to the bottom' do
+    expect{ deck.add_to_bottom(:card) }.to change {deck.count}.by(1)
+  end
 end
