@@ -40,5 +40,18 @@ describe Action, :type => :model do
       expect(action.defrost).to be_a Actions::KeepRouteCards
       expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
+
+    it 'defrosts ClaimRoute' do
+      route_id = 5
+
+      action = Action.create(
+        action: 'claim_route',
+        player: player,
+        route_id: route_id
+      )
+
+      expect(action.defrost).to be_a Actions::ClaimRoute
+      expect(action.route_id).to eq route_id
+    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902030445) do
+ActiveRecord::Schema.define(version: 20140903215956) do
 
   create_table "actions", force: true do |t|
     t.string   "type"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140902030445) do
     t.string   "action"
     t.integer  "card_index"
     t.string   "route_cards_to_keep"
+    t.integer  "route_id"
   end
 
   create_table "games", force: true do |t|

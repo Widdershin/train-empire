@@ -5,7 +5,7 @@ describe Actions::ClaimRoute do
   describe 'process' do
     let(:route_id) { 5 }
     it 'claims the route with the given id' do
-      action = Actions::ClaimRoute.new(route_id: route_id)
+      action = Actions::ClaimRoute.new(route_id)
       game_state = double(:game_state)
       player = double(:player_state)
 

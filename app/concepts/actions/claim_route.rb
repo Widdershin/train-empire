@@ -1,5 +1,5 @@
 class Actions::ClaimRoute
-  def initialize(route_id:)
+  def initialize(route_id)
     @route_id = route_id
   end
 
