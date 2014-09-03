@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Actions::ClaimRoute do
-  it { should respond_to :process }
 
   describe 'process' do
     let(:route_id) { 5 }
@@ -12,7 +11,7 @@ describe Actions::ClaimRoute do
 
       expect(game_state)
         .to receive(:claim_route)
-        .with(route_id)
+        .with(route_id, player)
 
       action.process(game_state, player)
     end

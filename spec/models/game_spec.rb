@@ -36,10 +36,17 @@ RSpec.describe Game, :type => :model do
       expect(current_player.potential_routes.size).to_not eq []
     end
 
-    it 'can process a draw_route_cards action' do
+    it 'can process a keep_route_cards action' do
       player.actions.create(action: 'draw_route_cards')
       player.actions.create(action: 'keep_route_cards', route_cards_to_keep: [1, 2])
       expect(game.state.current_player.routes.size).to eq 2
+    end
+
+    it 'can process a claim_route action' do
+      player.actions.create(action: 'claim_route', route_id: 0)
+
+      expect(game.state.routes(route_id).owner).to eq current_player
+
     end
   end
 
