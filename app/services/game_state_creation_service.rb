@@ -8,8 +8,11 @@ class GameStateCreationService
       player_states,
       train_deck,
       route_deck,
+      routes,
     )
   end
+
+  private
 
   def train_deck
     DeckCreationService.new.make :train, @game.seed
@@ -21,5 +24,9 @@ class GameStateCreationService
 
   def player_states
     PlayerStateCreationService.from_players(@game.players)
+  end
+
+  def routes
+    RoutesCreationService.new.make
   end
 end
