@@ -40,19 +40,9 @@ describe GameStateCreationService do
         .with(:train, game.seed)
         .and_return(fake_train_deck)
 
-
-      allow(RoutesCreationService)
-        .to receive(:new)
-        .and_return(routes_creation_service)
-
-      expect(routes_creation_service)
-        .to receive(:make)
-        .and_return(fake_routes)
-
-
       expect(GameState)
         .to receive(:new)
-        .with(fake_player_states, fake_train_deck, fake_route_deck, fake_routes)
+        .with(fake_player_states, fake_train_deck, fake_route_deck, anything)
         .and_return(instance_double('GameState').as_null_object)
 
       creation_service.make
