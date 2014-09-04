@@ -44,6 +44,7 @@ class GameState
   def route(id)
     @routes.find { |route| route.id == id }
   end
+
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"
   end

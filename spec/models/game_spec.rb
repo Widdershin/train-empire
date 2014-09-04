@@ -43,9 +43,14 @@ RSpec.describe Game, :type => :model do
     end
 
     it 'can process a claim_route action' do
-      player.actions.create(action: 'claim_route', route_id: 0)
+      route_id = 1
+      player.actions.create(action: 'claim_route', route_id: route_id)
 
-      expect(game.state.routes(route_id).owner).to eq current_player
+      state = game.state
+      route = state.route(route_id)
+      player = state.current_player
+
+      expect(route.owner).to eq player
 
     end
   end

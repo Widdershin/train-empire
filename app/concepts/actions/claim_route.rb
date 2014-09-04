@@ -5,5 +5,7 @@ class Actions::ClaimRoute
 
   def process(game_state, player)
     game_state.claim_route @route_id, player
+
+    game_state
   end
 end
