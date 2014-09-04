@@ -69,7 +69,18 @@ describe 'playing a game' do
       card_index: 1,
     )
 
+    update_state
+
     expect(@state.available_train_cards.count).to eq 5
+
+    player_1.actions.create(
+      action: 'claim_route',
+      route_id: 1,
+    )
+
+    update_state
+
+    expect(@state.route(1).owner).to eq p1
 
   end
 end

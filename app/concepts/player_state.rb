@@ -34,4 +34,8 @@ class PlayerState
   def return_unkept_route_cards
     @potential_routes.clear
   end
+
+  def to_s
+    "Player #{id} - #{name}. #{hand.size} cards in hand, #{trains} trains. Holding #{routes.size} routes"
+  end
 end
