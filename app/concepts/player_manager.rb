@@ -1,5 +1,5 @@
 class PlayerManager
-  attr_reader :current_player
+  attr_reader :current_player, :players
 
   def initialize(player_states)
     @players = player_states
@@ -26,10 +26,6 @@ class PlayerManager
 
   def next_index
     (current_index + 1) % players.size
-  end
-
-  def players
-    @players
   end
 
   def current_player=(player)
