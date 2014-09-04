@@ -1,29 +1,44 @@
 require 'rails_helper'
 
-RSpec.describe Action, :type => :model do
+describe Action, :type => :model do
   it { should validate_presence_of :action }
   it { should belong_to :player }
 
   describe 'defrosting' do
+    let(:player) { mock_model('Player') }
+    let(:card_index) { 1 }
+
     it 'returns an instance of an action modifier (words?)' do
-      card_index = 1
-
-      player = mock_model('Player')
-
       action = Action.create(
         action: 'draw_train_card',
         player: player,
         card_index: card_index,
       )
 
-      soft_action = double :soft_action
+      expect(action.defrost).to be_a Actions::DrawTrainCard
+      expect(action.card_index).to eq 1
+    end
 
-      expect(Actions::DrawTrainCard)
-        .to receive(:new)
-        .with(player.id, card_index)
-        .and_return(soft_action)
+    it 'defrosts DrawRouteCards' do
+      action = Action.create(
+        action: 'draw_route_cards',
+        player: player,
+      )
 
-      expect(action.defrost).to eq soft_action
+      expect(action.defrost).to be_a Actions::DrawRouteCards
+    end
+
+    it 'defrosts KeepRouteCards' do
+      cards_to_keep = [0, 2, 3]
+
+      action = Action.create(
+        action: 'keep_route_cards',
+        player: player,
+        route_cards_to_keep: cards_to_keep
+      )
+
+      expect(action.defrost).to be_a Actions::KeepRouteCards
+      expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
   end
 end

@@ -19,11 +19,7 @@ class Game < ActiveRecord::Base
     GameStateCreationService.new(self).make
   end
 
-  def ordered_actions
-    actions.order('id ASC')
-  end
-
   def defrosted_actions
-    ordered_actions.map(&:defrost)
+    actions.defrost_all
   end
 end

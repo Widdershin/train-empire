@@ -14,4 +14,33 @@ RSpec.describe Game, :type => :model do
   it 'has a state' do
     expect(game.state).to be_a GameState
   end
+
+  # this is really an integration test, and should live in another file
+  describe 'integration' do
+    before do
+      game.users << create(:user)
+    end
+
+    let(:player) { game.players.first }
+    let(:current_player) { game.state.current_player }
+
+    it 'can process a draw_train_card action' do
+      player.actions.create(action: 'draw_train_card', card_index: 1)
+
+      expect(current_player.hand.first).to be_a TrainCard
+    end
+
+    it 'can process a draw_route_cards action' do
+      player.actions.create(action: 'draw_route_cards')
+
+      expect(current_player.potential_routes.size).to_not eq []
+    end
+
+    it 'can process a draw_route_cards action' do
+      player.actions.create(action: 'draw_route_cards')
+      player.actions.create(action: 'keep_route_cards', route_cards_to_keep: [1, 2])
+      expect(game.state.current_player.routes.size).to eq 2
+    end
+  end
+
 end

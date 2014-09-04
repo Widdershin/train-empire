@@ -6,8 +6,8 @@ class CardDeck
     @random = random
   end
 
-  def draw
-    cards.pop
+  def draw(count = nil)
+    count ? cards.pop(count) : cards.pop
   end
 
   def shuffle
@@ -22,6 +22,10 @@ class CardDeck
 
   def count
     cards.count
+  end
+
+  def add_to_bottom(card)
+    cards.unshift card
   end
 
   private def cards
