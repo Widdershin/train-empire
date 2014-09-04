@@ -8,4 +8,8 @@ class Actions::ClaimRoute
 
     game_state
   end
+
+  def end_of_turn?
+    true
+  end
 end

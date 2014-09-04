@@ -27,6 +27,8 @@ class GameState
 
   def end_turn
     players.advance_current_player
+
+    self
   end
 
   def draw_route_cards

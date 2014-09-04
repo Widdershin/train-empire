@@ -16,4 +16,8 @@ class Actions::KeepRouteCards
 
     game_state
   end
+
+  def end_of_turn?
+    true
+  end
 end

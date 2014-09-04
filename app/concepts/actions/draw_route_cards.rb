@@ -5,4 +5,8 @@ class Actions::DrawRouteCards
 
     game_state
   end
+
+  def end_of_turn?
+    false
+  end
 end
