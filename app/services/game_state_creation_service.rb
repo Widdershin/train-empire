@@ -9,7 +9,7 @@ class GameStateCreationService
       train_deck,
       route_deck,
       routes,
-    )
+    ).replenish_available_cards
   end
 
   private

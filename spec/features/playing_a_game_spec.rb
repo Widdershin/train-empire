@@ -69,7 +69,7 @@ describe 'playing a game' do
       card_index: 1,
     )
 
-    p @state.available_train_cards
+    expect(@state.available_train_cards.count).to eq 5
 
   end
 end

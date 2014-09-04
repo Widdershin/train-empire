@@ -53,6 +53,7 @@ describe GameStateCreationService do
       expect(GameState)
         .to receive(:new)
         .with(fake_player_states, fake_train_deck, fake_route_deck, fake_routes)
+        .and_return(instance_double('GameState').as_null_object)
 
       creation_service.make
     end
