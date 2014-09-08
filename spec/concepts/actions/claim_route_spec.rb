@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Actions::ClaimRoute do
+  let(:route_id) { 5 }
 
   describe 'process' do
-    let(:route_id) { 5 }
     it 'claims the route with the given id' do
       action = Actions::ClaimRoute.new(route_id)
       game_state = double(:game_state)
