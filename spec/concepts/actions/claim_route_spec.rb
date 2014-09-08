@@ -6,14 +6,14 @@ describe Actions::ClaimRoute do
   describe 'process' do
     it 'claims the route with the given id' do
       action = Actions::ClaimRoute.new(route_id)
-      game_state = double(:game_state)
+      route = double(:route)
       player = double(:player_state)
 
-      expect(game_state)
-        .to receive(:claim_route)
-        .with(route_id, player)
+      expect(route)
+        .to receive(:set_owner)
+        .with(player)
 
-      action.process(player, game_state)
+      action.process(player, route)
     end
   end
 end

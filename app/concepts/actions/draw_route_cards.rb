@@ -12,4 +12,9 @@ class Actions::DrawRouteCards
   def args_for(state)
     [state.current_player, state.route_deck]
   end
+
+  def valid?(player, state)
+    true
+  end
+
 end

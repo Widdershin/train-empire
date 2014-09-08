@@ -14,4 +14,8 @@ class Actions::DrawTrainCard
   def args_for(state)
     [state.current_player, state.available_train_cards]
   end
+
+  def valid?(current_player, available_train_cards)
+    @card_index < available_train_cards.count
+  end
 end

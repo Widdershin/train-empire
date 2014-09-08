@@ -17,4 +17,8 @@ class Actions::KeepRouteCards
   def args_for(state)
     [state.current_player, state.route_deck]
   end
+
+  def valid?(current_player, route_deck)
+    current_player.potential_routes.any?
+  end
 end

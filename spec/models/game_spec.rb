@@ -43,7 +43,9 @@ RSpec.describe Game, :type => :model do
     end
 
     it 'can process a claim_route action' do
+      pending 'a brainwave'
       route_id = 1
+      route = game.state.route(route_id)
       player.actions.create(action: 'claim_route', route_id: route_id)
 
       state = game.state
