@@ -13,7 +13,7 @@ describe Actions::ClaimRoute do
         .to receive(:claim_route)
         .with(route_id, player)
 
-      action.process(game_state, player)
+      action.process(player, game_state)
     end
   end
 end

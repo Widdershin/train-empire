@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Actions::DrawTrainCard do
   let(:card_index) { 2 }
-  let(:game_state) { double :game_state }
+  let(:train_deck) { double :train_deck }
   let(:action) { Actions::DrawTrainCard.new card_index }
   let(:player) { double :player_state }
 
@@ -10,8 +10,8 @@ describe Actions::DrawTrainCard do
     let(:fake_card) { double :card }
 
     before do
-      allow(game_state)
-        .to receive(:take_available_train_card)
+      allow(train_deck)
+        .to receive(:take)
         .and_return(fake_card)
 
       allow(player)
@@ -20,8 +20,8 @@ describe Actions::DrawTrainCard do
     end
 
     it 'takes the card from the available_train_cards' do
-      expect(game_state)
-        .to receive(:take_available_train_card)
+      expect(train_deck)
+        .to receive(:take)
         .with(card_index)
     end
 
@@ -31,11 +31,6 @@ describe Actions::DrawTrainCard do
         .with(fake_card)
     end
 
-    it "should return the modified game_state" do
-      expect(action.process game_state, player)
-        .to eq game_state
-    end
-
-    after { action.process game_state, player }
+    after { action.process player, train_deck }
   end
 end

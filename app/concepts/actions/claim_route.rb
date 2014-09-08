@@ -3,10 +3,8 @@ class Actions::ClaimRoute
     @route_id = route_id
   end
 
-  def process(game_state, player)
+  def process(player, game_state)
     game_state.claim_route @route_id, player
-
-    game_state
   end
 
   def end_of_turn?

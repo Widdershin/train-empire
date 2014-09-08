@@ -1,6 +1,5 @@
 class GameState
   AVAILABLE_TRAIN_CARDS = 5
-  ROUTE_DECK_DRAW_COUNT = 3
   attr_reader :players, :train_deck, :available_train_cards, :route_deck
 
   def initialize(player_states, train_deck, route_deck, routes)
@@ -29,14 +28,6 @@ class GameState
     players.advance_current_player
 
     self
-  end
-
-  def draw_route_cards
-    route_deck.draw(ROUTE_DECK_DRAW_COUNT)
-  end
-
-  def return_route_cards(cards)
-    cards.map { |card| route_deck.add_to_bottom card }
   end
 
   def claim_route(route_id, player)
