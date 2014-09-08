@@ -77,25 +77,18 @@ RSpec.describe PlayerState, :type => :model do
       expect(player_state.routes).to eq [:cardb, :cardc]
     end
 
-    it 'removes the kept cards from the potential_routes list' do
+    it 'returns the unkept cards' do
       player_state.set_potential_route_cards cards
 
-      player_state.keep_route_cards [1, 2]
-
-      expect(player_state.potential_routes).to eq [:carda]
+      expect(player_state.keep_route_cards([1, 2])).to eq [:carda]
     end
-  end
 
-  describe 'return_unkept_route_cards' do
-    let(:cards) { [:carda, :cardb, :cardc] }
-    it 'returns the current potential cards' do
+    it 'clears the potential_routes list' do
       player_state.set_potential_route_cards cards
 
-      expect(player_state.return_unkept_route_cards)
-        .to eq cards
+      player_state.keep_route_cards [2]
 
-      expect(player_state.potential_routes)
-        .to eq []
+      expect(player_state.potential_routes).to be_empty
     end
   end
 end

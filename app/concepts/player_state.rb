@@ -25,14 +25,11 @@ class PlayerState
   end
 
   def keep_route_cards(card_indices)
-    card_indices.each { |i| @routes << @potential_routes.at(i) }
-    @potential_routes = @potential_routes.each_with_index.select do |route_card, index|
-      !card_indices.include? index
-    end.map { |route, index| route }
- end
-
-  def return_unkept_route_cards
+    kept_cards = card_indices.map { |index| @potential_routes.at index }
+    returned_cards = @potential_routes - kept_cards
+    @routes += kept_cards
     @potential_routes.clear
+    returned_cards
   end
 
   def to_s

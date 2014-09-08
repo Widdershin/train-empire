@@ -6,13 +6,8 @@ class Actions::KeepRouteCards
   end
 
   def process(current_player, route_deck)
-    # given the list of cards to keep
-    # tell the player to keep the cards with those indexes
-    # get the remaining cards back from the player and put the on the bottom of the route deck
-
-    current_player.keep_route_cards cards_to_keep
-    cards_not_kept = current_player.return_unkept_route_cards
-    cards_not_kept.each { |card| route_deck.place_on_bottom(card) }
+    cards_not_kept = current_player.keep_route_cards cards_to_keep
+    cards_not_kept.each { |card| route_deck.add_to_bottom(card) }
   end
 
   def end_of_turn?

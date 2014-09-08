@@ -13,18 +13,15 @@ describe Actions::KeepRouteCards do
       route_deck = double(:route_deck)
       current_player = double(:player_state)
 
-      expect(current_player)
-        .to receive(:keep_route_cards)
-        .with(cards_to_keep)
-
       returned_cards = [:card, :card, :card]
 
       expect(current_player)
-        .to receive(:return_unkept_route_cards)
+        .to receive(:keep_route_cards)
+        .with(cards_to_keep)
         .and_return(returned_cards)
 
       expect(route_deck)
-        .to receive(:place_on_bottom)
+        .to receive(:add_to_bottom)
         .with(:card)
         .exactly(3).times
 
