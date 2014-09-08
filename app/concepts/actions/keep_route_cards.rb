@@ -18,4 +18,8 @@ class Actions::KeepRouteCards
   def end_of_turn?
     true
   end
+
+  def args_for(state)
+    [state.current_player, state.route_deck]
+  end
 end

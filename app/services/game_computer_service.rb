@@ -17,19 +17,7 @@ class GameComputerService
   private
 
   def apply_action(state, action)
-    case action
-    when Actions::DrawTrainCard
-      action.process state.current_player, state.available_train_cards
-    when Actions::DrawRouteCards
-      action.process state.current_player, state.route_deck
-    when Actions::KeepRouteCards
-      action.process state.current_player, state.route_deck
-    when Actions::ClaimRoute
-      action.process state.current_player, state
-    else
-      raise 'Invalid Action'
-    end
-
+    action.process(*action.args_for(state))
   end
 
   private def actions

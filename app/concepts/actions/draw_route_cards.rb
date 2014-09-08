@@ -8,4 +8,8 @@ class Actions::DrawRouteCards
   def end_of_turn?
     false
   end
+
+  def args_for(state)
+    [state.current_player, state.route_deck]
+  end
 end

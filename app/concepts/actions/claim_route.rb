@@ -10,4 +10,8 @@ class Actions::ClaimRoute
   def end_of_turn?
     true
   end
+
+  def args_for(state)
+    [state.current_player, state]
+  end
 end

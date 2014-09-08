@@ -10,4 +10,8 @@ class Actions::DrawTrainCard
   def end_of_turn?
     true
   end
+
+  def args_for(state)
+    [state.current_player, state.available_train_cards]
+  end
 end
