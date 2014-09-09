@@ -7,7 +7,7 @@ class Actions::ClaimRoute
   end
 
   def process(player, route)
-    route.set_owner player
+    player.claim route
   end
 
   def end_of_turn?
@@ -24,7 +24,8 @@ class Actions::ClaimRoute
     player_card_count = player.hand.count { |card| card.color == route.color }
 
     if player_card_count < route.cost
-      @errors << "#{player.name} needs more #{route.color} cards. Has #{player_card_count}, needs #{route.cost}."
+      @errors << "#{player.name} needs more #{route.color} cards. " +
+                 "Has #{player_card_count}, needs #{route.cost}."
     end
 
     if player.trains < route.cost

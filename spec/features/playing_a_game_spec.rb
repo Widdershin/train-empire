@@ -106,7 +106,8 @@ describe 'playing a game' do
       route_id: route_id,
     )
 
-    update_state
+    route = @state.route(route_id)
+    expect {update_state}.to change {p1.trains}.by(-route.cost)
 
     expect(@state.route(route_id).owner).to eq p1
 

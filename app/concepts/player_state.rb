@@ -32,7 +32,20 @@ class PlayerState
     returned_cards
   end
 
+  def claim(route)
+    route.set_owner self
+    @trains -= route.cost
+    spend_cards(route.cost, route.color)
+  end
+
+  def spend_cards(count, color)
+    count.times do
+      hand.delete_at(hand.find_index { |card| card.color == color })
+    end
+  end
+
   def to_s
-    "Player #{id} - #{name}. #{hand.size} cards in hand, #{trains} trains. Holding #{routes.size} routes"
+    "Player #{name}. #{hand.size} cards in hand, " +
+    "#{trains} trains. Holding #{routes.size} routes"
   end
 end

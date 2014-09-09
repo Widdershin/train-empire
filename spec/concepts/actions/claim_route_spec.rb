@@ -9,9 +9,9 @@ describe Actions::ClaimRoute do
       route = double(:route)
       player = double(:player_state)
 
-      expect(route)
-        .to receive(:set_owner)
-        .with(player)
+      expect(player)
+        .to receive(:claim)
+        .with(route)
 
       action.process(player, route)
     end

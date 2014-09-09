@@ -91,4 +91,48 @@ RSpec.describe PlayerState, :type => :model do
       expect(player_state.potential_routes).to be_empty
     end
   end
+
+  describe 'claim' do
+    let (:route) { double(:route, cost: 5, color: :blue, set_owner: nil) }
+
+    let (:card) { double(:card, color: :blue) }
+
+    before do
+      route.cost.times do
+        player_state.add_to_hand card
+      end
+    end
+
+    it 'claims a route' do
+      expect(route).to receive(:set_owner).with(player_state)
+      player_state.claim route
+    end
+
+    it 'subtracts the route cost from the trains' do
+      expect{ player_state.claim(route) }
+        .to change { player_state.trains }
+        .by(-route.cost)
+    end
+
+    it 'spends the needed cards' do
+      expect { player_state.claim(route) }
+        .to change { player_state.hand.size }
+        .by(-route.cost)
+    end
+
+  end
+
+  describe 'spend_cards' do
+    it 'removes a certain number of cards of a certain color from the hand' do
+      10.times do
+        player_state.add_to_hand(double :card, color: :blue)
+      end
+
+      card_count = 4
+
+      expect{ player_state.spend_cards(card_count, :blue) }
+        .to change { player_state.hand.count { |card| card.color == :blue } }
+        .by(-card_count)
+    end
+  end
 end
