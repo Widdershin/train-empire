@@ -6,7 +6,8 @@ class Actions::ClaimRoute
     @errors = []
   end
 
-  def process(player, route)
+  def process(player, game_state)
+    route = game_state.route(@route_id)
     player.claim route
   end
 
@@ -14,11 +15,8 @@ class Actions::ClaimRoute
     true
   end
 
-  def args_for(state)
-    [state.current_player, state.route(@route_id)]
-  end
-
-  def valid?(player, route)
+  def valid?(player, game_state)
+    route = game_state.route(@route_id)
     @errors = []
 
     player_card_count = player.hand.count { |card| card.color == route.color }
