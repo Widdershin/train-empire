@@ -17,9 +17,8 @@ class GameComputerService
   private
 
   def apply_action(state, action)
-    args = *action.args_for(state)
-    raise "Invalid Action: #{action.errors.join ', '}" unless action.valid? *args
-    action.process *args
+    raise "Invalid Action: #{action.errors.join ', '}" unless action.valid? state.current_player, state
+    action.process state.current_player, state
   end
 
   private def actions
