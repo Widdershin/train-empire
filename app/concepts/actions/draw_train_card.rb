@@ -3,19 +3,16 @@ class Actions::DrawTrainCard
     @card_index = card_index
   end
 
-  def process(current_player, train_deck)
-    current_player.add_to_hand(train_deck.take @card_index)
+  def process(current_player, game_state)
+    available_train_cards = game_state.available_train_cards
+    current_player.add_to_hand(available_train_cards.take(@card_index))
   end
 
   def end_of_turn?
     true
   end
 
-  def args_for(state)
-    [state.current_player, state.available_train_cards]
-  end
-
-  def valid?(current_player, available_train_cards)
-    @card_index < available_train_cards.count
+  def valid?(current_player, game_state)
+    @card_index < game_state.available_train_cards.count
   end
 end
