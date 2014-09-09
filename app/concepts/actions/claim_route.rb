@@ -21,8 +21,10 @@ class Actions::ClaimRoute
   def valid?(player, route)
     @errors = []
 
-    if player.hand.count { |card| card.color == route.color } < route.cost
-      @errors << "#{player} needs more #{route.color} cards."
+    player_card_count = player.hand.count { |card| card.color == route.color }
+
+    if player_card_count < route.cost
+      @errors << "#{player.name} needs more #{route.color} cards. Has #{player_card_count}, needs #{route.cost}."
     end
 
     if player.trains < route.cost

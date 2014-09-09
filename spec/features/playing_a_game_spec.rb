@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'playing a game' do
   it 'can play a game' do
     @game = Game.create!
+    test_seed = 500
+    @game.seed = test_seed
     @game.users << User.create!(username: 'Widdershin', email: 'u@a.c', password: 'barbarbar')
     @game.users << User.create!(username: 'FooBazBar', email: 'hey@bar.com', password: 'nahdamn8chars')
 
@@ -17,19 +19,40 @@ describe 'playing a game' do
       @state.players.players.find {|player| player.name == 'FooBazBar' }
     end
 
+    def display_cards
+      puts "****" * 4
+      puts @state.available_train_cards.cards
+      puts "****" * 4
+    end
+
     def update_state
       @state = @game.state
+    end
+
+    def draw_card(player, color)
+      card_index = @state.available_train_cards.cards.find_index { |card| card.color == color }
+
+      if card_index.nil?
+        display_cards
+        raise 'no card with that color found'
+      end
+
+      player.actions.create!(
+        action: 'draw_train_card',
+        card_index: card_index,
+      )
+      update_state
     end
 
     update_state
 
     expect(@state.current_player).to eq p1
 
-    player_1.actions.create(
+    player_1.actions.create!(
       action: 'draw_route_cards'
     )
 
-    player_1.actions.create(
+    player_1.actions.create!(
       action: 'keep_route_cards',
       route_cards_to_keep: [0, 1]
     )
@@ -39,7 +62,7 @@ describe 'playing a game' do
     expect(p1.routes.size).to eq 2
     expect(@state.current_player).to eq p2
 
-    player_2.actions.create(
+    player_2.actions.create!(
       action: 'draw_route_cards'
     )
 
@@ -47,7 +70,7 @@ describe 'playing a game' do
 
     expect(p2.potential_routes.size).to eq 3
 
-    player_2.actions.create(
+    player_2.actions.create!(
       action: 'keep_route_cards',
       route_cards_to_keep: [0, 1]
     )
@@ -55,7 +78,7 @@ describe 'playing a game' do
     update_state
     expect(@state.current_player).to eq p1
 
-    player_1.actions.create(
+    player_1.actions.create!(
       action: 'draw_train_card',
       card_index: 0,
     )
@@ -64,7 +87,7 @@ describe 'playing a game' do
 
     expect(p1.hand.size).to eq 1
 
-    player_2.actions.create(
+    player_2.actions.create!(
       action: 'draw_train_card',
       card_index: 1,
     )
@@ -73,14 +96,19 @@ describe 'playing a game' do
 
     expect(@state.available_train_cards.count).to eq 5
 
-    player_1.actions.create(
+    draw_card(player_1, :blue)
+
+    draw_card(player_2, :purple)
+
+    route_id = 3
+    player_1.actions.create!(
       action: 'claim_route',
-      route_id: 1,
+      route_id: route_id,
     )
 
     update_state
 
-    expect(@state.route(1).owner).to eq p1
+    expect(@state.route(route_id).owner).to eq p1
 
   end
 end
