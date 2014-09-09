@@ -3,11 +3,15 @@ class Actions::DrawTrainCard
     @card_index = card_index
   end
 
-  def process(game_state, current_player)
-    card = game_state.take_available_train_card(@card_index)
+  def process(current_player, train_deck)
+    current_player.add_to_hand(train_deck.take @card_index)
+  end
 
-    current_player.add_to_hand card
+  def end_of_turn?
+    true
+  end
 
-    game_state
+  def args_for(state)
+    [state.current_player, state.available_train_cards]
   end
 end

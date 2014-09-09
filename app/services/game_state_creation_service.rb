@@ -1,4 +1,5 @@
 class GameStateCreationService
+  ROUTES_CSV_FILE = "#{Rails.root}/data/routes.csv"
   def initialize(game)
     @game = game
   end
@@ -8,8 +9,11 @@ class GameStateCreationService
       player_states,
       train_deck,
       route_deck,
-    )
+      routes,
+    ).replenish_available_cards
   end
+
+  private
 
   def train_deck
     DeckCreationService.new.make :train, @game.seed
@@ -21,5 +25,9 @@ class GameStateCreationService
 
   def player_states
     PlayerStateCreationService.from_players(@game.players)
+  end
+
+  def routes
+    CsvMapper.new(ROUTES_CSV_FILE, Route).load
   end
 end

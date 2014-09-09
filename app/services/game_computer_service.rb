@@ -4,11 +4,20 @@ class GameComputerService
     @actions = actions
   end
 
+
   def process
     actions.reduce(game_state) do |game_state, action|
+      apply_action game_state, action
+      game_state.end_turn if action.end_of_turn?
       game_state.replenish_available_cards
-      action.process game_state, game_state.current_player
+      game_state
     end
+  end
+
+  private
+
+  def apply_action(state, action)
+    action.process(*action.args_for(state))
   end
 
   private def actions

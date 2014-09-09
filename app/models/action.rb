@@ -18,6 +18,8 @@ class Action < ActiveRecord::Base
       Actions::DrawRouteCards.new
     when 'keep_route_cards'
       Actions::KeepRouteCards.new route_cards_to_keep
+    when 'claim_route'
+      Actions::ClaimRoute.new route_id
     end
   end
 end
