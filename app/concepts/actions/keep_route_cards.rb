@@ -5,17 +5,14 @@ class Actions::KeepRouteCards
     @cards_to_keep = cards_to_keep
   end
 
-  def process(current_player, route_deck)
+  def process(current_player, game_state)
+    route_deck = game_state.route_deck
     cards_not_kept = current_player.keep_route_cards cards_to_keep
     cards_not_kept.each { |card| route_deck.add_to_bottom(card) }
   end
 
   def end_of_turn?
     true
-  end
-
-  def args_for(state)
-    [state.current_player, state.route_deck]
   end
 
   def valid?(current_player, route_deck)
