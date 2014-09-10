@@ -11,7 +11,7 @@ class Actions::ClaimRoute
     player.claim route
   end
 
-  def end_of_turn?
+  def end_of_turn?(player)
     true
   end
 

@@ -48,7 +48,6 @@ describe 'playing a game' do
   end
 
   it 'can play a game' do
-    pending 'proper draw_train_card logic'
     expect(@state.current_player).to eq p1
 
     @player_1.actions.create!(
@@ -87,18 +86,14 @@ describe 'playing a game' do
 
     expect(p1.hand.size).to eq 1
 
-    @player_2.actions.create!(
-      action: 'draw_train_card',
-      card_index: 1,
-    )
-
-    update_state
-
-    expect(@state.available_train_cards.count).to eq 5
-
     draw_card(@player_1, :blue)
 
+    expect(@state.current_player).to eq p2
+
     draw_card(@player_2, :purple)
+    draw_card(@player_2, :red)
+
+    expect(@state.available_train_cards.count).to eq 5
 
     route_id = 3
     @player_1.actions.create!(
