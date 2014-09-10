@@ -78,12 +78,11 @@ describe 'playing a game' do
     update_state
     expect(@state.current_player).to eq p1
 
-    player_1.actions.create!(
-      action: 'draw_train_card',
-      card_index: 0,
-    )
+    draw_card(player_1, :yellow)
 
     update_state
+
+    expect(@state.current_player).to eq p1
 
     expect(p1.hand.size).to eq 1
 
