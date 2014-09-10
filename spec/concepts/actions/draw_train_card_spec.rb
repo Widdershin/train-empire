@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Actions::DrawTrainCard do
   let(:card_index) { 2 }
   let(:action) { Actions::DrawTrainCard.new card_index }
-  let(:player) { double :player_state }
+  let(:player) { PlayerState.new(1, 'test') }
 
   describe 'process' do
     it 'moves the card from the available_train_cards to the players hand' do

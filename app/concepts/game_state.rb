@@ -27,6 +27,10 @@ class GameState
   def end_turn
     players.advance_current_player
 
+    players.players.each do |player|
+      player.remaining_draws = 2
+    end
+
     self
   end
 

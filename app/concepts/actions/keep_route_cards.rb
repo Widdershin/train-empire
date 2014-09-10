@@ -11,7 +11,7 @@ class Actions::KeepRouteCards
     cards_not_kept.each { |card| route_deck.add_to_bottom(card) }
   end
 
-  def end_of_turn?
+  def end_of_turn?(player)
     true
   end
 

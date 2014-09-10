@@ -6,7 +6,7 @@ class Actions::DrawRouteCards
     player.set_potential_route_cards(route_deck.draw ROUTE_DECK_DRAW_COUNT)
   end
 
-  def end_of_turn?
+  def end_of_turn?(player)
     false
   end
 
