@@ -83,8 +83,6 @@ describe 'playing a game' do
 
     draw_card(@player_1, :yellow)
 
-    update_state
-
     expect(@state.current_player).to eq p1
 
     expect(p1.hand.size).to eq 1
@@ -117,33 +115,22 @@ describe 'playing a game' do
   it 'lets you draw twice' do
     draw_card(@player_1, :purple)
 
-    update_state
-
     expect(@state.current_player).to eq p1
 
     draw_card(@player_1, :blue)
-
-    update_state
 
     expect(@state.current_player).to eq p2
 
     draw_card(@player_2, :red)
 
-    update_state
-
     expect(@state.current_player).to eq p2
 
     draw_card(@player_2, :white)
-
-    update_state
 
     expect(@state.current_player).to eq p1
 
     draw_card(@player_1, :yellow)
 
-    update_state
-
     expect(@state.current_player).to eq p1
-
   end
 end
