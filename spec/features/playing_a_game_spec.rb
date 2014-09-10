@@ -128,4 +128,13 @@ describe 'playing a game' do
 
     expect(@state.current_player).to eq p1
   end
+
+  it 'only lets you draw one wildcard per turn' do
+    @game.seed = 999
+
+    update_state
+    draw_card(@player_1, :wild)
+
+    expect(@state.current_player).to eq p2
+  end
 end

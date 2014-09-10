@@ -11,4 +11,14 @@ RSpec.describe TrainCard, :type => :model do
 
     expect(card.to_s).to eq 'Blue Train Card'
   end
+
+  it 'has a cost' do
+    card = TrainCard.new :blue
+
+    expect(card.cost).to eq TrainCard::COST
+
+    wildcard = TrainCard.new :wild
+
+    expect(wildcard.cost).to eq TrainCard::WILD_COST
+  end
 end

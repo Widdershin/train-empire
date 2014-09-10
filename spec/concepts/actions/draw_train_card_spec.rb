@@ -11,7 +11,7 @@ describe Actions::DrawTrainCard do
       game_state = GameStateCreationService.new(game).make
       allow(game_state).to receive(:current_player).and_return(player)
 
-      fake_card = double (:card)
+      fake_card = double(:card, color: :fake, cost: 1)
 
       expect(game_state.available_train_cards)
         .to receive(:take)

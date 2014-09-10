@@ -5,8 +5,10 @@ class Actions::DrawTrainCard
 
   def process(current_player, game_state)
     available_train_cards = game_state.available_train_cards
-    current_player.add_to_hand(available_train_cards.take(@card_index))
-    current_player.remaining_draws -= 1
+    card = available_train_cards.take(@card_index)
+    current_player.add_to_hand(card)
+
+    current_player.remaining_draws -= card.cost
   end
 
   def end_of_turn?(current_player)
