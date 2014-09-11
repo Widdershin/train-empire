@@ -1,6 +1,9 @@
 require 'rails_helper'
+require_relative 'shared_action_spec'
 
 describe Actions::KeepRouteCards do
+  it_should_behave_like 'an action'
+
   let (:cards_to_keep) { [0, 2, 3] }
   let (:action) { Actions::KeepRouteCards.new(cards_to_keep)}
 

@@ -1,6 +1,9 @@
 require 'rails_helper'
+require_relative 'shared_action_spec'
 
 describe Actions::DrawTrainCard do
+  it_should_behave_like 'an action'
+
   let(:card_index) { 2 }
   let(:action) { Actions::DrawTrainCard.new card_index }
   let(:player) { PlayerState.new(1, 'test') }

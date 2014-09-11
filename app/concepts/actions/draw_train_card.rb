@@ -1,6 +1,9 @@
 class Actions::DrawTrainCard
+  attr_reader :errors
+
   def initialize(card_index)
     @card_index = card_index
+    @errors = []
   end
 
   def process(current_player, game_state)

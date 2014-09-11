@@ -1,8 +1,9 @@
 class Actions::KeepRouteCards
-  attr_reader :cards_to_keep
+  attr_reader :cards_to_keep, :errors
 
   def initialize(cards_to_keep)
     @cards_to_keep = cards_to_keep
+    @errors = []
   end
 
   def process(current_player, game_state)

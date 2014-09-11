@@ -1,6 +1,10 @@
 require 'rails_helper'
+require_relative 'shared_action_spec'
 
 describe Actions::ClaimRoute do
+  it_should_behave_like 'an action'
+
+  let(:action) { Actions::ClaimRoute.new(route_id) }
   let(:route_id) { 2 }
 
   describe 'process' do
@@ -9,8 +13,6 @@ describe Actions::ClaimRoute do
       game_state = GameStateCreationService.new(game).make
 
       player = double(:player_state)
-
-      action = Actions::ClaimRoute.new(route_id)
 
       expect(player)
         .to receive(:claim)
