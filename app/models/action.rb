@@ -15,15 +15,6 @@ class Action < ActiveRecord::Base
   end
 
   def defrost
-    case action
-    when 'draw_train_card'
-      Actions::DrawTrainCard.new card_index
-    when 'draw_route_cards'
-      Actions::DrawRouteCards.new
-    when 'keep_route_cards'
-      Actions::KeepRouteCards.new route_cards_to_keep
-    when 'claim_route'
-      Actions::ClaimRoute.new route_id
-    end
+    defrosted_class.from_action(self)
   end
 end
