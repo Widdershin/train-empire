@@ -137,14 +137,4 @@ describe 'playing a game' do
 
     expect(@state.current_player).to eq p2
   end
-
-  it 'only lets you draw after drawing once' do
-    draw_card(@player_1, :orange)
-
-    @player_1.actions.create(
-      action: 'draw_route_cards'
-    )
-
-    expect {update_state}.to raise_error
-  end
 end
