@@ -1,11 +1,11 @@
 class Actions::ClaimRoute
-  attr_reader :errors
+  attr_reader :errors, :player_id
 
   def self.from_action(action)
-    new(action.route_id)
+    new(action.player_id, action.route_id)
   end
 
-  def initialize(route_id)
+  def initialize(player_id, route_id)
     @route_id = route_id
     @errors = []
   end

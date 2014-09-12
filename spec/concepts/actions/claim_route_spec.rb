@@ -4,7 +4,8 @@ require_relative 'shared_action_spec'
 describe Actions::ClaimRoute do
   it_should_behave_like 'an action'
 
-  let(:action) { Actions::ClaimRoute.new(route_id) }
+  let(:action) { Actions::ClaimRoute.new(player_id, route_id) }
+  let(:player_id) { 1 }
   let(:route_id) { 2 }
 
   describe 'process' do

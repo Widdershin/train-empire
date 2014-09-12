@@ -12,4 +12,5 @@ shared_examples_for 'an action' do
   it { should respond_to :end_of_turn? }
   it { should respond_to :valid? }
   it { should respond_to :errors }
+  it { should respond_to :player_id }
 end
