@@ -54,4 +54,14 @@ describe Action, :type => :model do
       expect(action.route_id).to eq route_id
     end
   end
+
+  describe '#defrosted_class' do
+    it 'returns the appropriate action class' do
+      action = Action.create(
+        action: 'draw_route_cards'
+      )
+
+      expect(action.defrosted_class).to eq Actions::DrawRouteCards
+    end
+  end
 end

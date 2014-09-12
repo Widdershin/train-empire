@@ -10,6 +10,10 @@ class Action < ActiveRecord::Base
     by_creation.map(&:defrost)
   end
 
+  def defrosted_class
+    "Actions::#{action.camelize}".constantize
+  end
+
   def defrost
     case action
     when 'draw_train_card'
