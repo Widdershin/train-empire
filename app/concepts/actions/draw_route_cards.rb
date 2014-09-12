@@ -3,6 +3,10 @@ class Actions::DrawRouteCards
 
   attr_reader :errors
 
+  def self.from_action(action)
+    new
+  end
+
   def process(player, game_state)
     route_deck = game_state.route_deck
     player.set_potential_route_cards(route_deck.draw ROUTE_DECK_DRAW_COUNT)

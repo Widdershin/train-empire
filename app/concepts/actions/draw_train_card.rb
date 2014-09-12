@@ -1,6 +1,10 @@
 class Actions::DrawTrainCard
   attr_reader :errors
 
+  def self.from_action(action)
+    new(action.card_index)
+  end
+
   def initialize(card_index)
     @card_index = card_index
     @errors = []

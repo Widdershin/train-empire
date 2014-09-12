@@ -1,6 +1,10 @@
 class Actions::ClaimRoute
   attr_reader :errors
 
+  def self.from_action(action)
+    new(action.route_id)
+  end
+
   def initialize(route_id)
     @route_id = route_id
     @errors = []
