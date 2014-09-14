@@ -11,7 +11,7 @@ class Action < ActiveRecord::Base
   end
 
   def defrosted_class
-    "Actions::#{action.camelize}".constantize
+    "StateModifiers::#{action.camelize}".constantize
   end
 
   def defrost

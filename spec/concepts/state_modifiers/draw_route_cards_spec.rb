@@ -1,10 +1,10 @@
 require 'rails_helper'
-require_relative 'shared_action_spec'
+require_relative 'shared_state_modifier_spec'
 
-describe Actions::DrawRouteCards do
-  it_should_behave_like 'an action'
+describe StateModifiers::DrawRouteCards do
+  it_should_behave_like 'a state modifier'
 
-  let(:action) { Actions::DrawRouteCards.new(player_id) }
+  let(:action) { StateModifiers::DrawRouteCards.new(player_id) }
   let(:player_id) { 2 }
 
   it 'draws three route cards' do

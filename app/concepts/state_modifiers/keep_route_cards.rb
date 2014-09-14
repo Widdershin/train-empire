@@ -1,4 +1,4 @@
-class Actions::KeepRouteCards
+class StateModifiers::KeepRouteCards
   attr_reader :cards_to_keep, :errors, :player_id
 
   def self.from_action(action)

@@ -1,4 +1,4 @@
-class Actions::DrawRouteCards
+class StateModifiers::DrawRouteCards
   ROUTE_DECK_DRAW_COUNT = 3
 
   attr_reader :errors, :player_id

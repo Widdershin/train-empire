@@ -8,14 +8,14 @@ describe Action, :type => :model do
     let(:player) { mock_model('Player') }
     let(:card_index) { 1 }
 
-    it 'returns an instance of an action modifier (words?)' do
+    it 'returns an instance of a state modifier modifier (words?)' do
       action = Action.create(
         action: 'draw_train_card',
         player: player,
         card_index: card_index,
       )
 
-      expect(action.defrost).to be_a Actions::DrawTrainCard
+      expect(action.defrost).to be_a StateModifiers::DrawTrainCard
       expect(action.card_index).to eq 1
     end
 
@@ -25,7 +25,7 @@ describe Action, :type => :model do
         player: player,
       )
 
-      expect(action.defrost).to be_a Actions::DrawRouteCards
+      expect(action.defrost).to be_a StateModifiers::DrawRouteCards
     end
 
     it 'defrosts KeepRouteCards' do
@@ -37,7 +37,7 @@ describe Action, :type => :model do
         route_cards_to_keep: cards_to_keep
       )
 
-      expect(action.defrost).to be_a Actions::KeepRouteCards
+      expect(action.defrost).to be_a StateModifiers::KeepRouteCards
       expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
 
@@ -50,7 +50,7 @@ describe Action, :type => :model do
         route_id: route_id
       )
 
-      expect(action.defrost).to be_a Actions::ClaimRoute
+      expect(action.defrost).to be_a StateModifiers::ClaimRoute
       expect(action.route_id).to eq route_id
     end
   end
@@ -61,7 +61,7 @@ describe Action, :type => :model do
         action: 'draw_route_cards'
       )
 
-      expect(action.defrosted_class).to eq Actions::DrawRouteCards
+      expect(action.defrosted_class).to eq StateModifiers::DrawRouteCards
     end
   end
 end

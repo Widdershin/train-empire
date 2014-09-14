@@ -1,4 +1,4 @@
-class Actions::DrawTrainCard
+class StateModifiers::DrawTrainCard
   attr_reader :errors, :player_id
 
   def self.from_action(action)

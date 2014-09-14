@@ -1,4 +1,4 @@
-class Actions::ClaimRoute
+class StateModifiers::ClaimRoute
   attr_reader :errors, :player_id
 
   def self.from_action(action)

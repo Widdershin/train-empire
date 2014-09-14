@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-shared_examples_for 'an action' do
+shared_examples_for 'a state modifier' do
   subject { action }
 
-  it 'can be created from an action' do
+  it 'can be created from a state modifier' do
     action_model = Action.new
     expect(action.class.from_action(action_model)).to be_a action.class
   end

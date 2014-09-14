@@ -1,11 +1,11 @@
 require 'rails_helper'
-require_relative 'shared_action_spec'
+require_relative 'shared_state_modifier_spec'
 
-describe Actions::DrawTrainCard do
-  it_should_behave_like 'an action'
+describe StateModifiers::DrawTrainCard do
+  it_should_behave_like 'a state modifier'
 
   let(:card_index) { 2 }
-  let(:action) { Actions::DrawTrainCard.new player_id, card_index }
+  let(:action) { StateModifiers::DrawTrainCard.new player_id, card_index }
   let(:player_id) { 1 }
   let(:player) { PlayerState.new(player_id, 'test') }
 
