@@ -1,4 +1,4 @@
-class Route
+class Link
   attr_reader :id, :owner, :cost, :color
 
   def initialize(id:, city_a_id:, city_b_id:, cost:, color:)

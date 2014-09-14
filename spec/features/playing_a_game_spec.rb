@@ -95,16 +95,16 @@ describe 'playing a game' do
 
     expect(@state.available_train_cards.count).to eq 5
 
-    route_id = 3
+    link_id = 3
     @player_1.actions.create!(
-      action: 'claim_route',
-      route_id: route_id,
+      action: 'claim_link',
+      link_id: link_id,
     )
 
-    route = @state.route(route_id)
+    route = @state.link(link_id)
     expect {update_state}.to change {p1.trains}.by(-route.cost)
 
-    expect(@state.route(route_id).owner).to eq p1
+    expect(@state.link(link_id).owner).to eq p1
   end
 
   it 'lets you draw twice' do

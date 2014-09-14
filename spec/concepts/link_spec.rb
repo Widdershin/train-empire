@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-describe Route do
+describe Link do
 end

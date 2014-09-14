@@ -7,12 +7,12 @@ RSpec.describe GameState do
   let (:player_states) { [player_state, player_state2] }
   let (:train_deck) { double :train_deck, count: 105 }
   let (:route_deck) { double :route_deck, draw: :route_card }
-  let (:route) { double :route, id: 1, owner: nil }
-  let (:route2) { double :route2, id: 2, owner: nil }
-  let (:routes) { [route, route2] }
+  let (:link) { double :link, id: 1, owner: nil }
+  let (:link2) { double :link2, id: 2, owner: nil }
+  let (:links) { [link, link2] }
 
   let (:game_state) do
-    GameState.new player_states, train_deck, route_deck, routes
+    GameState.new player_states, train_deck, route_deck, links
   end
 
   it 'has a nice string representation' do
@@ -25,16 +25,16 @@ RSpec.describe GameState do
       .to eq route_deck
   end
 
-  describe 'routes' do
-    describe 'claim_route' do
-      it 'claims the route for the player' do
+  describe 'links' do
+    describe 'claim_link' do
+      it 'claims the link for the player' do
         player = double :player_state
 
-        expect(route)
+        expect(link)
           .to receive(:set_owner)
           .with(player)
 
-        game_state.claim_route(route.id, player)
+        game_state.claim_link(link.id, player)
       end
     end
   end

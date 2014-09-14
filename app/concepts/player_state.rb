@@ -34,10 +34,10 @@ class PlayerState
     returned_cards
   end
 
-  def claim(route)
-    route.set_owner self
-    @trains -= route.cost
-    spend_cards(route.cost, route.color)
+  def claim(link)
+    link.set_owner self
+    @trains -= link.cost
+    spend_cards(link.cost, link.color)
   end
 
   def spend_cards(count, color)

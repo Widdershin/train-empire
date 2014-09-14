@@ -18,7 +18,7 @@ describe GameStateCreationService do
 
       expect(game_state.players.size).to eq game.players.count
 
-      expect(game_state.route(1)).to_not be_nil
+      expect(game_state.link(1)).to_not be_nil
     end
   end
 end

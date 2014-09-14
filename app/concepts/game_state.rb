@@ -2,12 +2,12 @@ class GameState
   AVAILABLE_TRAIN_CARDS = 5
   attr_reader :players, :train_deck, :available_train_cards, :route_deck
 
-  def initialize(player_states, train_deck, route_deck, routes)
+  def initialize(player_states, train_deck, route_deck, links)
     @players = PlayerManager.new player_states
     @train_deck = train_deck
     @available_train_cards = Pile.new
     @route_deck = route_deck
-    @routes = routes
+    @links = links
   end
 
   def replenish_available_cards
@@ -34,12 +34,12 @@ class GameState
     self
   end
 
-  def claim_route(route_id, player)
-    route(route_id).set_owner player
+  def claim_link(link_id, player)
+    link(link_id).set_owner player
   end
 
-  def route(id)
-    @routes.find { |route| route.id == id }
+  def link(link_id)
+    @links.find { |link| link.id == link_id }
   end
 
   def to_s

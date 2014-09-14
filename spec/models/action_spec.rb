@@ -41,17 +41,17 @@ describe Action, :type => :model do
       expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
 
-    it 'defrosts ClaimRoute' do
-      route_id = 5
+    it 'defrosts ClaimLink' do
+      link_id = 5
 
       action = Action.create(
-        action: 'claim_route',
+        action: 'claim_link',
         player: player,
-        route_id: route_id
+        link_id: link_id
       )
 
-      expect(action.to_modifier).to be_a StateModifiers::ClaimRoute
-      expect(action.route_id).to eq route_id
+      expect(action.to_modifier).to be_a StateModifiers::ClaimLink
+      expect(action.link_id).to eq link_id
     end
   end
 

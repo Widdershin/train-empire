@@ -28,6 +28,6 @@ class GameStateCreationService
   end
 
   def routes
-    CsvMapper.new(ROUTES_CSV_FILE, Route).load
+    CsvMapper.new(ROUTES_CSV_FILE, Link).load
   end
 end
