@@ -1,11 +1,12 @@
 class Actions::KeepRouteCards
-  attr_reader :cards_to_keep, :errors
+  attr_reader :cards_to_keep, :errors, :player_id
 
   def self.from_action(action)
-    new(action.route_cards_to_keep)
+    new(action.player_id, action.route_cards_to_keep)
   end
 
-  def initialize(cards_to_keep)
+  def initialize(player_id, cards_to_keep)
+    @player_id = player_id
     @cards_to_keep = cards_to_keep
     @errors = []
   end

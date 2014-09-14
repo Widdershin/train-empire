@@ -5,8 +5,9 @@ describe Actions::DrawTrainCard do
   it_should_behave_like 'an action'
 
   let(:card_index) { 2 }
-  let(:action) { Actions::DrawTrainCard.new card_index }
-  let(:player) { PlayerState.new(1, 'test') }
+  let(:action) { Actions::DrawTrainCard.new player_id, card_index }
+  let(:player_id) { 1 }
+  let(:player) { PlayerState.new(player_id, 'test') }
 
   describe 'process' do
     it 'moves the card from the available_train_cards to the players hand' do

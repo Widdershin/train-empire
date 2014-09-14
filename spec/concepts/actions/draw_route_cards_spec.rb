@@ -4,7 +4,8 @@ require_relative 'shared_action_spec'
 describe Actions::DrawRouteCards do
   it_should_behave_like 'an action'
 
-  let(:action) { Actions::DrawRouteCards.new }
+  let(:action) { Actions::DrawRouteCards.new(player_id) }
+  let(:player_id) { 2 }
 
   it 'draws three route cards' do
     game = double(:game, players: [], seed: 1)

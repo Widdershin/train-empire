@@ -1,10 +1,14 @@
 class Actions::DrawRouteCards
   ROUTE_DECK_DRAW_COUNT = 3
 
-  attr_reader :errors
+  attr_reader :errors, :player_id
 
   def self.from_action(action)
-    new
+    new(action.player_id)
+  end
+
+  def initialize(player_id)
+    @player_id = player_id
   end
 
   def process(player, game_state)

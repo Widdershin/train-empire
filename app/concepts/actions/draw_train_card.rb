@@ -1,11 +1,11 @@
 class Actions::DrawTrainCard
-  attr_reader :errors
+  attr_reader :errors, :player_id
 
   def self.from_action(action)
-    new(action.card_index)
+    new(action.player_id, action.card_index)
   end
 
-  def initialize(card_index)
+  def initialize(player_id, card_index)
     @card_index = card_index
     @errors = []
   end
