@@ -4,7 +4,7 @@ describe Action, :type => :model do
   it { should validate_presence_of :action }
   it { should belong_to :player }
 
-  describe 'defrosting' do
+  describe 'to_modifier' do
     let(:player) { mock_model('Player') }
     let(:card_index) { 1 }
 
@@ -15,7 +15,7 @@ describe Action, :type => :model do
         card_index: card_index,
       )
 
-      expect(action.defrost).to be_a StateModifiers::DrawTrainCard
+      expect(action.to_modifier).to be_a StateModifiers::DrawTrainCard
       expect(action.card_index).to eq 1
     end
 
@@ -25,7 +25,7 @@ describe Action, :type => :model do
         player: player,
       )
 
-      expect(action.defrost).to be_a StateModifiers::DrawRouteCards
+      expect(action.to_modifier).to be_a StateModifiers::DrawRouteCards
     end
 
     it 'defrosts KeepRouteCards' do
@@ -37,7 +37,7 @@ describe Action, :type => :model do
         route_cards_to_keep: cards_to_keep
       )
 
-      expect(action.defrost).to be_a StateModifiers::KeepRouteCards
+      expect(action.to_modifier).to be_a StateModifiers::KeepRouteCards
       expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
 
@@ -50,18 +50,18 @@ describe Action, :type => :model do
         route_id: route_id
       )
 
-      expect(action.defrost).to be_a StateModifiers::ClaimRoute
+      expect(action.to_modifier).to be_a StateModifiers::ClaimRoute
       expect(action.route_id).to eq route_id
     end
   end
 
-  describe '#defrosted_class' do
+  describe '#modifier_class' do
     it 'returns the appropriate action class' do
       action = Action.create(
         action: 'draw_route_cards'
       )
 
-      expect(action.defrosted_class).to eq StateModifiers::DrawRouteCards
+      expect(action.modifier_class).to eq StateModifiers::DrawRouteCards
     end
   end
 end

@@ -12,14 +12,14 @@ class Game < ActiveRecord::Base
   end
 
   def state
-    GameComputerService.new(initial_state, defrosted_actions).process
+    GameComputerService.new(initial_state, state_modifiers).process
   end
 
   def initial_state
     GameStateCreationService.new(self).make
   end
 
-  def defrosted_actions
-    actions.defrost_all
+  def state_modifiers
+    actions.as_modifiers
   end
 end

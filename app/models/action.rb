@@ -6,15 +6,15 @@ class Action < ActiveRecord::Base
 
   validates :action, presence: true
 
-  def self.defrost_all
-    by_creation.map(&:defrost)
+  def self.as_modifiers
+    by_creation.map(&:to_modifier)
   end
 
-  def defrosted_class
+  def modifier_class
     "StateModifiers::#{action.camelize}".constantize
   end
 
-  def defrost
-    defrosted_class.from_action(self)
+  def to_modifier
+    modifier_class.from_action(self)
   end
 end
