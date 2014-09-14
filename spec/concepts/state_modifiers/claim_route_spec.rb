@@ -4,7 +4,7 @@ require_relative 'shared_state_modifier_spec'
 describe StateModifiers::ClaimRoute do
   it_should_behave_like 'a state modifier'
 
-  let(:action) { StateModifiers::ClaimRoute.new(player_id, route_id) }
+  let(:modifier) { StateModifiers::ClaimRoute.new(player_id, route_id) }
   let(:player_id) { 1 }
   let(:route_id) { 2 }
 
@@ -19,7 +19,7 @@ describe StateModifiers::ClaimRoute do
         .to receive(:claim)
         .with(kind_of(Route))
 
-      action.process(player, game_state)
+      modifier.process(player, game_state)
     end
   end
 end

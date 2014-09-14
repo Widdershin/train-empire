@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 shared_examples_for 'a state modifier' do
-  subject { action }
+  subject { modifier }
 
-  it 'can be created from a state modifier' do
+  it 'can be created from an action' do
     action_model = Action.new
-    expect(action.class.from_action(action_model)).to be_a action.class
+    expect(modifier.class.from_action(action_model)).to be_a modifier.class
   end
 
   it { should respond_to :process }

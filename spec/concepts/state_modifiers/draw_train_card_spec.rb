@@ -5,7 +5,7 @@ describe StateModifiers::DrawTrainCard do
   it_should_behave_like 'a state modifier'
 
   let(:card_index) { 2 }
-  let(:action) { StateModifiers::DrawTrainCard.new player_id, card_index }
+  let(:modifier) { StateModifiers::DrawTrainCard.new player_id, card_index }
   let(:player_id) { 1 }
   let(:player) { PlayerState.new(player_id, 'test') }
 
@@ -26,7 +26,7 @@ describe StateModifiers::DrawTrainCard do
         .to receive(:add_to_hand)
         .with(fake_card)
 
-      action.process player, game_state
+      modifier.process player, game_state
     end
   end
 end

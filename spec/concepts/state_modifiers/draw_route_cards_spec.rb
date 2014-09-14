@@ -4,7 +4,7 @@ require_relative 'shared_state_modifier_spec'
 describe StateModifiers::DrawRouteCards do
   it_should_behave_like 'a state modifier'
 
-  let(:action) { StateModifiers::DrawRouteCards.new(player_id) }
+  let(:modifier) { StateModifiers::DrawRouteCards.new(player_id) }
   let(:player_id) { 2 }
 
   it 'draws three route cards' do
@@ -16,7 +16,7 @@ describe StateModifiers::DrawRouteCards do
     expect(current_player)
       .to receive(:set_potential_route_cards)
 
-    action.process current_player, game_state
+    modifier.process current_player, game_state
   end
 
 

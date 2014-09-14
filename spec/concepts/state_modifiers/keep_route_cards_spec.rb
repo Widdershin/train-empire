@@ -5,11 +5,11 @@ describe StateModifiers::KeepRouteCards do
   it_should_behave_like 'a state modifier'
 
   let (:cards_to_keep) { [0, 2, 3] }
-  let (:action) { StateModifiers::KeepRouteCards.new(player_id, cards_to_keep)}
+  let (:modifier) { StateModifiers::KeepRouteCards.new(player_id, cards_to_keep)}
   let (:player_id) { 1 }
 
   it 'has a list of card indexes to keep' do
-    expect(action.cards_to_keep).to eq cards_to_keep
+    expect(modifier.cards_to_keep).to eq cards_to_keep
   end
 
   describe 'process' do
@@ -31,7 +31,7 @@ describe StateModifiers::KeepRouteCards do
         .with(:card)
         .exactly(3).times
 
-      action.process current_player, game_state
+      modifier.process current_player, game_state
     end
   end
 end
