@@ -22,4 +22,8 @@ class Game < ActiveRecord::Base
   def state_modifiers
     actions.as_modifiers
   end
+
+  def turns
+    state_modifiers.chunk { |mod| mod.player_id }.map { |_, chunk| Turn.new(chunk) }
+  end
 end

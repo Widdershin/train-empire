@@ -6,6 +6,7 @@ class StateModifiers::DrawTrainCard
   end
 
   def initialize(player_id, card_index)
+    @player_id = player_id
     @card_index = card_index
     @errors = []
   end

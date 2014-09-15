@@ -6,6 +6,7 @@ class StateModifiers::ClaimLink
   end
 
   def initialize(player_id, link_id)
+    @player_id = player_id
     @link_id = link_id
     @errors = []
   end

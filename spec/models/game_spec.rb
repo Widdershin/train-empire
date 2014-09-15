@@ -46,5 +46,43 @@ RSpec.describe Game, :type => :model do
     end
   end
 
+  describe '#turns' do
+    it 'breaks the games actions up into turns' do
+      game = Game.create
 
+      2.times { game.users << create(:user) }
+
+      player1 = game.players.first
+      player2 = game.players.last
+
+      player1.actions.create(
+        action: 'draw_train_card',
+        card_index: 0,
+      )
+
+      player1.actions.create(
+        action: 'draw_train_card',
+        card_index: 2,
+      )
+
+      player2.actions.create(
+        action: 'draw_route_cards',
+      )
+
+      player2.actions.create(
+        action: 'keep_route_cards',
+      )
+
+      player1.actions.create(
+        action: 'draw_route_cards',
+      )
+
+      turns = game.turns
+
+      expect(turns.first).to be_a Turn
+      expect(turns.size).to eq 3
+
+      expect(turns.last.modifiers.size).to eq 1
+    end
+  end
 end
