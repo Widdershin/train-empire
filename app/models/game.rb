@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
   end
 
   def state
-    GameComputerService.new(initial_state, state_modifiers).process
+    GameComputerService.new(initial_state, turns).process
   end
 
   def initial_state

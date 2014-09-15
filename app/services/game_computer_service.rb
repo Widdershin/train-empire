@@ -1,14 +1,14 @@
 class GameComputerService
-  def initialize(game_state, state_modifiers)
+  def initialize(game_state, turns)
     @game_state = game_state
-    @state_modifiers = state_modifiers
+    @turns = turns
   end
 
 
   def process
-    state_modifiers.reduce(game_state) do |game_state, state_modifier|
-      apply_state_modifier game_state, state_modifier
-      game_state.end_turn if state_modifier.end_of_turn? game_state.current_player
+    turns.reduce(game_state) do |game_state, turn|
+      apply_turn game_state, turn
+      game_state.end_turn if turn.end_of_turn? game_state.current_player
       game_state.replenish_available_cards
       game_state
     end
@@ -16,13 +16,13 @@ class GameComputerService
 
   private
 
-  def apply_state_modifier(state, state_modifier)
-    raise "Invalid state_modifier: #{state_modifier.errors.join ', '}" unless state_modifier.valid? state.current_player, state
-    state_modifier.process state.current_player, state
+  def apply_turn(state, turn)
+    raise "Invalid turn: #{turn.modifiers.map(&:class).join(', ')}" unless turn.valid?
+    turn.process state.current_player, state
   end
 
-  private def state_modifiers
-    @state_modifiers
+  private def turns
+    @turns
   end
 
   private def game_state

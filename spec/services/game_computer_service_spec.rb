@@ -20,7 +20,7 @@ describe GameComputerService do
 
       computer = GameComputerService.new(
         game.initial_state,
-        game.state_modifiers,
+        game.turns,
       )
 
       expect(computer.process).to be_a GameState
