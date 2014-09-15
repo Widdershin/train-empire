@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative 'shared_state_modifier_spec'
+require_relative 'shared_state_modifier_specs'
 
 describe StateModifiers::KeepRouteCards do
   it_should_behave_like 'a state modifier'
