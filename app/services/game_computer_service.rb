@@ -15,7 +15,7 @@ class GameComputerService
   private
 
   def error_message(turn)
-    turn.modifiers.map(&:class).join(', ')
+    "#{turn.modifiers.map(&:class).join(', ')}, current: #{turn.current?}"
   end
 
   def turns

@@ -17,7 +17,7 @@ class Turn
   end
 
   def valid?
-    valid_modifier_pattern? or current?
+    valid_modifier_pattern? or (current? and start_of_pattern?)
   end
 
   def current?
@@ -25,6 +25,31 @@ class Turn
   end
 
   private
+
+  def valid_modifier_pattern?
+    patterns.include? modifier_classes
+  end
+
+  def start_of_pattern?
+    modifier_count = modifier_classes.size
+
+    patterns.any? do |pattern|
+      pattern_subset = pattern.first(modifier_count)
+      modifier_classes == pattern_subset
+    end
+  end
+
+  def modifier_classes
+    modifiers.map(&:class)
+  end
+
+  def patterns
+    [
+      [StateModifiers::ClaimLink],
+      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
+      [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
+    ]
+  end
 
   def apply_modifier(game_state, modifier)
     raise error_message(modifier) unless modifier.valid? game_state.current_player, game_state
@@ -35,11 +60,4 @@ class Turn
     "Invalid Modifier: #{modifier}, #{modifier.errors.join (', ')}"
   end
 
-  def valid_modifier_pattern?
-    [
-      [StateModifiers::ClaimLink],
-      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
-      [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
-    ].include?(modifiers.map(&:class))
-  end
 end
