@@ -24,8 +24,12 @@ class Game < ActiveRecord::Base
   end
 
   def turns
-    state_modifiers
+    turns = state_modifiers
       .chunk(&:player_id)
       .map { |_, chunk| Turn.new(chunk) }
+
+    turns.last.current = true if turns.any?
+
+    turns
   end
 end

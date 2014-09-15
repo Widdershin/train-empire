@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe Turn do
+  let (:turn) { Turn.new [] }
+
+  subject { turn }
+
+  it { should respond_to :current? }
+
   describe '#valid?' do
     it 'is true when the modifiers match a turn pattern' do
       turn = Turn.new [StateModifiers::ClaimLink.new(nil, nil)]
