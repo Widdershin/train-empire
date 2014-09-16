@@ -23,4 +23,22 @@ describe Turn do
       expect(turn.valid?).to eq false
     end
   end
+
+  describe "#options" do
+    it 'gives a list of all valid next actions' do
+      turn = Turn.new([])
+
+      expect(turn.options).to eq [
+        StateModifiers::ClaimLink,
+        StateModifiers::DrawTrainCard,
+        StateModifiers::DrawRouteCards,
+      ]
+
+      turn = Turn.new([StateModifiers::DrawRouteCards.new(nil)], current: true)
+
+      expect(turn.options).to eq [
+        StateModifiers::KeepRouteCards,
+      ]
+    end
+  end
 end

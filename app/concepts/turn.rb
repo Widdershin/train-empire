@@ -24,19 +24,22 @@ class Turn
     @current
   end
 
+  def options
+    matched_patterns.map { |pattern| pattern.at(modifiers.size) }
+  end
+
   private
+
+  def matched_patterns
+    patterns.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
+  end
 
   def valid_modifier_pattern?
     patterns.include? modifier_classes
   end
 
   def start_of_pattern?
-    modifier_count = modifier_classes.size
-
-    patterns.any? do |pattern|
-      pattern_subset = pattern.first(modifier_count)
-      modifier_classes == pattern_subset
-    end
+    matched_patterns.any?
   end
 
   def modifier_classes
