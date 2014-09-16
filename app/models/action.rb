@@ -10,6 +10,16 @@ class Action < ActiveRecord::Base
     by_creation.map(&:to_modifier)
   end
 
+  def self.to_turns
+    turns = as_modifiers
+      .chunk(&:player_id)
+      .map { |_, chunk| Turn.new(chunk) }
+
+    turns.last.current = true if turns.any?
+
+    turns
+  end
+
   def modifier_class
     "StateModifiers::#{action.camelize}".constantize
   end
