@@ -1,5 +1,5 @@
 class StateModifiers::DrawTrainCard
-  attr_reader :errors, :player_id
+  attr_reader :errors, :player_id, :card_index
 
   def self.from_action(action)
     new(action.player_id, action.card_index)
