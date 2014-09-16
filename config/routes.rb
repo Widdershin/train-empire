@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :players
 
     member do
-      post '/actions/:action'
+      post '/actions/:action', controller: 'actions'
     end
   end
 end
