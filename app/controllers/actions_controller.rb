@@ -4,6 +4,7 @@ class ActionsController < ApplicationController
 
     player = game.players.find_by(user_id: current_user.id)
 
+
     unless player.id == game.state.current_player.id
       flash[:error] = 'Wait your turn.'
       return redirect_to game
@@ -13,6 +14,10 @@ class ActionsController < ApplicationController
       action: 'draw_train_card',
       card_index: params[:card_index]
     )
+
+    unless player.can_perform? action
+      flash[:error] = "Action can't be performed"
+    end
 
     if action.to_modifier.valid? game.state.current_player, game.state
       action.save

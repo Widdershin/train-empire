@@ -2,15 +2,19 @@ require 'rails_helper'
 
 RSpec.describe ActionsController, :type => :controller do
   describe 'POST draw_train_card' do
+    let(:card_index) { 1 }
+    let(:second_user) { create(:user) }
+    let(:user) { create(:user) }
     let(:game) { Game.create }
 
-    it 'should create a draw_train_card action' do
-      user = create(:user)
-      sign_in user
+    before do
       game.users << user
-      game.save
+      game.save!
+    end
 
-      card_index = 1
+    it 'should create a draw_train_card action' do
+      sign_in user
+
       post :draw_train_card, id: game.id, card_index: card_index
 
       new_modifier = game.turns.last.modifiers.last
@@ -21,31 +25,35 @@ RSpec.describe ActionsController, :type => :controller do
     end
 
     it "should fail if it's not my turn" do
-      user = create(:user)
-      second_user = create(:user)
-
-      game.users += [user, second_user]
+      game.users << second_user
       game.save!
 
       sign_in second_user
 
-      card_index = 1
       post :draw_train_card, id: game.id, card_index: card_index
 
       expect(request.flash[:error]).to_not be_nil
     end
 
     it "should fail if the action is invalid" do
-      user = create(:user)
       sign_in user
-      game.users << user
-      game.save
 
       card_index = 7
       post :draw_train_card, id: game.id, card_index: card_index
 
       expect(request.flash[:error]).to include 'Invalid card'
     end
-  end
 
+    it "should fail if the action is against the rules" do
+      sign_in user
+
+      player = game.players.first
+
+      player.actions.create!(action: 'draw_route_cards')
+
+      post :draw_train_card, id: game.id, card_index: card_index
+
+      expect(request.flash[:error]).to include "Action can't be performed"
+    end
+  end
 end

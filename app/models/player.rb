@@ -6,4 +6,11 @@ class Player < ActiveRecord::Base
   def name
     user.username
   end
+
+  def can_perform?(action)
+    turn = game.turns.last
+    turn ||= Turn.new([])
+
+    turn.options.include? action.to_modifier.class
+  end
 end
