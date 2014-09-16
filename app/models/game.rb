@@ -19,10 +19,6 @@ class Game < ActiveRecord::Base
     GameStateCreationService.new(self).make
   end
 
-  def state_modifiers
-    actions.as_modifiers
-  end
-
   def turns
     actions.to_turns
   end
