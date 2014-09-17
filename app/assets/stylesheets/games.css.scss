@@ -1,3 +1,50 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$card-size: 2;
+
+.card {
+  width: 50px * $card-size;
+  height: 30px * $card-size;
+  border: 1px solid black;
+  border-radius: 5px * $card-size;
+  display: inline-block;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.black {
+  background-color: black;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.wild {
+  border: 1px solid red;
+  background-color: lime;
+}
+
+.cards form {
+  display: inline-block
+}
