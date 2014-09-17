@@ -59,3 +59,11 @@ end
 Then(/^I should have a new card in my hand$/) do
   expect(page).to have_selector('.hand .card', count: 1)
 end
+
+When(/^I draw route cards$/) do
+  click_button 'Draw Route Cards'
+end
+
+Then(/^I should see some route cards$/) do
+  expect(page).to have_selector('.card.route-card')
+end
