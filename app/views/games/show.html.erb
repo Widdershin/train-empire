@@ -3,11 +3,12 @@
 <h4>Players:</h4>
 <ul>
   <% @state.players.each do |player| %>
-    <li><%= player %></li>
+    <li><%= 'Your turn: ' if player == @state.current_player %><%= player %></li>
   <% end %>
 </ul>
 
 <% if @player %>
+  <h3><%= @player.name %></h3>
   <div class="hand">
     <% @player.hand.each do |card| %>
       <div class="card"><%= card.color %></div>
@@ -32,8 +33,9 @@
 <% end %>
 
 <% @state.available_train_cards.each_with_index do |train_card, index| %>
+  <%= train_card.color %>
   <%= form_tag("/games/#{@game.id}/actions/create") do %>
-    <%= hidden_field_tag(:action_type, 'draw_train_card') %>
+    <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
     <%= hidden_field_tag(:card_index, index) %>
     <%= submit_tag('Draw') %>
   <% end %>
