@@ -20,7 +20,7 @@ TicketToRide = do ->
     getTurn (newTurn) ->
       console.log("Starting at #{newTurn}")
       currentTurn = newTurn
-      setInterval(publik.updateIfNeeded, 250)
+      setInterval(publik.updateIfNeeded, 1000)
 
   publik.startGame()
 
