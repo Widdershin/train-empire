@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ActionsController, :type => :controller do
-  describe 'POST draw_train_card' do
+  describe 'POST create' do
     let(:card_index) { 1 }
     let(:second_user) { create(:user) }
     let(:user) { create(:user) }
@@ -15,7 +15,7 @@ RSpec.describe ActionsController, :type => :controller do
     it 'should create a draw_train_card action' do
       sign_in user
 
-      post :draw_train_card, id: game.id, card_index: card_index
+      post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
 
       new_modifier = game.turns.last.modifiers.last
       expect(new_modifier).to be_a StateModifiers::DrawTrainCard
@@ -30,7 +30,7 @@ RSpec.describe ActionsController, :type => :controller do
 
       sign_in second_user
 
-      post :draw_train_card, id: game.id, card_index: card_index
+      post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
 
       expect(request.flash[:error]).to_not be_nil
     end
@@ -39,8 +39,7 @@ RSpec.describe ActionsController, :type => :controller do
       sign_in user
 
       card_index = 7
-      post :draw_train_card, id: game.id, card_index: card_index
-
+      post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
       expect(request.flash[:error]).to include 'Invalid card'
     end
 
@@ -51,8 +50,7 @@ RSpec.describe ActionsController, :type => :controller do
 
       player.actions.create!(action: 'draw_route_cards')
 
-      post :draw_train_card, id: game.id, card_index: card_index
-
+      post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
       expect(request.flash[:error]).to include "Action can't be performed"
     end
   end
