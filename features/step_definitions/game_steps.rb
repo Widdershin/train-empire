@@ -46,3 +46,16 @@ end
 Then(/^I should be in the game$/) do
   expect(page).to have_content @user.username
 end
+
+Given(/^I am playing a game$/) do
+  visit '/games'
+  click_link 'Host Game'
+end
+
+When(/^I draw a train card$/) do
+  first('input[type=submit][value="Draw"]').click
+end
+
+Then(/^I should have a new card in my hand$/) do
+  expect(page).to have_selector('.hand .card', count: 1)
+end

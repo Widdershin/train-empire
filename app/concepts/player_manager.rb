@@ -1,9 +1,15 @@
 class PlayerManager
+  include Enumerable
+
   attr_reader :current_player, :players
 
   def initialize(player_states)
     @players = player_states
     @current_player = players.first
+  end
+
+  def each(&block)
+    players.each(&block)
   end
 
   def advance_current_player

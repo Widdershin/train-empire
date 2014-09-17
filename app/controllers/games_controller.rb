@@ -4,6 +4,11 @@ class GamesController < ApplicationController
   def show
     @game = Game.find_by_id params[:id]
     @users = @game.users
+    @state = @game.state
+    if @game.users.include? current_user
+      player_id = current_user.players.find_by(game: @game).id
+      @player = @game.state.players.find { |p_state| p_state.id == player_id }
+    end
   end
 
   def new

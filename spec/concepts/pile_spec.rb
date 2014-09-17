@@ -3,6 +3,10 @@ require 'rails_helper'
 describe Pile do
   let(:pile) { Pile.new }
 
+  it 'is enumerable' do
+    expect {pile.each { |card| card }}.to_not raise_error
+  end
+
   it 'has a bunch of cards' do
     expect(pile.cards).to eq []
   end
