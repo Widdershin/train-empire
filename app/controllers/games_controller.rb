@@ -11,6 +11,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def action_count
+    render text: Game.find(params[:id]).turns.flat_map(&:modifiers).size
+  end
+
   def new
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ActionsController, :type => :controller do
   describe 'POST create' do
-    let(:card_index) { 1 }
+    let(:card_index) { 2 }
     let(:second_user) { create(:user) }
     let(:user) { create(:user) }
     let(:game) { Game.create }
@@ -56,6 +56,8 @@ RSpec.describe ActionsController, :type => :controller do
 
       it 'creates a draw_train_card action' do
         sign_in user
+
+        game.update_attributes!(seed: 1)
 
         post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
 

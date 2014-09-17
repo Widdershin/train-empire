@@ -44,3 +44,6 @@
 <% if not playing_game? @game %>
     <%= link_to("Join Game", game_players_path(@game), method: :post) %>
 <% end %>
+
+
+<%= javascript_include_tag 'games_show.js' %>
