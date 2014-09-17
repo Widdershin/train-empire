@@ -20,10 +20,12 @@ class ActionsController < ApplicationController
       return redirect_to game
     end
 
-    if action.to_modifier.valid? game.state.current_player, game.state
+    modifier = action.to_modifier
+
+    if modifier.valid? game.state.current_player, game.state
       action.save!
     else
-      flash[:error] = 'Invalid card'
+      flash[:error] = "Invalid Action: #{modifier.errors.join ','}"
     end
 
     redirect_to game
@@ -35,6 +37,12 @@ class ActionsController < ApplicationController
     case action
     when 'draw_train_card'
       params.permit(:card_index)
+    when 'draw_route_cards'
+      {}
+    when 'keep_route_cards'
+      params.permit(route_cards_to_keep: [])
+    when 'claim_link'
+      params.permit(:link_id)
     end
   end
 end

@@ -12,19 +12,43 @@ RSpec.describe ActionsController, :type => :controller do
       game.save!
     end
 
-    it 'should create a draw_train_card action' do
-      sign_in user
+    context 'successful' do
 
-      post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
+      after do
+        raise "Errors: #{request.flash[:error]}" if request.flash[:error]
+        expect(response).to redirect_to game
+      end
 
-      new_modifier = game.turns.last.modifiers.last
-      expect(new_modifier).to be_a StateModifiers::DrawTrainCard
-      expect(new_modifier.card_index).to eq card_index
-      expect(response).to redirect_to game
-      expect(request.flash[:error]).to be_nil
+      it 'creates draw_route_card actions' do
+        sign_in user
+
+        expect { post :create, action_type: 'draw_route_cards', id: game.id }
+          .to change { Action.count }.by(1)
+      end
+
+      it 'creates keep_route_cards actions' do
+        sign_in user
+
+        post :create, action_type: 'draw_route_cards', id: game.id
+
+        expect { post :create, action_type: 'keep_route_cards', id: game.id, route_cards_to_keep: [1, 2, 3] }
+          .to change { Action.count }.by(1)
+
+      end
+
+      it 'creates a draw_train_card action' do
+        sign_in user
+
+        post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
+
+        new_modifier = game.turns.last.modifiers.last
+        expect(new_modifier).to be_a StateModifiers::DrawTrainCard
+        expect(new_modifier.card_index).to eq card_index
+      end
+
     end
 
-    it "should fail if it's not my turn" do
+    it "fails if it's not my turn" do
       game.users << second_user
       game.save!
 
@@ -35,15 +59,15 @@ RSpec.describe ActionsController, :type => :controller do
       expect(request.flash[:error]).to_not be_nil
     end
 
-    it "should fail if the action is invalid" do
+    it "fails if the action is invalid" do
       sign_in user
 
       card_index = 7
       post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
-      expect(request.flash[:error]).to include 'Invalid card'
+      expect(request.flash[:error]).to include 'Invalid Action'
     end
 
-    it "should fail if the action is against the rules" do
+    it "fails if the action is against the rules" do
       sign_in user
 
       player = game.players.first
@@ -53,5 +77,6 @@ RSpec.describe ActionsController, :type => :controller do
       post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
       expect(request.flash[:error]).to include "Action can't be performed"
     end
+
   end
 end
