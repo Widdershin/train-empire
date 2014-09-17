@@ -19,6 +19,24 @@ RSpec.describe ActionsController, :type => :controller do
         expect(response).to redirect_to game
       end
 
+      it 'creates draw_wild_card actions' do
+        sign_in user
+
+        game.update_attributes!(seed: 1)
+
+        train_cards = game.state.available_train_cards
+        expect(train_cards.map(&:color)).to include :wild
+
+        expect do
+          post :create, {
+            action_type: 'draw_wild_card',
+            id: game.id,
+            card_index: train_cards.find_index { |c| c.color == :wild}
+          }
+        end.to change { Action.count }.by(1)
+
+      end
+
       it 'creates draw_route_card actions' do
         sign_in user
 

@@ -43,6 +43,8 @@ class ActionsController < ApplicationController
       params.permit(route_cards_to_keep: [])
     when 'claim_link'
       params.permit(:link_id)
+    when 'draw_wild_card'
+      params.permit(:card_index)
     end
   end
 end
