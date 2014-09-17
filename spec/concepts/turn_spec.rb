@@ -30,6 +30,7 @@ describe Turn do
 
       expect(turn.options).to eq [
         StateModifiers::ClaimLink,
+        StateModifiers::DrawWildCard,
         StateModifiers::DrawTrainCard,
         StateModifiers::DrawRouteCards,
       ]

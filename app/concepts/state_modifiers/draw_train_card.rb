@@ -24,6 +24,7 @@ class StateModifiers::DrawTrainCard
   end
 
   def valid?(current_player, game_state)
-    @card_index < game_state.available_train_cards.count
+    @card_index < game_state.available_train_cards.count &&
+      game_state.available_train_cards.cards.at(@card_index).color != :wild
   end
 end

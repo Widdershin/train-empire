@@ -133,7 +133,13 @@ describe 'playing a game' do
     @game.seed = 999
 
     update_state
-    draw_card(@player_1, :wild)
+
+    @player_1.actions.create(
+      action: 'draw_wild_card',
+      card_index: 2
+    )
+
+    update_state
 
     expect(@state.current_player).to eq p2
   end

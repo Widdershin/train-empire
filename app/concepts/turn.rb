@@ -10,7 +10,6 @@ class Turn
   def process(game_state)
     modifiers.reduce(game_state) do |game_state, modifier|
       apply_modifier(game_state, modifier)
-      game_state.end_turn if modifier.end_of_turn? game_state.current_player
       game_state.replenish_available_cards
       game_state
     end
@@ -53,6 +52,7 @@ class Turn
   def patterns
     [
       [StateModifiers::ClaimLink],
+      [StateModifiers::DrawWildCard],
       [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
       [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
     ]
