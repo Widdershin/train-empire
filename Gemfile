@@ -45,6 +45,7 @@ group :test, :development do
   gem 'cucumber'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 group :test do

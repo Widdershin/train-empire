@@ -13,3 +13,11 @@ Feature: Playing Games
         And I am playing a game
         When I draw route cards
         Then I should see some route cards
+
+    @javascript
+    Scenario: Keeping route cards
+        Given I am logged in
+        And I am playing a game
+        When I draw route cards
+        And I keep the first route card
+        Then I should have one route card

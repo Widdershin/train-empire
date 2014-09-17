@@ -67,3 +67,12 @@ end
 Then(/^I should see some route cards$/) do
   expect(page).to have_selector('.card.route-card')
 end
+
+When(/^I keep the first route card$/) do
+  first('input[type=checkbox]').click
+  click_button 'Keep Route Cards'
+end
+
+Then(/^I should have one route card$/) do
+  expect(page).to have_content('Holding 1 routes')
+end

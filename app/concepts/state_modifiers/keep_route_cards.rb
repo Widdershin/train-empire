@@ -7,7 +7,7 @@ class StateModifiers::KeepRouteCards
 
   def initialize(player_id, cards_to_keep)
     @player_id = player_id
-    @cards_to_keep = cards_to_keep
+    @cards_to_keep = cards_to_keep.map(&:to_i)
     @errors = []
   end
 
