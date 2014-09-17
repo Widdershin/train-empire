@@ -33,5 +33,17 @@ RSpec.describe Player, :type => :model do
 
       expect(player.can_perform?(action)).to eq false
     end
+
+    it 'returns true if this action would be the start of a new valid turn' do
+      previous_turn = Turn.new([
+        StateModifiers::DrawTrainCard.new(1, 1),
+        StateModifiers::DrawTrainCard.new(1, 2),
+      ])
+
+      allow(game).to receive(:turns) { [previous_turn] }
+
+      action = double :action, to_modifier: StateModifiers::DrawTrainCard.new(1, 1)
+      expect(player.can_perform?(action)).to eq true
+    end
   end
 end

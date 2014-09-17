@@ -9,7 +9,10 @@ class Player < ActiveRecord::Base
 
   def can_perform?(action)
     turn = game.turns.last
-    turn ||= Turn.new([])
+
+    if turn.nil? || turn.complete?
+      turn = Turn.new []
+    end
 
     turn.options.include? action.to_modifier.class
   end

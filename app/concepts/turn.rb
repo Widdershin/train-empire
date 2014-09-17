@@ -24,6 +24,10 @@ class Turn
     @current
   end
 
+  def complete?
+    valid_modifier_pattern?
+  end
+
   def options
     matched_patterns.map { |pattern| pattern.at(modifiers.size) }
   end
