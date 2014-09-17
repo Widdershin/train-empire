@@ -1,13 +1,14 @@
 class GameState
   AVAILABLE_TRAIN_CARDS = 5
-  attr_reader :players, :train_deck, :available_train_cards, :route_deck
+  attr_reader :players, :train_deck, :available_train_cards, :route_deck, :links, :cities
 
-  def initialize(player_states, train_deck, route_deck, links)
+  def initialize(player_states, train_deck, route_deck, links, cities)
     @players = PlayerManager.new player_states
     @train_deck = train_deck
     @available_train_cards = Pile.new
     @route_deck = route_deck
     @links = links
+    @cities = cities
   end
 
   def replenish_available_cards

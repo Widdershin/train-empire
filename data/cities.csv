@@ -1,31 +1,4 @@
-id,name
-1,Los Angeles
-2,Duluth
-3,Sault Ste Marie
-4,New York
-5,Portland
-6,Vancouver
-7,Toronto
-8,Dallas
-9,Calgary
-10,Winnipeg
-11,San Francisco
-12,Kansas City
-13,Denver
-14,Chicago
-15,Boston
-16,Montreal
-17,Seattle
-18,Helena
-19,Houston
-20,Nashville
-21,Atlanta
-23,El Paso
-24,Miami
-25,Phoenix
-26,Salt Lake City
-27,Little Rock
-28,Pittsburgh
-29,Santa Fe
-30,New Orleans
-31,Oklahoma City
+id,name,x,y
+1,Foo,80,80
+2,Baz,300,150
+3,Bar,150,300

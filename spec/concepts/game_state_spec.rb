@@ -10,9 +10,10 @@ RSpec.describe GameState do
   let (:link) { double :link, id: 1, owner: nil }
   let (:link2) { double :link2, id: 2, owner: nil }
   let (:links) { [link, link2] }
+  let (:cities) { double :cities }
 
   let (:game_state) do
-    GameState.new player_states, train_deck, route_deck, links
+    GameState.new player_states, train_deck, route_deck, links, cities
   end
 
   it 'has a nice string representation' do

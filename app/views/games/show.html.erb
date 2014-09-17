@@ -32,6 +32,27 @@
 
 <% end %>
 
+<div class="links">
+  <svg
+    width="600"
+    height="400">
+
+    <% @state.links.each do |link| %>
+      <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
+      x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
+      stroke="<%= link.color %>" stroke-width="6" class="link"/>
+    <% end %>
+
+    <% @state.cities.each do |city| %>
+      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="50" fill="gray" />
+      <text x="<%= city.x %>" y="<%= city.y %>"
+        text-anchor="middle">
+        <%= city.name %>
+        </text>
+    <% end %>
+  </svg>
+</div>
+
 <div class="cards">
   <% @state.available_train_cards.each_with_index do |train_card, index| %>
     <%= form_tag("/games/#{@game.id}/actions/create") do %>

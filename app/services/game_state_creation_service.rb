@@ -1,5 +1,7 @@
 class GameStateCreationService
-  ROUTES_CSV_FILE = "#{Rails.root}/data/routes.csv"
+  ROUTES_CSV_FILE = "#{Rails.root}/data/links.csv"
+  CITIES_CSV_FILE = "#{Rails.root}/data/cities.csv"
+
   def initialize(game)
     @game = game
   end
@@ -10,6 +12,7 @@ class GameStateCreationService
       train_deck,
       route_deck,
       routes,
+      cities,
     ).replenish_available_cards
   end
 
@@ -28,6 +31,10 @@ class GameStateCreationService
   end
 
   def routes
-    CsvMapper.new(ROUTES_CSV_FILE, Link).load
+    CsvMapper.new(ROUTES_CSV_FILE, Link).load.map { |route| route.take_cities(cities) }
+  end
+
+  def cities
+    CsvMapper.new(CITIES_CSV_FILE, City).load
   end
 end

@@ -21,3 +21,9 @@ Feature: Playing Games
         When I draw route cards
         And I keep the first route card
         Then I should have one route card
+
+    Scenario: Claiming a link
+        Given I am logged in
+        And I am playing a game
+        When I claim a link
+        Then I should own that link

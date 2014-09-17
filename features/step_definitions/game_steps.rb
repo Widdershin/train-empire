@@ -76,3 +76,11 @@ end
 Then(/^I should have one route card$/) do
   expect(page).to have_content('Holding 1 routes')
 end
+
+When(/^I claim a link$/) do
+  first('.link').click
+end
+
+Then(/^I should own that link$/) do
+  expect(page).to have_selector('.link.owned')
+end
