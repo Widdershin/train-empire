@@ -4,8 +4,8 @@ class City
   def initialize(id:, name:, x:, y:)
     @id = id
     @name = name
-    @x = x
-    @y = y
+    @x = x.to_i
+    @y = y.to_i
   end
 
   def to_s

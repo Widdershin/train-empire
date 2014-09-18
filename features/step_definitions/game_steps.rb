@@ -82,5 +82,5 @@ When(/^I claim a link$/) do
 end
 
 Then(/^I should own that link$/) do
-  expect(page).to have_selector('.link.owned')
+  expect(page).to have_content('Owned by')
 end

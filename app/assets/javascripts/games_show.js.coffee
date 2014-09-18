@@ -22,5 +22,12 @@ TicketToRide = do ->
       currentTurn = newTurn
       setInterval(publik.updateIfNeeded, 1000)
 
+  $('.link').on 'click', ->
+    linkToClaim = $(this).data('id')
+    args =
+      action_type: 'claim_link'
+      link_id: linkToClaim
+    $.post "#{window.location.href}/actions/create", args
+
   publik.startGame()
 

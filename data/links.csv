@@ -1,3 +1,6 @@
 id,city_a_id,city_b_id,cost,color
 1,1,2,1,blue
 2,1,3,2,red
+3,4,2,2,green
+4,5,1,1,red
+5,5,2,3,orange

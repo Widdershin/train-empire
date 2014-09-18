@@ -22,6 +22,7 @@ Feature: Playing Games
         And I keep the first route card
         Then I should have one route card
 
+    @javascript
     Scenario: Claiming a link
         Given I am logged in
         And I am playing a game
