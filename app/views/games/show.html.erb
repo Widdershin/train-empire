@@ -43,18 +43,18 @@
     <% @state.links.each do |link| %>
       <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
       x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
-      stroke="<%= link.color %>" stroke-width="12" class="link" data-id="<%= link.id %>"
+      stroke="<%= link.color %>" stroke-width="7" class="link" data-id="<%= link.id %>"
       stroke-dasharray="<%= link.dasharray %>"/>
       <text x="<%= link.center_x %>" y="<%= link.center_y - 15 %>" text-anchor="middle">
-        <%= link %>
+        <%= nil %>
       </text>
     <% end %>
 
     <% @state.cities.each do |city| %>
-      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="35" fill="gray" />
+      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="15" fill="lightgray" />
       <text x="<%= city.x %>" y="<%= city.y %>"
-        text-anchor="middle">
-        <%= city.name %>
+        text-anchor="middle" font-size="10">
+        <%= city %>
         </text>
     <% end %>
   </svg>
