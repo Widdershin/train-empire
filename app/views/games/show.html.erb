@@ -41,10 +41,18 @@
     height="768">
 
     <% @state.links.each do |link| %>
+
+      <% if link.owner %>
+      <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
+      x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
+      stroke="purple" stroke-width="12" />
+      <% end %>
+
       <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
       x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
       stroke="<%= link.color %>" stroke-width="7" class="link" data-id="<%= link.id %>"
       stroke-dasharray="<%= link.dasharray %>"/>
+
       <text x="<%= link.center_x %>" y="<%= link.center_y - 15 %>" text-anchor="middle">
         <%= nil %>
       </text>
