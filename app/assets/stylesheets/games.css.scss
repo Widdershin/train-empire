@@ -10,6 +10,12 @@ $card-size: 2;
   border: 1px solid black;
   border-radius: 5px * $card-size;
   display: inline-block;
+  text-align: center;
+  line-height: 30px * $card-size;
+}
+
+.white {
+  background-color: white;
 }
 
 .yellow {
@@ -22,6 +28,7 @@ $card-size: 2;
 
 .black {
   background-color: black;
+  color: white;
 }
 
 .red {
