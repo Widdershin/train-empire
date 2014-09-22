@@ -35,9 +35,19 @@
 
 <% end %>
 
+<div class="cards">
+  <% @state.available_train_cards.each_with_index do |train_card, index| %>
+    <%= form_tag("/games/#{@game.id}/actions/create") do %>
+      <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
+      <%= hidden_field_tag(:card_index, index) %>
+      <%= submit_tag('Draw', class: "card #{train_card.color}") %>
+    <% end %>
+  <% end %>
+</div>
+
 <div class="links">
   <svg
-    width="1024"
+    width="900"
     height="600">
 
     <% @state.links.each do |link| %>
@@ -57,7 +67,7 @@
     <% end %>
 
     <% @state.cities.each do |city| %>
-      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="15" fill="lightgray" />
+      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="23" fill="lightgray" />
       <text x="<%= city.x %>" y="<%= city.y %>"
         text-anchor="middle" font-size="10">
         <%= city %>
@@ -66,15 +76,6 @@
   </svg>
 </div>
 
-<div class="cards">
-  <% @state.available_train_cards.each_with_index do |train_card, index| %>
-    <%= form_tag("/games/#{@game.id}/actions/create") do %>
-      <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
-      <%= hidden_field_tag(:card_index, index) %>
-      <%= submit_tag('Draw', class: "card #{train_card.color}") %>
-    <% end %>
-  <% end %>
-</div>
 
 <% if not playing_game? @game %>
     <%= link_to("Join Game", game_players_path(@game), method: :post) %>

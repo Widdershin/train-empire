@@ -4,7 +4,6 @@ class GameComputerService
     @turns = turns
   end
 
-
   def process
     turns.reduce(game_state) do |game_state, turn|
       raise "Invalid turn: #{error_message(turn)}" unless turn.valid?

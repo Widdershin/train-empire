@@ -12,4 +12,8 @@ class RouteCard
       destination == other.destination &&
       points == other.points
   end
+
+  def to_s
+    "Connect #{origin} to #{destination} for #{points} points."
+  end
 end
