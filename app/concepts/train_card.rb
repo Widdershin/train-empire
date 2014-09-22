@@ -19,4 +19,8 @@ class TrainCard
   def wild?
     color == :wild
   end
+
+  def can_buy?(link_color)
+    link_color == color or link_color == :gray
+  end
 end

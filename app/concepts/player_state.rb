@@ -34,6 +34,10 @@ class PlayerState
     returned_cards
   end
 
+  def can_claim?(link)
+    hand.select { |card| card.can_buy? link.color }.size >= link.cost
+  end
+
   def claim(link)
     link.set_owner self
     @trains -= link.cost
@@ -42,7 +46,8 @@ class PlayerState
 
   def spend_cards(count, color)
     count.times do
-      hand.delete_at(hand.find_index { |card| card.color == color })
+      card_to_spend_index = hand.find_index { |card| card.can_buy? color }
+      hand.delete_at(card_to_spend_index)
     end
   end
 

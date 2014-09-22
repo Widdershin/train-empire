@@ -95,7 +95,7 @@ describe 'playing a game' do
 
     expect(@state.available_train_cards.count).to eq 5
 
-    link_id = 1
+    link_id = 27
     @player_1.actions.create!(
       action: 'claim_link',
       link_id: link_id,

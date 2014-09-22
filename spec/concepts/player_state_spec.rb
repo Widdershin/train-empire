@@ -95,7 +95,7 @@ RSpec.describe PlayerState, :type => :model do
   describe 'claim' do
     let (:route) { double(:route, cost: 5, color: :blue, set_owner: nil) }
 
-    let (:card) { double(:card, color: :blue) }
+    let (:card) { TrainCard.new(:blue) }
 
     before do
       route.cost.times do
@@ -120,12 +120,48 @@ RSpec.describe PlayerState, :type => :model do
         .by(-route.cost)
     end
 
+    it 'claims grey routes with any card color' do
+      gray_route = double(:route, cost: 1, color: :gray, set_owner: nil)
+
+      expect { player_state.claim(gray_route) }
+        .to change { player_state.hand.size }
+        .by(-gray_route.cost)
+    end
+
+  end
+
+  describe '#can_claim' do
+    it 'can claim a link when it has enough cards of the right color' do
+      3.times do
+        player_state.add_to_hand(TrainCard.new(:red))
+      end
+
+      link = double(:link, cost: 3, color: :red)
+
+      expect(player_state.can_claim?(link)).to eq true
+    end
+
+    it "can't if they don't have enough cards" do
+      link = double(:link, cost: 6, color: :blue)
+
+      expect(player_state.can_claim?(link)).to eq false
+    end
+
+    it 'can claim gray links with cards of any color' do
+      link = double(:link, cost: 4, color: :gray)
+
+      4.times do
+        player_state.add_to_hand(TrainCard.new(:green))
+      end
+
+      expect(player_state.can_claim?(link)).to eq true
+    end
   end
 
   describe 'spend_cards' do
     it 'removes a certain number of cards of a certain color from the hand' do
       10.times do
-        player_state.add_to_hand(double :card, color: :blue)
+        player_state.add_to_hand(TrainCard.new(:blue))
       end
 
       card_count = 4
