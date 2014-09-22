@@ -25,10 +25,5 @@ RSpec.describe "games/show.html.erb", :type => :view do
   end
 
   it 'renders potential_routes' do
-    render
-
-    expect(rendered).to include route.origin
-    expect(rendered).to include route.destination
-    expect(rendered).to include route.points
   end
 end

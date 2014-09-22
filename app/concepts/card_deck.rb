@@ -28,7 +28,13 @@ class CardDeck
     cards.unshift card
   end
 
+  def take_cities!(cities)
+    cards.each { |card| card.take_cities!(cities) }
+    self
+  end
+
   private def cards
     @cards
   end
+
 end

@@ -11,7 +11,12 @@ $card-size: 2;
   border-radius: 5px * $card-size;
   display: inline-block;
   text-align: center;
-  line-height: 30px * $card-size;
+  vertical-align: middle;
+}
+
+.route-card {
+  font-size: 9pt;
+  padding: 3px;
 }
 
 .white {

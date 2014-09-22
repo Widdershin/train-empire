@@ -24,7 +24,7 @@ class GameStateCreationService
   end
 
   def route_deck
-    RouteDeckCreationService.new.make @game.seed
+    RouteDeckCreationService.new.make(@game.seed).take_cities!(cities)
   end
 
   def player_states

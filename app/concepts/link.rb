@@ -51,4 +51,5 @@ class Link
     segment_length = (line_length / cost) * 0.80
     "#{segment_length}, 7"
   end
+
 end
