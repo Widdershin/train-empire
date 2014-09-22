@@ -3,7 +3,7 @@
 <h4>Players:</h4>
 <ul>
   <% @state.players.each do |player| %>
-    <li><%= 'Your turn: ' if player == @state.current_player %><%= player %></li>
+    <li style="color:#<%=player.color%>;"><%= 'Your turn: ' if player == @state.current_player %><%= player %></li>
   <% end %>
 </ul>
 
@@ -38,24 +38,22 @@
 <div class="links">
   <svg
     width="1024"
-    height="768">
+    height="600">
 
     <% @state.links.each do |link| %>
 
       <% if link.owner %>
       <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
-      x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
-      stroke="purple" stroke-width="12" />
-      <% end %>
+            x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
+            stroke="#<%= link.owner.color %>" stroke-width="12" />
+      <% else %>
 
       <line x1="<%= link.city_a.x %>" y1="<%= link.city_a.y%>"
-      x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
-      stroke="<%= link.color %>" stroke-width="7" class="link" data-id="<%= link.id %>"
-      stroke-dasharray="<%= link.dasharray %>"/>
+            x2="<%= link.city_b.x %>" y2="<%= link.city_b.y%>"
+            stroke="<%= link.color %>" stroke-width="7" class="link" data-id="<%= link.id %>"
+            stroke-dasharray="<%= link.dasharray %>"/>
+      <% end %>
 
-      <text x="<%= link.center_x %>" y="<%= link.center_y - 15 %>" text-anchor="middle">
-        <%= nil %>
-      </text>
     <% end %>
 
     <% @state.cities.each do |city| %>

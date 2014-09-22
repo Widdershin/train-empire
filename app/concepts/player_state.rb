@@ -1,14 +1,14 @@
 INITIAL_TRAIN_COUNT = 45
 
 class PlayerState
-  attr_reader :name, :hand, :trains, :routes, :id, :potential_routes
+  attr_reader :name, :hand, :trains, :routes, :id, :potential_routes, :color
   attr_accessor :remaining_draws
 
   def self.from_player(player)
-    new player.name, player.id
+    new player.name, player.id, color: player.color
   end
 
-  def initialize(name, id)
+  def initialize(name, id, color: '#000000')
     @name = name
     @id = id
     @hand = []
@@ -16,6 +16,7 @@ class PlayerState
     @routes = []
     @potential_routes = []
     @remaining_draws = 2
+    @color = color
   end
 
   def add_to_hand(card)
@@ -55,4 +56,5 @@ class PlayerState
     "#{name}. #{hand.size} cards in hand, " +
     "#{trains} trains. Holding #{routes.size} routes"
   end
+
 end

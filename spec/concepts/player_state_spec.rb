@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PlayerState, :type => :model do
   let (:test_name) { 'baz' }
   let (:test_id) { 1 }
-  let (:player) { double(:player, name: test_name, id: test_id) }
+  let (:player) { double(:player, name: test_name, id: test_id, color: 'FFF') }
   let (:player_state) { PlayerState.new test_name, test_id }
 
   before do
