@@ -36,5 +36,13 @@ RSpec.describe TrainCard, :type => :model do
     it 'is true if the link is gray' do
       expect(card.can_buy?(:gray)).to eq true
     end
+
+    it 'is true if the card is wild' do
+      wildcard = TrainCard.new(:wild)
+
+      expect(wildcard.can_buy?(:red)).to eq true
+      expect(wildcard.can_buy?(:gray)).to eq true
+      expect(wildcard.can_buy?(:yellow)).to eq true
+    end
   end
 end
