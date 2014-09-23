@@ -84,7 +84,7 @@ describe 'playing a game' do
 
     expect(@state.current_player).to eq p1
 
-    expect(p1.hand.size).to eq 1
+    expect(p1.hand.size).to eq 5
 
     draw_card(@player_1, :blue)
 

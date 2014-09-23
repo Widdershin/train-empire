@@ -57,7 +57,7 @@ When(/^I draw a train card$/) do
 end
 
 Then(/^I should have a new card in my hand$/) do
-  expect(page).to have_selector('.hand .card', count: 1)
+  expect(page).to have_selector('.hand .card', count: 5)
 end
 
 When(/^I draw route cards$/) do

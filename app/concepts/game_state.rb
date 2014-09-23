@@ -1,5 +1,6 @@
 class GameState
   AVAILABLE_TRAIN_CARDS = 5
+  START_HAND_SIZE = 4
   attr_reader :players, :train_deck, :available_train_cards, :route_deck, :links, :cities
 
   def initialize(player_states, train_deck, route_deck, links, cities)
@@ -41,6 +42,19 @@ class GameState
 
   def link(link_id)
     @links.find { |link| link.id == link_id }
+  end
+
+  def prepare
+    replenish_available_cards
+    stock_player_hands
+
+    self
+  end
+
+  def stock_player_hands
+    players.each do |player|
+      START_HAND_SIZE.times { player.add_to_hand(train_deck.draw) }
+    end
   end
 
   def to_s

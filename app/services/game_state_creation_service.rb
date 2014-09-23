@@ -14,7 +14,7 @@ class GameStateCreationService
       route_deck,
       links,
       cities,
-    ).replenish_available_cards
+    ).prepare
   end
 
   private
