@@ -16,10 +16,6 @@ class StateModifiers::ClaimLink
     player.claim link
   end
 
-  def end_of_turn?(player)
-    true
-  end
-
   def valid?(player, game_state)
     link = game_state.link(@link_id)
     @errors = []

@@ -17,10 +17,6 @@ class StateModifiers::KeepRouteCards
     cards_not_kept.each { |card| route_deck.add_to_bottom(card) }
   end
 
-  def end_of_turn?(player)
-    true
-  end
-
   def valid?(current_player, route_deck)
     current_player.potential_routes.any?
   end

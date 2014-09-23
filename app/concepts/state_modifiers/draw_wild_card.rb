@@ -22,8 +22,4 @@ class StateModifiers::DrawWildCard
 
     errors.none?
   end
-
-  def end_of_turn?(player, game_state)
-    false
-  end
 end

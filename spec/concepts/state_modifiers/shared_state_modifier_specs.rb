@@ -9,7 +9,6 @@ shared_examples_for 'a state modifier' do
   end
 
   it { should respond_to :process }
-  it { should respond_to :end_of_turn? }
   it { should respond_to :valid? }
   it { should respond_to :errors }
   it { should respond_to :player_id }
