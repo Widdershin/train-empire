@@ -28,11 +28,6 @@ class GameState
 
   def end_turn
     players.advance_current_player
-
-    players.players.each do |player|
-      player.remaining_draws = 2
-    end
-
     self
   end
 
@@ -47,6 +42,7 @@ class GameState
   def prepare
     replenish_available_cards
     stock_player_hands
+    stock_player_routes
 
     self
   end
@@ -54,6 +50,13 @@ class GameState
   def stock_player_hands
     players.each do |player|
       START_HAND_SIZE.times { player.add_to_hand(train_deck.draw) }
+    end
+  end
+
+  def stock_player_routes
+    card_count = StateModifiers::DrawRouteCards::ROUTE_DECK_DRAW_COUNT
+    players.each do |player|
+      player.set_potential_route_cards(route_deck.draw(card_count))
     end
   end
 

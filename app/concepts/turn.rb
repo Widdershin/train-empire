@@ -55,6 +55,7 @@ class Turn
       [StateModifiers::DrawWildCard],
       [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
       [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
+      [StateModifiers::KeepRouteCards],
     ]
   end
 

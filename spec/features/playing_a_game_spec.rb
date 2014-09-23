@@ -51,10 +51,6 @@ describe 'playing a game' do
     expect(@state.current_player).to eq p1
 
     @player_1.actions.create!(
-      action: 'draw_route_cards'
-    )
-
-    @player_1.actions.create!(
       action: 'keep_route_cards',
       route_cards_to_keep: [0, 1]
     )
@@ -63,12 +59,6 @@ describe 'playing a game' do
 
     expect(p1.routes.size).to eq 2
     expect(@state.current_player).to eq p2
-
-    @player_2.actions.create!(
-      action: 'draw_route_cards'
-    )
-
-    update_state
 
     expect(p2.potential_routes.size).to eq 3
 

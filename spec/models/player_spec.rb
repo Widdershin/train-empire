@@ -29,6 +29,7 @@ RSpec.describe Player, :type => :model do
     end
 
     it 'returns false if the action cant be performed' do
+      player.actions << Action.create!(action: 'draw_train_card')
       action = double :action, to_modifier: StateModifiers::KeepRouteCards.new(1, [1])
 
       expect(player.can_perform?(action)).to eq false
