@@ -9,7 +9,27 @@ RSpec.describe ActionsController, :type => :controller do
 
     before do
       game.users << user
+      game.users << second_user
       game.save!
+
+      sign_in user
+
+      post :create, {
+        action_type: 'keep_initial_route_cards',
+        id: game.id,
+        route_cards_to_keep: [0, 1],
+      }
+
+      sign_out user
+      sign_in second_user
+
+      post :create, {
+        action_type: 'keep_initial_route_cards',
+        id: game.id,
+        route_cards_to_keep: [0, 1],
+      }
+
+      sign_out second_user
     end
 
     context 'successful' do
@@ -17,6 +37,10 @@ RSpec.describe ActionsController, :type => :controller do
       after do
         raise "Errors: #{request.flash[:error]}" if request.flash[:error]
         expect(response).to redirect_to game
+      end
+
+      before do
+
       end
 
       it 'creates draw_wild_card actions' do

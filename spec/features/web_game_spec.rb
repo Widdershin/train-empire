@@ -18,7 +18,7 @@ describe 'web game', type: :feature do
 
   it 'only lets you draw route cards at the start of the game' do
     first('.cards .card').click
-    expect(page).to have_content 'Invalid Action'
+    expect(page).to have_content 'You must draw route cards to start'
   end
 
   it 'lets you draw at least two route cards' do
