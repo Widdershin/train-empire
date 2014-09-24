@@ -10,13 +10,17 @@ class Player < ActiveRecord::Base
   end
 
   def can_perform?(action)
+    options.include? action.to_modifier.class
+  end
+
+  def options
     turn = game.turns.last
 
     if turn.nil? || turn.complete?
       turn = Turn.new []
     end
 
-    turn.options.include? action.to_modifier.class
+    turn.options
   end
 
   private

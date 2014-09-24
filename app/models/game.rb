@@ -22,4 +22,8 @@ class Game < ActiveRecord::Base
   def turns
     actions.to_turns
   end
+
+  def initial_round?
+    actions.count < players.count
+  end
 end

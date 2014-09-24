@@ -65,7 +65,7 @@ class Turn
   end
 
   def error_message(modifier)
-    "Invalid Modifier: #{modifier}, #{modifier.errors.join (', ')}"
+    "Invalid Modifier: #{modifier.inspect}"
   end
 
 end

@@ -20,6 +20,11 @@ class ActionsController < ApplicationController
       return redirect_to game
     end
 
+    if game.initial_round? && params[:action_type] != 'keep_initial_route_cards'
+      flash[:error] = "You must draw route cards to start."
+      return redirect_to game
+    end
+
     modifier = action.to_modifier
 
     if modifier.valid? game.state.current_player, game.state
@@ -40,6 +45,8 @@ class ActionsController < ApplicationController
     when 'draw_route_cards'
       {}
     when 'keep_route_cards'
+      params.permit(route_cards_to_keep: [])
+    when 'keep_initial_route_cards'
       params.permit(route_cards_to_keep: [])
     when 'claim_link'
       params.permit(:link_id)

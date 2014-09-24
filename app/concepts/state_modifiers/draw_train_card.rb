@@ -18,7 +18,17 @@ class StateModifiers::DrawTrainCard
   end
 
   def valid?(current_player, game_state)
-    @card_index < game_state.available_train_cards.count &&
-      game_state.available_train_cards.cards.at(@card_index).color != :wild
+    @errors = []
+    card = Maybe.wrap(game_state.available_train_cards.cards.at(@card_index))
+
+    if card.nil?
+      @errors << 'Invalid card index'
+    end
+
+    unless card.color != :wild
+      @errors << "You can't draw wildcards with #{self.class}"
+    end
+
+    @errors.empty?
   end
 end
