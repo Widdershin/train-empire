@@ -76,4 +76,3 @@ end
 Then(/^I should have one route card$/) do
   expect(page).to have_content('Holding 1 routes')
 end
-
