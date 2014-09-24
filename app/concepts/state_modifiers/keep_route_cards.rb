@@ -18,9 +18,12 @@ class StateModifiers::KeepRouteCards
   end
 
   def valid?(current_player, route_deck)
+    @errors = []
+
     unless cards_to_keep.all? { |index| current_player.potential_routes.at(index) }
       errors << 'Invalid index'
     end
-    current_player.potential_routes.any?
+
+    errors.empty?
   end
 end

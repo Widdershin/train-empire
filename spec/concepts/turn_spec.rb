@@ -33,7 +33,7 @@ describe Turn do
         StateModifiers::DrawWildCard,
         StateModifiers::DrawTrainCard,
         StateModifiers::DrawRouteCards,
-        StateModifiers::KeepRouteCards,
+        StateModifiers::KeepInitialRouteCards,
       ]
 
       turn = Turn.new([StateModifiers::DrawRouteCards.new(nil)], current: true)

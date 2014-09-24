@@ -49,7 +49,7 @@ RSpec.describe ActionsController, :type => :controller do
 
         post :create, action_type: 'draw_route_cards', id: game.id
 
-        expect { post :create, action_type: 'keep_route_cards', id: game.id, route_cards_to_keep: [1, 2, 3] }
+        expect { post :create, action_type: 'keep_route_cards', id: game.id, route_cards_to_keep: [1, 2]  }
           .to change { Action.count }.by(1)
 
       end
