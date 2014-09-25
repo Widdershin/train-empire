@@ -67,9 +67,14 @@ module WebGameHelper
   end
 
   def as(player)
-    log_out!
-    log_in! player
-    visit @game_path
+    unless page.text.include? "Signed in as #{player.username}"
+      log_out!
+      log_in! player
+    end
+
+    unless current_path == @game_path
+      visit @game_path
+    end
 
     yield
   end
