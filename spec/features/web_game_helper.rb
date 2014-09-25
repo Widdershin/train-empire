@@ -26,7 +26,7 @@ module WebGameHelper
   end
 
   def draw_train_card!
-    first('.cards .card:not(wild)').click
+    first('.cards .card:not(.wild)').click
 
     check_for_errors!
   end
@@ -34,6 +34,14 @@ module WebGameHelper
   def check_for_errors!
     expect(page).to have_no_selector('.flash.error'),
       -> { first('.flash.error').text }
+  end
+
+  def as(player)
+    log_out!
+    log_in! player
+    visit @game_path
+
+    yield
   end
 
 end

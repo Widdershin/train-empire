@@ -16,7 +16,7 @@ class ActionsController < ApplicationController
     )
 
     unless player.can_perform? action
-      flash[:error] = "Action can't be performed"
+      flash[:error] = "Action can't be performed. Must perform one of these: #{player.options.join(', ')}"
       return redirect_to game
     end
 
