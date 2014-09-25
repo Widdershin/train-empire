@@ -51,7 +51,7 @@ module WebGameHelper
   end
 
   def draw_train_card!(color = nil)
-    color_class = color ? ".#{color}" : ""
+    color_class = ".#{color}" if color
     card = first(".cards .card#{color_class}:not(.wild)")
     if card.nil?
       p all('.cards .card').map { |card| card[:class] }
