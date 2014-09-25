@@ -13,12 +13,10 @@ TicketToRide = do ->
   publik.updateIfNeeded = ->
     getTurn (newTurn) ->
       if newTurn > currentTurn
-        console.log("updating from #{currentTurn} to #{newTurn}")
         location.reload()
 
   publik.startGame = ->
     getTurn (newTurn) ->
-      console.log("Starting at #{newTurn}")
       currentTurn = newTurn
       setInterval(publik.updateIfNeeded, 1000)
 
