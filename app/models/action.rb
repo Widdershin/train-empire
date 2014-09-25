@@ -1,6 +1,7 @@
 class Action < ActiveRecord::Base
   belongs_to :player
   serialize :route_cards_to_keep, Array
+  serialize :cards_to_spend, Array
 
   scope :by_creation, -> { order :id }
 

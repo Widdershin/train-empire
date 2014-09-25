@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Action, :type => :model do
   it { should validate_presence_of :action }
   it { should belong_to :player }
+  it { should respond_to :cards_to_spend }
 
   describe 'to_modifier' do
     let(:player) { mock_model('Player') }
