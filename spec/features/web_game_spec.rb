@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative 'web_game_helper'
 
-describe 'web game', type: :feature do
+describe 'web game', type: :feature, js: true do
   include WebGameHelper
 
   let(:fred) { create :user }
@@ -46,6 +46,26 @@ describe 'web game', type: :feature do
         draw_train_card!
         expect(page).to have_selector('.hand .card', count: 6)
       end
+    end
+
+    it 'lets you claim a link' do
+      as fred do
+        draw_train_card! :black
+        draw_train_card! :black
+      end
+
+      as wilma do
+        draw_route_cards!
+        keep_route_cards! [0, 1]
+      end
+
+      link_to_claim = 11 # two cost gray link
+
+      as fred do
+        claim_link! id: link_to_claim, cards: [0, 1]
+      end
+
+      expect(find_link(link_to_claim)).to be_nil
     end
 
   end
