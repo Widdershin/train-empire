@@ -62,13 +62,17 @@ describe 'web game', type: :feature, js: true do
       link_to_claim = 11 # two cost gray link
 
       as fred do
-        claim_link! id: link_to_claim, cards: [0, 1]
+        expect(hand).to eq([
+          :purple, :black, :purple, :yellow, :black, :black
+        ])
+
+        claim_link! id: link_to_claim, cards: [4, 5]
+
+        expect(hand).to eq([
+          :purple, :black, :purple, :yellow
+        ])
       end
-
-      expect(find_link(link_to_claim)).to be_nil
     end
-
   end
-
 end
 

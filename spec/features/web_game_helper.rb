@@ -17,20 +17,36 @@ module WebGameHelper
   def claim_link!(id:, cards:)
     checkboxes = all('.hand input[type=checkbox]')
 
-    expect(checkboxes.count).to be >= cards.count
-
     checkboxes.each_with_index do |box, index|
       box.set(true) if cards.include? index
     end
 
-    find_link(id).click
+    click_city_link(id)
 
     check_for_errors!
   end
 
   def find_link(id)
-    id = id.to_s
-    all('.link').find { |link| link['data-id'] == id }
+    find(link_selector(id))
+  end
+
+  def link_selector(id)
+    ".link[data-id='#{id}']"
+  end
+
+  def click_city_link(id)
+    #https://github.com/teampoltergeist/poltergeist/issues/331
+    #
+    if Capybara.javascript_driver == :poltergeist
+      page.execute_script(<<-javascript)
+        var svgEl = document.querySelector("#{link_selector(id)}");
+        var clickEvent = document.createEvent('MouseEvents');
+        clickEvent.initMouseEvent('click',true,true);
+        svgEl.dispatchEvent(clickEvent);
+      javascript
+    else
+      find_link(id).click
+    end
   end
 
   def draw_route_cards!
@@ -77,6 +93,12 @@ module WebGameHelper
     end
 
     yield
+  end
+
+  def hand
+    all('.hand .card').map do |card|
+      /card (\w+)/.match(card[:class])[1].to_sym
+    end
   end
 
 end

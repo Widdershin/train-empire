@@ -16,7 +16,10 @@
   <h4>Your hand:</h4>
   <div class="hand">
     <% @player.hand.each do |card| %>
-      <div class="card <%= card.color %>"><%= card.color %></div>
+      <div class="card <%= card.color %>">
+        <%= card.color %>
+        <input type="checkbox">
+      </div>
     <% end %>
   </div>
 
@@ -33,8 +36,8 @@
 
   <%= form_tag("/games/#{@game.id}/actions/create") do %>
     <%= hidden_field_tag(:action_type, @game.initial_round? ? 'keep_initial_route_cards' : 'keep_route_cards') %>
-    <% @player.potential_routes.each do |route_card| %>
-      <%= check_box_tag 'route_cards_to_keep[]' %>
+    <% @player.potential_routes.each_with_index do |route_card, index| %>
+      <%= check_box_tag 'route_cards_to_keep[]', index %>
       <div class="card route-card">Route: <%= route_card %></div>
     <% end %>
 

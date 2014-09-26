@@ -22,10 +22,20 @@ TicketToRide = do ->
 
   $('.link').on 'click', ->
     linkToClaim = $(this).data('id')
-    args =
-      action_type: 'claim_link'
-      link_id: linkToClaim
-    $.post "#{window.location.href}/actions/create", args
 
+    cardsToSpendInputs = ''
+
+    cardsToSpend = $('.hand input[type=checkbox]').each (index, checkbox) ->
+      if $(checkbox).is(":checked")
+        cardsToSpendInputs += "<input type='checkbox' name='cards_to_spend[]' value='#{index}' checked />"
+
+    form = $("<form action='#{window.location.href}/actions/create' method='POST'>" +
+      "<input type='hidden' name='action_type' value='claim_link'>" +
+      "<input type='hidden' name='link_id' value='#{linkToClaim}'>" +
+      cardsToSpendInputs + '</form>')
+
+    $(document.body).append(form)
+
+    form.submit()
   publik.startGame()
 

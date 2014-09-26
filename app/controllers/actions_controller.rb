@@ -1,4 +1,6 @@
 class ActionsController < ApplicationController
+  protect_from_forgery except: :create
+
   def create
     game = Game.find params[:id]
 
@@ -49,7 +51,7 @@ class ActionsController < ApplicationController
     when 'keep_initial_route_cards'
       params.permit(route_cards_to_keep: [])
     when 'claim_link'
-      params.permit(:link_id)
+      params.permit(:link_id, cards_to_spend: [])
     when 'draw_wild_card'
       params.permit(:card_index)
     end

@@ -1,6 +1,8 @@
 require 'rails_helper'
+require_relative 'player_state_helper'
 
 RSpec.describe PlayerState, :type => :model do
+  include PlayerStateHelper
   let (:test_name) { 'baz' }
   let (:test_id) { 1 }
   let (:player) { double(:player, name: test_name, id: test_id, color: 'FFF') }
@@ -97,6 +99,8 @@ RSpec.describe PlayerState, :type => :model do
 
     let (:card) { TrainCard.new(:blue) }
 
+    let (:cards_to_spend) { [*0..route.cost] }
+
     before do
       route.cost.times do
         player_state.add_to_hand card
@@ -105,17 +109,17 @@ RSpec.describe PlayerState, :type => :model do
 
     it 'claims a route' do
       expect(route).to receive(:set_owner).with(player_state)
-      player_state.claim route
+      player_state.claim route, cards_to_spend
     end
 
     it 'subtracts the route cost from the trains' do
-      expect{ player_state.claim(route) }
+      expect{ player_state.claim(route, cards_to_spend) }
         .to change { player_state.trains }
         .by(-route.cost)
     end
 
     it 'spends the needed cards' do
-      expect { player_state.claim(route) }
+      expect { player_state.claim(route, cards_to_spend) }
         .to change { player_state.hand.size }
         .by(-route.cost)
     end
@@ -123,52 +127,69 @@ RSpec.describe PlayerState, :type => :model do
     it 'claims grey routes with any card color' do
       gray_route = double(:route, cost: 1, color: :gray, set_owner: nil)
 
-      expect { player_state.claim(gray_route) }
+      expect { player_state.claim(gray_route, [0]) }
         .to change { player_state.hand.size }
         .by(-gray_route.cost)
     end
+  end
 
+  describe '#spend_cards' do
+    it 'removes the cards with the indices from the players hand' do
+      [:red, :green, :blue, :yellow].each do |color|
+        player_state.add_to_hand(TrainCard.new(color))
+      end
+
+      player_state.spend_cards([0, 2])
+
+      expect(player_state.hand.map(&:color)).to match_array [:green, :yellow]
+    end
   end
 
   describe '#can_claim' do
-    it 'can claim a link when it has enough cards of the right color' do
-      3.times do
-        player_state.add_to_hand(TrainCard.new(:red))
+    context 'cards of one color' do
+      it 'returns true' do
+        set_hand [:red, :red]
+
+        link = double :link, color: :red, cost: 2
+
+        expect(player_state.can_claim?(link, [0, 1])).to eq true
       end
 
-      link = double(:link, cost: 3, color: :red)
+      it 'must be the right color' do
+        set_hand [:green, :green]
 
-      expect(player_state.can_claim?(link)).to eq true
+        link = double :link, color: :red, cost: 2
+
+        expect(player_state.can_claim?(link, [0, 1])).to eq false
+      end
     end
 
-    it "can't if they don't have enough cards" do
-      link = double(:link, cost: 6, color: :blue)
+    context 'wild cards' do
+      it 'uses wilcards happily' do
+        set_hand [:wild, :red]
 
-      expect(player_state.can_claim?(link)).to eq false
+        link = double :link, color: :red, cost: 2
+
+        expect(player_state.can_claim?(link, [0, 1])).to eq true
+      end
     end
 
-    it 'can claim gray links with cards of any color' do
-      link = double(:link, cost: 4, color: :gray)
+    context 'gray links' do
+      it 'uses any color' do
+        set_hand [:green, :green]
 
-      4.times do
-        player_state.add_to_hand(TrainCard.new(:green))
+        link = double :link, color: :gray, cost: 2
+
+        expect(player_state.can_claim?(link, [0, 1])).to eq true
       end
 
-      expect(player_state.can_claim?(link)).to eq true
-    end
-  end
+      it 'must use one color' do
+        set_hand [:green, :red]
 
-  describe 'spend_cards' do
-    it 'removes a certain number of cards of a certain color from the hand' do
-      10.times do
-        player_state.add_to_hand(TrainCard.new(:blue))
+        link = double :link, color: :gray, cost: 2
+
+        expect(player_state.can_claim?(link, [0, 1])).to eq false
       end
-
-      card_count = 4
-
-      expect{ player_state.spend_cards(card_count, :blue) }
-        .to change { player_state.hand.count { |card| card.color == :blue } }
-        .by(-card_count)
     end
   end
 end

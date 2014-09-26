@@ -9,7 +9,7 @@ describe Turn do
 
   describe '#valid?' do
     it 'is true when the modifiers match a turn pattern' do
-      turn = Turn.new [StateModifiers::ClaimLink.new(nil, nil)]
+      turn = Turn.new [StateModifiers::ClaimLink.new(nil, nil, [])]
 
       expect(turn).to be_valid
     end

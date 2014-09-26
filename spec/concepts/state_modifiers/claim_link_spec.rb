@@ -4,7 +4,11 @@ require_relative 'shared_state_modifier_specs'
 describe StateModifiers::ClaimLink do
   it_should_behave_like 'a state modifier'
 
-  let(:modifier) { StateModifiers::ClaimLink.new(player_id, link_id) }
+  let(:modifier) do
+    StateModifiers::ClaimLink.new(player_id, link_id, cards_to_spend)
+  end
+
+  let(:cards_to_spend) { [0, 1, 2] }
   let(:player_id) { 1 }
   let(:link_id) { 2 }
 
@@ -17,7 +21,7 @@ describe StateModifiers::ClaimLink do
 
       expect(player)
         .to receive(:claim)
-        .with(kind_of(Link))
+        .with(kind_of(Link), cards_to_spend)
 
       modifier.process(player, game_state)
     end

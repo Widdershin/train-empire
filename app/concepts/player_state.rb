@@ -33,21 +33,25 @@ class PlayerState
     returned_cards
   end
 
-  def can_claim?(link)
-    hand.select { |card| card.can_buy? link.color }.size >= link.cost
-  end
-
-  def claim(link)
+  def claim(link, cards_to_spend)
     link.set_owner self
     @trains -= link.cost
-    spend_cards(link.cost, link.color)
+    spend_cards(cards_to_spend)
   end
 
-  def spend_cards(count, color)
-    count.times do
-      card_to_spend_index = hand.find_index { |card| card.can_buy? color }
-      hand.delete_at(card_to_spend_index)
-    end
+  def spend_cards(indices)
+    @hand.select!.with_index { |card, index| indices.exclude? index }
+  end
+
+  def can_claim?(link, indices)
+    cards = @hand.values_at(*indices)
+
+    colors = cards.map(&:color).uniq - [:wild]
+
+    return false if colors.size > 1
+    return false unless cards.all? { |card| card.can_buy? link.color }
+
+    cards.all?
   end
 
   def to_s
