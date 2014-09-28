@@ -46,9 +46,9 @@ class PlayerState
   def can_claim?(link, indices)
     cards = @hand.values_at(*indices)
 
-    colors = cards.map(&:color).uniq - [:wild]
+    colors_without_wild = cards.map(&:color).uniq - [:wild]
 
-    return false if colors.size > 1
+    return false if colors_without_wild.count > 1
     return false unless cards.all? { |card| card.can_buy? link.color }
 
     cards.all?
