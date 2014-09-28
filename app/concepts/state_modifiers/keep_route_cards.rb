@@ -24,6 +24,10 @@ class StateModifiers::KeepRouteCards
       errors << 'Invalid index'
     end
 
+    unless cards_to_keep.size >= 1
+      errors << 'You must draw at least one card'
+    end
+
     errors.empty?
   end
 end
