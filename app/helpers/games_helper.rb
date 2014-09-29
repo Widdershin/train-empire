@@ -7,4 +7,8 @@ module GamesHelper
     LinkPresenter.new(link).svg
   end
 
+  def city_svg(city)
+    CityPresenter.new(city).svg
+  end
+
 end

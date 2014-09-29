@@ -38,7 +38,7 @@
 
 <div class="links">
   <svg
-    width="900"
+    width="950"
     height="600">
 
     <% @state.links.each do |link| %>
@@ -47,11 +47,7 @@
     <% end %>
 
     <% @state.cities.each do |city| %>
-      <circle cx="<%= city.x %>" cy="<%= city.y %>" r="20" fill="lightgray" />
-      <text x="<%= city.x %>" y="<%= city.y %>"
-        text-anchor="middle" font-size="10">
-        <%= city %>
-        </text>
+      <%= city_svg(city) %>
     <% end %>
   </svg>
 </div>

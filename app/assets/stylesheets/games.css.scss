@@ -19,37 +19,57 @@ $card-size: 2;
   padding: 3px;
 }
 
+$white: white;
 .white {
-  background-color: white;
+  background-color: $white;
+  stroke: $white;
 }
 
+$yellow: yellow;
 .yellow {
-  background-color: yellow;
+  background-color: $yellow;
+  stroke: $yellow;
 }
 
+$orange: orange;
 .orange {
-  background-color: orange;
+  background-color: $orange;
+  stroke: $orange;
 }
 
 .black {
   background-color: black;
   color: white;
+  stroke: black;
 }
 
+$red: red;
 .red {
-  background-color: red;
+  background-color: $red;
+  stroke: $red;
 }
 
+$green: green;
 .green {
-  background-color: green;
+  background-color: $green;
+  stroke: $green;
 }
 
+$blue: #39F;
 .blue {
-  background-color: blue;
+  background-color: $blue;
+  stroke: $blue;
 }
 
+
+$purple: #CC00CC;
 .purple {
-  background-color: purple;
+  background-color: $purple;
+  stroke: $purple;
+}
+
+.gray {
+  stroke: gray;
 }
 
 .wild {
@@ -58,11 +78,18 @@ $card-size: 2;
 }
 
 .cards form {
-  display: inline-block
+  display: inline-block;
+}
+
+.city-label {
+  font-family: 'Arial';
+  font-size: 12pt;
+  fill: #F7F7F7;
+  text-shadow: 1px 1px 3px black;
 }
 
 svg {
-  background-color: #E6E6E6;
+  background: url(/map.png) no-repeat scroll -220px 0px / 145% auto transparent;
 //  background: url(/game.png);
 //  background-position: 0px -50px;
 }
