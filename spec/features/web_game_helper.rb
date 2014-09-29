@@ -36,7 +36,6 @@ module WebGameHelper
 
   def click_city_link(id)
     #https://github.com/teampoltergeist/poltergeist/issues/331
-    #
     if Capybara.javascript_driver == :poltergeist
       page.execute_script(<<-javascript)
         var svgEl = document.querySelector("#{link_selector(id)}");
