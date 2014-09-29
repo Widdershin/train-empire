@@ -1,37 +1,37 @@
 id,name,x,y
-1,Los Angeles,85,470
-2,Duluth,500,180
-3,Sault Ste Marie,620,120
-4,New York,810,190
-5,Portland,45,180
-6,Vancouver,55,85
-7,Toronto,726,144
-8,Dallas,491,483
-9,Calgary,185,62
-10,Winnipeg,395,75
-11,San Francisco,24,365
-12,Kansas City,490,319
-13,Denver,330,327
-14,Chicago,617,240
-15,Boston,866,115
-16,Montreal,800,64
-17,Seattle,56,133
-18,Helena,280,191
-19,Houston,530,519
-20,Nashville,661,355
-21,Atlanta,710,390
-22,El Paso,325,504
-23,Miami,829,545
-24,Phoenix,210,470
-25,Salt Lake City,210,304
-26,Little Rock,556,405
-27,Pittsburgh,740,229
-28,Santa Fe,327,419
-29,New Orleans,622,515
-30,Oklahoma City,478,398
-31,Washington,827,273
-32,Raleigh,771,335
-33,Las Vegas,159,398
-34,Ohama,472,271
-35,Charleston,797,395
-36,St Louis,574,319
+1,Los Angeles,110,470
+2,Duluth,525,180
+3,Sault Ste Marie,645,120
+4,New York,835,190
+5,Portland,70,180
+6,Vancouver,80,85
+7,Toronto,751,144
+8,Dallas,516,483
+9,Calgary,210,62
+10,Winnipeg,420,75
+11,San Francisco,49,365
+12,Kansas City,515,319
+13,Denver,355,327
+14,Chicago,642,240
+15,Boston,891,115
+16,Montreal,825,64
+17,Seattle,81,133
+18,Helena,305,191
+19,Houston,555,519
+20,Nashville,686,355
+21,Atlanta,735,390
+22,El Paso,350,504
+23,Miami,854,545
+24,Phoenix,235,470
+25,Salt Lake City,235,304
+26,Little Rock,591,415
+27,Pittsburgh,765,229
+28,Santa Fe,352,419
+29,New Orleans,647,515
+30,Oklahoma City,503,398
+31,Washington,852,273
+32,Raleigh,796,335
+33,Las Vegas,184,398
+34,Ohama,497,271
+35,Charleston,822,395
+36,St Louis,599,319
