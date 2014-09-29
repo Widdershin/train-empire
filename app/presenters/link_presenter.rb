@@ -1,4 +1,7 @@
 class LinkPresenter
+  UNOWNED_WIDTH = 8
+  OWNED_WIDTH = 12
+
   attr_reader :link
 
   def initialize(link)
@@ -7,8 +10,8 @@ class LinkPresenter
 
   def svg
     <<-SVG.strip_heredoc.html_safe
-      <path class="link" data-id="#{id}"
-            d="#{path}" stroke="#{line_color}" fill="transparent"
+      <path class="link #{line_color}" data-id="#{id}"
+            d="#{path}" fill="transparent"
             stroke-dasharray="#{dasharray}" stroke-width="#{line_width}"/>
     SVG
   end
@@ -40,7 +43,7 @@ class LinkPresenter
   end
 
   def line_width
-    owner.nil? ? 6 : 10
+    owner.nil? ? UNOWNED_WIDTH : OWNED_WIDTH
   end
 
   def center_x
@@ -58,6 +61,7 @@ class LinkPresenter
   def curve_y
     center_y + curve_offset_y
   end
+
   def distance_coord
     [(city_b.x - city_a.x), (city_b.y - city_a.y)]
   end
@@ -69,7 +73,7 @@ class LinkPresenter
   end
 
   def dasharray
-    segment_length = (line_length / cost) * 0.80
+    segment_length = (line_length / cost) * 0.9
     "#{segment_length}, 7"
   end
 end
