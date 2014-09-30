@@ -15,10 +15,22 @@ module WebGameHelper
   end
 
   def claim_link!(id:, cards:)
+    indexes = []
+
+    my_hand = hand
+    cards.each_with_index do |card, index|
+      raise 'no card of that color in hand' unless my_hand.include? card
+
+      card_index = my_hand.find_index(card)
+      my_hand[card_index] = :taken
+
+      indexes << card_index
+    end
+
     checkboxes = all('.hand input[type=checkbox]')
 
     checkboxes.each_with_index do |box, index|
-      box.set(true) if cards.include? index
+      box.set(true) if indexes.include? index
     end
 
     click_city_link(id)

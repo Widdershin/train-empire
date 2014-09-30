@@ -89,6 +89,7 @@ describe 'playing a game' do
     @player_1.actions.create!(
       action: 'claim_link',
       link_id: link_id,
+      cards_to_spend: [4]
     )
 
     route = @state.link(link_id)

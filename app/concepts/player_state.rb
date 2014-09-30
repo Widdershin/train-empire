@@ -49,6 +49,7 @@ class PlayerState
 
     colors_without_wild = cards.map(&:color).uniq - [:wild]
 
+    return false if cards.count != link.cost
     return false if colors_without_wild.count > 1
     return false unless cards.all? { |card| card.can_buy? link.color }
 

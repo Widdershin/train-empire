@@ -21,10 +21,8 @@ class StateModifiers::ClaimLink
     link = game_state.link(@link_id)
     @errors = []
 
-
     unless player.can_claim?(link, @cards_to_spend)
-      @errors << "#{player.name} needs more #{link.color} cards. " +
-                 "Has #{player_card_count}, needs #{link.cost}."
+      @errors << "Cannot claim that link with those cards"
     end
 
     if player.trains < link.cost
