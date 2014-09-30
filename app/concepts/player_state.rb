@@ -19,6 +19,7 @@ class PlayerState
 
   def add_to_hand(card)
     @hand << card
+    @hand.sort_by!(&:color)
   end
 
   def set_potential_route_cards(cards)

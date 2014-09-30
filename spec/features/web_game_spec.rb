@@ -62,15 +62,15 @@ describe 'web game', type: :feature, js: true do
       link_to_claim = 11 # two cost gray link
 
       as fred do
-        expect(hand).to eq([
+        expect(hand).to contain_exactly(
           :purple, :black, :purple, :yellow, :black, :black
-        ])
+        )
 
-        claim_link! id: link_to_claim, cards: [4, 5]
+        claim_link! id: link_to_claim, cards: [:black, :black]
 
-        expect(hand).to eq([
+        expect(hand).to contain_exactly(
           :purple, :black, :purple, :yellow
-        ])
+        )
       end
     end
   end

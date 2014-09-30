@@ -51,11 +51,18 @@ RSpec.describe PlayerState, :type => :model do
 
   describe 'add_to_hand' do
     it 'adds the card to the hand' do
-      card = double :card
+      card = double :card, color: :red
 
       player_state.add_to_hand card
 
       expect(player_state.hand).to include card
+    end
+
+    it 'sorts the hand by color' do
+      card = double :card, color: :red
+
+      player_state.add_to_hand card
+      expect(player_state.hand).to eq player_state.hand.sort_by(&:color)
     end
   end
 
@@ -190,6 +197,14 @@ RSpec.describe PlayerState, :type => :model do
 
         expect(player_state.can_claim?(link, [0, 1])).to eq false
       end
+    end
+
+    it 'must spend cards' do
+      set_hand [:green, :green]
+
+      link = double :link, color: :gray, cost: 2
+
+      expect(player_state.can_claim?(link, [])).to eq false
     end
   end
 end

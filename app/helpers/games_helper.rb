@@ -11,4 +11,8 @@ module GamesHelper
     CityPresenter.new(city).svg
   end
 
+  def hand_svg(hand)
+    HandPresenter.new(hand).svg
+  end
+
 end
