@@ -20,7 +20,7 @@ When(/^I visit that game$/) do
 end
 
 Then(/^I should see a new game$/) do
-  expect(page).to have_content 'Welcome to your new game'
+  expect(page).to have_content "It's your turn."
 end
 
 Then(/^I should see the game I am in$/) do

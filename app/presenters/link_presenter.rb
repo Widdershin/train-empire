@@ -1,6 +1,7 @@
 class LinkPresenter
-  UNOWNED_WIDTH = 8
-  OWNED_WIDTH = 12
+  UNOWNED_WIDTH = 6
+  OWNED_WIDTH = 10
+  OUTLINE_BUFFER = 4
 
   attr_reader :link
 
@@ -10,10 +11,17 @@ class LinkPresenter
 
   def svg
     <<-SVG.strip_heredoc.html_safe
-      <path class="link #{line_color}" data-id="#{id}"
+      <path class="link-outline"
             d="#{path}" fill="transparent"
-            stroke-dasharray="#{dasharray}" stroke-width="#{line_width}"/>
+            stroke-width="#{line_width + OUTLINE_BUFFER}"/>
+      <path class="link #{line_color}" data-id="#{id}"
+            d="#{path}" fill="transparent" stroke="#{owner_color}"
+            stroke-dasharray="#{dash_array}" stroke-width="#{line_width}"/>
     SVG
+  end
+
+  def dash_array
+    dasharray if owner.nil?
   end
 
   private
@@ -34,12 +42,13 @@ class LinkPresenter
     PATH
   end
 
-  def dasharray
-    super if owner.nil?
-  end
 
   def line_color
-    owner.nil? ? color : "##{owner.color}"
+    color if owner.nil?
+  end
+
+  def owner_color
+    "##{Maybe.wrap(owner).color}"
   end
 
   def line_width

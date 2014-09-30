@@ -14,15 +14,18 @@ class CityPresenter
 
   def svg
     <<-SVG.strip_heredoc.html_safe
-      <circle cx="#{x}" cy="#{y}" r="#{radius}" fill="lightgray" />
+      <g>
+        <circle cx="#{x}" cy="#{y}" r="#{radius}" fill="lightgray"/>
 
-      <text class="city-label"
-            x="#{x}" y="#{y - (radius + 2)}"
+        <text class="city-label"
+            x="#{x}" y="#{y - (radius)}"
             width="20"
             text-anchor="middle"
+            data-id="#{city.id}"
             >
-        #{name}
-      </text>
+          #{name}
+        </text>
+      </g>
     SVG
   end
 

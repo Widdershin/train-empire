@@ -4,19 +4,29 @@
 
 $card-size: 2;
 
+body {
+  background-color: #303030;
+}
+
+.links {
+  width: 100%;
+  text-align: center;
+}
+
 .card {
   width: 50px * $card-size;
   height: 30px * $card-size;
   border: 1px solid black;
   border-radius: 5px * $card-size;
   display: inline-block;
-  text-align: center;
   vertical-align: middle;
 }
 
 .route-card {
+  background-color: white;
   font-size: 9pt;
   padding: 3px;
+  text-align: center;
 }
 
 $white: white;
@@ -73,9 +83,15 @@ $purple: #CC00CC;
 }
 
 .wild {
-  border: 1px solid red;
-  background-color: lime;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
 }
+
+.link-outline
+{
+  stroke: white;
+  opacity: 0.05;
+}
+
 
 .cards form {
   display: inline-block;
@@ -83,13 +99,48 @@ $purple: #CC00CC;
 
 .city-label {
   font-family: 'Arial';
-  font-size: 12pt;
+  font-size: 13pt;
   fill: #F7F7F7;
-  text-shadow: 1px 1px 3px black;
+
+  $shadow: #3D3D3D;
+
+  text-shadow:
+    /* Simulated effect for Firefox and Opera
+       and nice enhancement for WebKit */
+   -1px -1px 0 $shadow,
+    1px -1px 0 $shadow,
+   -1px  1px 0 $shadow,
+    1px  1px 0 $shadow,
+    0px  0px 3px black;
 }
+
+.hand {
+  padding: 15px;
+  text-align: left;
+}
+
+.hand .card {
+  margin-right: -80px;
+}
+
+.hand .card.black {
+  border: 1px solid white;
+}
+
+.hand .last-card {
+  margin-right: auto;
+}
+
+.flash.error {
+  background-color: red;
+  text-align: center;
+}
+
 
 svg {
   background: url(/map.png) no-repeat scroll -220px 0px / 145% auto transparent;
+  display: inline-block;
+  text-align: left;
 //  background: url(/game.png);
 //  background-position: 0px -50px;
 }

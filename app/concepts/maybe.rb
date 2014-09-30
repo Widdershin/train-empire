@@ -10,4 +10,8 @@ class Maybe
   def nil?
     true
   end
+
+  def to_s
+    nil.to_s
+  end
 end
