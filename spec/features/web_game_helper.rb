@@ -48,19 +48,20 @@ module WebGameHelper
 
   def click_city_link(id)
     #https://github.com/teampoltergeist/poltergeist/issues/331
+
     if Capybara.javascript_driver == :poltergeist
-      page.execute_script(<<-javascript)
+      page.execute_script(<<-JAVASCRIPT)
         var svgEl = document.querySelector("#{link_selector(id)}");
         var clickEvent = document.createEvent('MouseEvents');
         clickEvent.initMouseEvent('click',true,true);
         svgEl.dispatchEvent(clickEvent);
-      javascript
+      JAVASCRIPT
     else
       find_link(id).click
     end
   end
 
-  def draw_route_cards!
+  def draw_route_cards
     click_button 'Draw Route Cards'
   end
 
@@ -90,6 +91,12 @@ module WebGameHelper
     check_for_errors!
   end
 
+  def draw_wild_card!
+    first('.cards .wild').click
+
+    check_for_errors!
+  end
+
   def check_for_errors!
     expect(page).to have_no_selector(ERROR_SELECTOR),
       -> { first(ERROR_SELECTOR).text }
@@ -109,9 +116,60 @@ module WebGameHelper
   end
 
   def hand
-    all('.hand .card').map do |card|
-      /card (\w+)/.match(card[:class])[1].to_sym
+    sleep 1
+    within('.hand') do
+      all('.card').map do |card|
+        /card (\w+)/.match(card[:class])[1].to_sym
+      end
     end
   end
 
+  def smallest_train_count
+    page.text.scan(/\d+ trains/).map(&:to_i).min
+  end
+
+  def claim_or_draw
+    hand_without_wild, wild_cards = hand.partition { |color| color != :wild }
+
+    biggest_card_group = hand_without_wild
+      .group_by { |c| c }
+      .map { |_, cards_of_color| cards_of_color }
+      .max_by(&:size).to_a + wild_cards
+
+    link = cheapest_link
+
+    if hand.any? && biggest_card_group.size >= link.cost
+      claim_link!(id: link.id, cards: biggest_card_group[0..link.cost - 1])
+    else
+      if first('.cards .wild')
+        draw_wild_card!
+      else
+        colors = []
+
+        color = biggest_card_group.first
+        if color == :wild
+          color = nil
+        end
+
+        card_with_right_color_count = all(".cards .card#{ ".#{color}" if color}").size
+
+        if color.nil?
+          card_with_right_color_count = 0
+        end
+
+        card_with_right_color_count.times { colors << color }
+        until(colors.size >= 2)
+          colors << nil
+        end
+
+        draw_train_card!(colors.shift)
+        draw_train_card!(colors.shift)
+      end
+    end
+  end
+
+  def cheapest_link
+    link = all('.link.gray').min_by { |link| link['data-cost'].to_i }
+    Struct.new(:id, :cost).new(link['data-id'].to_i, link['data-cost'].to_i)
+  end
 end

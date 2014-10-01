@@ -49,28 +49,50 @@ describe 'web game', type: :feature, js: true do
     end
 
     it 'lets you claim a link' do
-      as fred do
-        draw_train_card! :black
-        draw_train_card! :black
-      end
-
-      as wilma do
-        draw_route_cards!
-        keep_route_cards! [0, 1]
-      end
-
       link_to_claim = 11 # two cost gray link
 
       as fred do
         expect(hand).to contain_exactly(
-          :purple, :black, :purple, :yellow, :black, :black
-        )
-
-        claim_link! id: link_to_claim, cards: [:black, :black]
-
-        expect(hand).to contain_exactly(
           :purple, :black, :purple, :yellow
         )
+
+        claim_link! id: link_to_claim, cards: [:purple, :purple]
+
+        expect(hand).to contain_exactly(
+          :black, :yellow
+        )
+      end
+    end
+
+    it 'can be won', slow: true do
+      until smallest_train_count <= 3 do
+        as fred do
+          claim_or_draw
+        end
+
+        as wilma do
+          claim_or_draw
+        end
+      end
+
+      as fred do
+        expect(smallest_train_count).to be < 5
+        draw_route_cards
+        keep_route_cards! [0, 1]
+      end
+
+      as wilma do
+        draw_route_cards
+        keep_route_cards! [0, 1]
+      end
+
+      as fred do
+        game = Game.last
+        p game.to_json
+        p game.players.to_json
+        p game.actions.to_json
+        p game.users.to_json
+        expect(page).to have_content 'Game Over'
       end
     end
   end

@@ -14,7 +14,7 @@ class LinkPresenter
       <path class="link-outline"
             d="#{path}" fill="transparent"
             stroke-width="#{line_width + OUTLINE_BUFFER}"/>
-      <path class="link #{line_color}" data-id="#{id}"
+      <path class="link #{line_color}" data-id="#{id}" data-cost="#{cost}"
             d="#{path}" fill="transparent" stroke="#{owner_color}"
             stroke-dasharray="#{dash_array}" stroke-width="#{line_width}"/>
     SVG
