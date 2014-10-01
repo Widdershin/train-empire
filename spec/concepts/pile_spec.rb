@@ -11,13 +11,23 @@ describe Pile do
     expect(pile.cards).to eq []
   end
 
-  it 'can be refilled with a deck' do
-    card = double :card
-    deck = double :deck, draw: card
+  describe '#refill_from' do
+    it 'can be refilled with a deck' do
+      card = double :card
+      deck = double :deck, draw: card, empty?: false
 
-    pile.refill_from deck
+      pile.refill_from deck
 
-    expect(pile.cards.size).to eq Pile::CARD_LIMIT
+      expect(pile.cards.size).to eq Pile::CARD_LIMIT
+    end
+
+    it "doesn't draw from an empty deck" do
+      deck = double :deck, empty?: true
+
+      pile.refill_from deck
+
+      expect(pile.cards.size).to eq 0
+    end
   end
 
   it 'has a size limit' do

@@ -14,7 +14,7 @@ class Pile
   end
 
   def refill_from(deck)
-    until full?
+    until full? || deck.empty?
       cards << deck.draw
     end
   end
