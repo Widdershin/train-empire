@@ -88,10 +88,6 @@ describe 'web game', type: :feature, js: true do
 
       as fred do
         game = Game.last
-        p game.to_json
-        p game.players.to_json
-        p game.actions.to_json
-        p game.users.to_json
         expect(page).to have_content 'Game Over'
       end
     end
