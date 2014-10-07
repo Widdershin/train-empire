@@ -1,12 +1,12 @@
 Train Empire
-############
+============
 
-A Rails remake of everyone's favourite train based board game
+A Rails remake of everyone's favourite train based board game.
 
 Setup
 -----
 
-    git clone <repo>
+    git clone https://github.com/Widdershin/train-empire.git
     rake db:create db:migrate
     rails s
 
