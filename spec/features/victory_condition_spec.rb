@@ -5,6 +5,7 @@ describe 'end game', type: :feature, js: true do
   include WebGameHelper
 
   it 'can be won', slow: true do
+    pending 'being worth running'
     until smallest_train_count <= 3 do
       as fred do
         claim_or_draw
