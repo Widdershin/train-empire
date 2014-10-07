@@ -22,11 +22,13 @@ class Action < ActiveRecord::Base
     turns
   end
 
-  def modifier_class
-    "StateModifiers::#{action.camelize}".constantize
-  end
-
   def to_modifier
     modifier_class.from_action(self)
+  end
+
+  private
+
+  def modifier_class
+    "StateModifiers::#{action.camelize}".constantize
   end
 end

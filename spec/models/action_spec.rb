@@ -55,14 +55,4 @@ describe Action, :type => :model do
       expect(action.link_id).to eq link_id
     end
   end
-
-  describe '#modifier_class' do
-    it 'returns the appropriate action class' do
-      action = Action.create(
-        action: 'draw_route_cards'
-      )
-
-      expect(action.modifier_class).to eq StateModifiers::DrawRouteCards
-    end
-  end
 end

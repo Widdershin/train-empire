@@ -30,7 +30,7 @@ class PlayerState
 
   # TODO - route card manager maybe
   def keep_route_cards(card_indices)
-    kept_cards = card_indices.map { |index| @potential_routes.at index }
+    kept_cards = @potential_routes.values_at(*card_indices)
     returned_cards = @potential_routes - kept_cards
     @routes += kept_cards
     @potential_routes.clear
