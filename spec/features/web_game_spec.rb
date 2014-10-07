@@ -42,8 +42,8 @@ describe 'web game', type: :feature, js: true do
 
     it 'lets you draw two train cards' do
       as fred do
-        draw_train_card!
-        draw_train_card!
+        draw_train_card
+        draw_train_card
         expect(page).to have_selector('.hand .card', count: 6)
       end
     end

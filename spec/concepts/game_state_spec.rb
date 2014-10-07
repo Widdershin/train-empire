@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GameState do
-  let (:player_state) { double :player_state }
-  let (:player_state2) { double :player_state2 }
+  let (:player_state) { PlayerState.new 'foo', 1 }
+  let (:player_state2) { PlayerState.new 'bar', 2 }
 
   let (:player_states) { [player_state, player_state2] }
   let (:train_deck) { double :train_deck, count: 105 }
@@ -37,6 +37,43 @@ RSpec.describe GameState do
 
         game_state.claim_link(link.id, player)
       end
+    end
+  end
+
+  describe '#any_player_train_count_below_threshold?' do
+    subject { game_state.any_player_train_count_below_threshold? }
+
+    it {should eq false}
+
+    context 'when a player has less than three trains remaining' do
+      before do
+        allow(player_state).to receive(:trains) { 2 }
+      end
+
+      it {should eq true}
+    end
+  end
+
+  describe '#game_over?' do
+    subject { game_state.game_over? }
+
+    it {should eq false}
+
+    context 'no players' do
+      before do
+        allow(game_state).to receive(:players) { PlayerManager.new [] }
+      end
+
+      it {should eq false}
+    end
+
+    context 'when all players have played their final turn' do
+      before do
+        allow(player_state).to receive(:played_final_turn?).and_return(true)
+        allow(player_state2).to receive(:played_final_turn?).and_return(true)
+      end
+
+      it {should eq true}
     end
   end
 end

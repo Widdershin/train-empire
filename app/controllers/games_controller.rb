@@ -3,6 +3,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by_id params[:id]
+
+    redirect_to :game_over_game if @game.state.game_over?
+
     @users = @game.users
     @state = @game.state
     if @game.users.include? current_user
@@ -27,5 +30,8 @@ class GamesController < ApplicationController
     new_game = current_user.host_game
 
     redirect_to new_game
+  end
+
+  def game_over
   end
 end

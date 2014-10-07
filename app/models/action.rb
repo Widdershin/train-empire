@@ -5,6 +5,7 @@ class Action < ActiveRecord::Base
 
   scope :by_creation, -> { order :id }
 
+  # TODO - rename to name maybe
   validates :action, presence: true
 
   def self.as_modifiers

@@ -78,7 +78,7 @@ module WebGameHelper
     check_for_errors!
   end
 
-  def draw_train_card!(color = nil)
+  def draw_train_card(color = nil)
     color_class = ".#{color}" if color
     card = first(".cards .card#{color_class}:not(.wild)")
 
@@ -116,7 +116,7 @@ module WebGameHelper
   end
 
   def hand
-    sleep 1
+    find('.hand', match: :first)
     within('.hand') do
       all('.card').map do |card|
         /card (\w+)/.match(card[:class])[1].to_sym

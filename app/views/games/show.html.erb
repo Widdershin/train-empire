@@ -7,6 +7,10 @@
 
 <% if @player %>
 
+  <% if @state.final_turn? %>
+    <h3>Final Turn</h3>
+  <% end %>
+
   <div class="route-cards">
     <%= form_tag("/games/#{@game.id}/actions/create") do %>
       <%= hidden_field_tag(:action_type, 'draw_route_cards') %>

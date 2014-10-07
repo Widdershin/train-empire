@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :players
 
     member do
+      get '/game_over', to: 'games#game_over'
       post '/actions/create', to: 'actions#create'
     end
   end

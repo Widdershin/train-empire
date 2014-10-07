@@ -1,6 +1,8 @@
 class GameState
   AVAILABLE_TRAIN_CARDS = 5
   START_HAND_SIZE = 4
+  FINAL_TURN_TRAIN_COUNT = 2
+
   attr_reader :players, :train_deck, :available_train_cards, :route_deck, :links, :cities
 
   def initialize(player_states, train_deck, route_deck, links, cities)
@@ -10,6 +12,7 @@ class GameState
     @route_deck = route_deck
     @links = links
     @cities = cities
+    @final_turn = false
   end
 
   def replenish_available_cards
@@ -27,6 +30,14 @@ class GameState
   end
 
   def end_turn
+    if final_turn?
+      current_player.mark_played_final_turn!
+    end
+
+    if any_player_train_count_below_threshold?
+      @final_turn = true
+    end
+
     players.advance_current_player
     self
   end
@@ -58,6 +69,18 @@ class GameState
     players.each do |player|
       player.set_potential_route_cards(route_deck.draw(card_count))
     end
+  end
+
+  def any_player_train_count_below_threshold?
+    players.map(&:trains).min <= FINAL_TURN_TRAIN_COUNT
+  end
+
+  def final_turn?
+    @final_turn
+  end
+
+  def game_over?
+    players.any? && players.all?(&:played_final_turn?)
   end
 
   def to_s

@@ -207,4 +207,5 @@ RSpec.describe PlayerState, :type => :model do
       expect(player_state.can_claim?(link, [])).to eq false
     end
   end
+
 end

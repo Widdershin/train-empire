@@ -15,6 +15,7 @@ class PlayerState
     @routes = []
     @potential_routes = []
     @color = color
+    @played_final_turn = false
   end
 
   def add_to_hand(card)
@@ -56,9 +57,16 @@ class PlayerState
     cards.all?
   end
 
+  def played_final_turn?
+    @played_final_turn
+  end
+
+  def mark_played_final_turn!
+    @played_final_turn = true
+  end
+
   def to_s
     "#{name}. #{hand.size} cards in hand, " +
     "#{trains} trains. Holding #{routes.size} routes"
   end
-
 end
