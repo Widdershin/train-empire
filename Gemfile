@@ -42,6 +42,7 @@ gem 'devise'
 
 group :test, :development do
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'cucumber'
   gem 'factory_girl'
