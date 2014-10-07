@@ -1,4 +1,4 @@
-User Stories for Ticket To Ride
+User Stories for Train Empire
 
 As a user, I can host a new game
 As a user, I can see a list of games I can join

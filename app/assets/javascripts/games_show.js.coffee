@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-TicketToRide = do ->
+TrainEmpire = do ->
   publik = {}
   currentTurn = 0
 
