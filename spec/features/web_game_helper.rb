@@ -172,4 +172,17 @@ module WebGameHelper
     link = all('.link.gray').min_by { |link| link['data-cost'].to_i }
     Struct.new(:id, :cost).new(link['data-id'].to_i, link['data-cost'].to_i)
   end
+
+  def save_game(name)
+    game_json = GameSerializerService.new.serialize(Game.last)
+    File.open("#{Rails.root}/spec/fixtures/#{name}.json", 'w') { |file| file.write(game_json) }
+  end
+
+  def load_game(name)
+    game_json = File.read("#{Rails.root}/spec/fixtures/#{name}.json")
+    game = GameSerializerService.new.deserialize(game_json)
+
+    @game_path = game_path(game)
+    game
+  end
 end
