@@ -26,7 +26,6 @@ RSpec.describe CardDeck do
   end
 
   it 'gives you the top x cards' do
-
     expect(bigger_deck.top(2)).to eq [card, card]
   end
 
@@ -36,5 +35,9 @@ RSpec.describe CardDeck do
 
   it 'adds cards to the bottom' do
     expect{ deck.add_to_bottom(:card) }.to change {deck.count}.by(1)
+  end
+
+  it 'raises an error if you draw from an empty deck' do
+    expect{ CardDeck.new([], random: random).draw }.to raise_error
   end
 end

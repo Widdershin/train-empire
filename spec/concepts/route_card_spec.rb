@@ -6,14 +6,6 @@ describe RouteCard do
   let (:points) { 10 }
   let (:card) { RouteCard.new origin: origin, destination: destination, points: points }
 
-  it 'has an origin city' do
-    expect(card.origin).to be origin
-  end
-
-  it 'has a destination city' do
-    expect(card.destination).to be destination
-  end
-
   it 'has points' do
     expect(card.points).to eq points
   end

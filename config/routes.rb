@@ -3,11 +3,14 @@ Rails.application.routes.draw do
 
   root to: 'games#index'
 
+  get '/games/:id/action_count', to: 'games#action_count'
+
   resources :games do
     resources :players
 
     member do
-      post '/actions/:action'
+      get '/game_over', to: 'games#game_over'
+      post '/actions/create', to: 'actions#create'
     end
   end
 end

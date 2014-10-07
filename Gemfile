@@ -41,10 +41,15 @@ gem 'devise'
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
+  gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'cucumber'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
+  gem 'fuubar'
+  gem 'poltergeist'
 end
 
 group :test do

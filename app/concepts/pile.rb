@@ -1,4 +1,6 @@
 class Pile
+  include Enumerable
+
   CARD_LIMIT = 5
 
   attr_reader :cards
@@ -7,8 +9,12 @@ class Pile
     @cards = []
   end
 
+  def each(&block)
+    cards.each &block
+  end
+
   def refill_from(deck)
-    until full?
+    until full? || deck.empty?
       cards << deck.draw
     end
   end

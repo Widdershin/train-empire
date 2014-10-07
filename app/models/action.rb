@@ -1,25 +1,34 @@
 class Action < ActiveRecord::Base
   belongs_to :player
   serialize :route_cards_to_keep, Array
+  serialize :cards_to_spend, Array
 
   scope :by_creation, -> { order :id }
 
+  # TODO - rename to name maybe
   validates :action, presence: true
 
-  def self.defrost_all
-    by_creation.map(&:defrost)
+  def self.as_modifiers
+    by_creation.map(&:to_modifier)
   end
 
-  def defrost
-    case action
-    when 'draw_train_card'
-      Actions::DrawTrainCard.new card_index
-    when 'draw_route_cards'
-      Actions::DrawRouteCards.new
-    when 'keep_route_cards'
-      Actions::KeepRouteCards.new route_cards_to_keep
-    when 'claim_route'
-      Actions::ClaimRoute.new route_id
-    end
+  def self.to_turns
+    turns = as_modifiers
+      .chunk(&:player_id)
+      .map { |_, chunk| Turn.new(chunk) }
+
+    turns.last.current = true if turns.any?
+
+    turns
+  end
+
+  def to_modifier
+    modifier_class.from_action(self)
+  end
+
+  private
+
+  def modifier_class
+    "StateModifiers::#{action.camelize}".constantize
   end
 end

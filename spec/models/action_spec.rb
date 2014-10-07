@@ -3,19 +3,20 @@ require 'rails_helper'
 describe Action, :type => :model do
   it { should validate_presence_of :action }
   it { should belong_to :player }
+  it { should respond_to :cards_to_spend }
 
-  describe 'defrosting' do
+  describe 'to_modifier' do
     let(:player) { mock_model('Player') }
     let(:card_index) { 1 }
 
-    it 'returns an instance of an action modifier (words?)' do
+    it 'returns an instance of a state modifier modifier (words?)' do
       action = Action.create(
         action: 'draw_train_card',
         player: player,
         card_index: card_index,
       )
 
-      expect(action.defrost).to be_a Actions::DrawTrainCard
+      expect(action.to_modifier).to be_a StateModifiers::DrawTrainCard
       expect(action.card_index).to eq 1
     end
 
@@ -25,7 +26,7 @@ describe Action, :type => :model do
         player: player,
       )
 
-      expect(action.defrost).to be_a Actions::DrawRouteCards
+      expect(action.to_modifier).to be_a StateModifiers::DrawRouteCards
     end
 
     it 'defrosts KeepRouteCards' do
@@ -37,21 +38,21 @@ describe Action, :type => :model do
         route_cards_to_keep: cards_to_keep
       )
 
-      expect(action.defrost).to be_a Actions::KeepRouteCards
+      expect(action.to_modifier).to be_a StateModifiers::KeepRouteCards
       expect(action.reload.route_cards_to_keep).to eq cards_to_keep
     end
 
-    it 'defrosts ClaimRoute' do
-      route_id = 5
+    it 'defrosts ClaimLink' do
+      link_id = 5
 
       action = Action.create(
-        action: 'claim_route',
+        action: 'claim_link',
         player: player,
-        route_id: route_id
+        link_id: link_id
       )
 
-      expect(action.defrost).to be_a Actions::ClaimRoute
-      expect(action.route_id).to eq route_id
+      expect(action.to_modifier).to be_a StateModifiers::ClaimLink
+      expect(action.link_id).to eq link_id
     end
   end
 end

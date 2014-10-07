@@ -3,7 +3,19 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by_id params[:id]
+
+    redirect_to :game_over_game if @game.state.game_over?
+
     @users = @game.users
+    @state = @game.state
+    if @game.users.include? current_user
+      player_id = current_user.players.find_by(game: @game).id
+      @player = @game.state.players.find { |p_state| p_state.id == player_id }
+    end
+  end
+
+  def action_count
+    render text: Game.find(params[:id]).turns.flat_map(&:modifiers).size
   end
 
   def new
@@ -18,5 +30,8 @@ class GamesController < ApplicationController
     new_game = current_user.host_game
 
     redirect_to new_game
+  end
+
+  def game_over
   end
 end

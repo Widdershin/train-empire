@@ -20,7 +20,7 @@ describe GameComputerService do
 
       computer = GameComputerService.new(
         game.initial_state,
-        game.defrosted_actions
+        game.turns,
       )
 
       expect(computer.process).to be_a GameState

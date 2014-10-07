@@ -6,6 +6,10 @@ describe PlayerManager do
   let (:states) { [player_1, player_2] }
   let (:manager) { PlayerManager.new states }
 
+  it 'is Enumerable' do
+    expect(manager.first).to eq player_1
+  end
+
   it 'has a current_player' do
     expect(manager.current_player).to eq player_1
   end

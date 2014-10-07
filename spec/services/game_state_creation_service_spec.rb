@@ -6,7 +6,7 @@ describe GameStateCreationService do
   let (:creation_service) { GameStateCreationService.new game }
 
   describe 'make' do
-    let (:player) { double :player, name: 'test', id: 1 }
+    let (:player) { double :player, name: 'test', id: 1, color: 'fff' }
     let (:game) { double :game, players: [player], seed: 3 }
     let (:game_state) { GameStateCreationService.new(game).make }
 
@@ -18,7 +18,7 @@ describe GameStateCreationService do
 
       expect(game_state.players.size).to eq game.players.count
 
-      expect(game_state.route(1)).to_not be_nil
+      expect(game_state.link(1)).to_not be_nil
     end
   end
 end

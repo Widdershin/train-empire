@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Game, :type => :model do
   let(:game) { Game.create }
+  let(:test_seed) { 5 }
 
   it { should have_many :users }
   it { should have_many :players }
@@ -19,6 +20,8 @@ RSpec.describe Game, :type => :model do
   describe 'integration' do
     before do
       game.users << create(:user)
+      game.seed = test_seed
+      game.save!
     end
 
     let(:player) { game.players.first }
@@ -41,19 +44,45 @@ RSpec.describe Game, :type => :model do
       player.actions.create(action: 'keep_route_cards', route_cards_to_keep: [1, 2])
       expect(game.state.current_player.routes.size).to eq 2
     end
-
-    it 'can process a claim_route action' do
-      route_id = 1
-      player.actions.create(action: 'claim_route', route_id: route_id)
-
-      state = game.state
-      route = state.route(route_id)
-      player = state.current_player
-
-      expect(route.owner).to eq player
-
-    end
   end
 
+  describe '#turns' do
+    it 'breaks the games actions up into turns' do
+      game = Game.create
 
+      2.times { game.users << create(:user) }
+
+      player1 = game.players.first
+      player2 = game.players.last
+
+      player1.actions.create(
+        action: 'draw_train_card',
+        card_index: 0,
+      )
+
+      player1.actions.create(
+        action: 'draw_train_card',
+        card_index: 2,
+      )
+
+      player2.actions.create(
+        action: 'draw_route_cards',
+      )
+
+      player2.actions.create(
+        action: 'keep_route_cards',
+      )
+
+      player1.actions.create(
+        action: 'draw_route_cards',
+      )
+
+      turns = game.turns
+
+      expect(turns.first).to be_a Turn
+      expect(turns.size).to eq 3
+
+      expect(turns.last.modifiers.size).to eq 1
+    end
+  end
 end

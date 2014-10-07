@@ -1,9 +1,87 @@
-<p>Welcome to your new game</p>
 
-<h4>Players:</h4>
-<%= render @users %>
+<ul>
+  <% @state.players.each do |player| %>
+    <li style="color:#<%=player.color%>;"><%= 'Your turn: ' if player == @state.current_player %><%= player %></li>
+  <% end %>
+</ul>
 
+<% if @player %>
+
+  <% if @state.final_turn? %>
+    <h3>Final Turn</h3>
+  <% end %>
+
+  <div class="route-cards">
+    <%= form_tag("/games/#{@game.id}/actions/create") do %>
+      <%= hidden_field_tag(:action_type, 'draw_route_cards') %>
+      <%= submit_tag('Draw Route Cards') %>
+    <% end %>
+
+    <%= form_tag("/games/#{@game.id}/actions/create") do %>
+      <%= hidden_field_tag(:action_type, @game.initial_round? ? 'keep_initial_route_cards' : 'keep_route_cards') %>
+      <%= submit_tag('Keep Route Cards') %>
+
+      <% @player.potential_routes.each_with_index do |route, index| %>
+        <%= check_box_tag 'route_cards_to_keep[]', index %>
+        <div class="card route-card" data-from="<%=route.origin.id%>" data-to="<%=route.destination.id%>"><%= route %></div>
+      <% end %>
+    <% end -%>
+  </div>
+
+<% end %>
+
+
+<div class="links">
+  <div class="cards">
+    <% @state.available_train_cards.each_with_index do |train_card, index| %>
+      <%= form_tag("/games/#{@game.id}/actions/create") do %>
+        <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
+        <%= hidden_field_tag(:card_index, index) %>
+        <%= submit_tag('Draw', class: "card #{train_card.color}") %>
+      <% end %>
+    <% end %>
+  </div>
+  <svg
+    width="950"
+    height="700">
+
+    <% @state.links.each do |link| %>
+      <%= link_svg(link) %>
+
+    <% end %>
+
+    <% @state.cities.each do |city| %>
+      <%= city_svg(city) %>
+    <% end %>
+
+    <rect x="0" y="600" width="950" height="100"/>
+    <text y="620" x="10" fill="white">Hand</text>
+
+    <% if @player %>
+      <%= hand_svg(@player.hand) %>
+    <% end %>
+
+  </svg>
+</div>
+
+<% if @player %>
+  <h3><%= @player.name %></h3>
+  <% if @player.id == @state.current_player.id %>
+    <h4>It's your turn.</h4>
+  <% end %>
+
+
+  <h4>Claimed route cards:</h4>
+  <div class="claimed-route-cards">
+    <% @player.routes.each do |route| %>
+      <div class="card route-card" data-from="<%=route.origin.id%>" data-to="<%=route.destination.id%>"><%= route %></div>
+    <% end %>
+  </div>
+<% end %>
 
 <% if not playing_game? @game %>
     <%= link_to("Join Game", game_players_path(@game), method: :post) %>
 <% end %>
+
+
+<%= javascript_include_tag 'games_show.js' %>

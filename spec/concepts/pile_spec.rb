@@ -3,17 +3,31 @@ require 'rails_helper'
 describe Pile do
   let(:pile) { Pile.new }
 
+  it 'is enumerable' do
+    expect {pile.each { |card| card }}.to_not raise_error
+  end
+
   it 'has a bunch of cards' do
     expect(pile.cards).to eq []
   end
 
-  it 'can be refilled with a deck' do
-    card = double :card
-    deck = double :deck, draw: card
+  describe '#refill_from' do
+    it 'can be refilled with a deck' do
+      card = double :card
+      deck = double :deck, draw: card, empty?: false
 
-    pile.refill_from deck
+      pile.refill_from deck
 
-    expect(pile.cards.size).to eq Pile::CARD_LIMIT
+      expect(pile.cards.size).to eq Pile::CARD_LIMIT
+    end
+
+    it "doesn't draw from an empty deck" do
+      deck = double :deck, empty?: true
+
+      pile.refill_from deck
+
+      expect(pile.cards.size).to eq 0
+    end
   end
 
   it 'has a size limit' do

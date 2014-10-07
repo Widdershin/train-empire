@@ -7,6 +7,7 @@ class CardDeck
   end
 
   def draw(count = nil)
+    raise 'no cards' if empty?
     count ? cards.pop(count) : cards.pop
   end
 
@@ -28,7 +29,17 @@ class CardDeck
     cards.unshift card
   end
 
+  def take_cities!(cities)
+    cards.each { |card| card.take_cities!(cities) }
+    self
+  end
+
+  def empty?
+    cards.empty?
+  end
+
   private def cards
     @cards
   end
+
 end
