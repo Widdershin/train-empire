@@ -63,34 +63,5 @@ describe 'web game', type: :feature, js: true do
         )
       end
     end
-
-    it 'can be won', slow: true do
-      until smallest_train_count <= 3 do
-        as fred do
-          claim_or_draw
-        end
-
-        as wilma do
-          claim_or_draw
-        end
-      end
-
-      as fred do
-        expect(smallest_train_count).to be < 5
-        draw_route_cards
-        keep_route_cards! [0, 1]
-      end
-
-      as wilma do
-        draw_route_cards
-        keep_route_cards! [0, 1]
-      end
-
-      as fred do
-        game = Game.last
-        expect(page).to have_content 'Game Over'
-      end
-    end
   end
 end
-
