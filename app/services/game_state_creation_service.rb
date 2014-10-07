@@ -32,7 +32,8 @@ class GameStateCreationService
   end
 
   def links
-    CsvMapper.new(LINKS_CSV_FILE, Link).load.map { |link| link.take_cities(cities) }
+    CsvMapper.new(LINKS_CSV_FILE, Link)
+      .load.map { |link| link.take_cities(cities) }
   end
 
   def cities

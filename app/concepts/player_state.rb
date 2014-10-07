@@ -23,10 +23,12 @@ class PlayerState
     @hand.sort_by!(&:color)
   end
 
+  # TODO - attr_writer
   def set_potential_route_cards(cards)
     @potential_routes = cards
   end
 
+  # TODO - route card manager maybe
   def keep_route_cards(card_indices)
     kept_cards = card_indices.map { |index| @potential_routes.at index }
     returned_cards = @potential_routes - kept_cards

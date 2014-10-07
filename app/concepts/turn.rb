@@ -2,6 +2,7 @@ class Turn
   attr_writer :current
   attr_reader :modifiers
 
+  # TODO - empty array of modifiers by default
   def initialize(state_modifiers, current: false)
     @modifiers = state_modifiers
     @current = current
@@ -49,6 +50,7 @@ class Turn
     modifiers.map(&:class)
   end
 
+  # TODO - constantize
   def patterns
     [
       [StateModifiers::ClaimLink],
