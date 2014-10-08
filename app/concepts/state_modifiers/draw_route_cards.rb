@@ -13,7 +13,7 @@ class StateModifiers::DrawRouteCards
 
   def process(player, game_state)
     route_deck = game_state.route_deck
-    player.set_potential_route_cards(route_deck.draw ROUTE_DECK_DRAW_COUNT)
+    player.potential_routes = route_deck.draw(ROUTE_DECK_DRAW_COUNT)
   end
 
   def valid?(player, state)

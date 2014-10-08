@@ -66,11 +66,11 @@ RSpec.describe PlayerState, :type => :model do
     end
   end
 
-  describe 'set_potential_route_cards' do
+  describe 'potential_routes = ' do
     it 'sets the potential_routes' do
       cards = [:card, :card, :card]
 
-      player_state.set_potential_route_cards cards
+      player_state.potential_routes = cards
 
       expect(player_state.potential_routes).to eq cards
     end
@@ -79,7 +79,7 @@ RSpec.describe PlayerState, :type => :model do
   describe 'keep_route_cards' do
     let(:cards) { [:carda, :cardb, :cardc] }
     it 'keeps the route cards with the given index' do
-      player_state.set_potential_route_cards cards
+      player_state.potential_routes = cards
 
       player_state.keep_route_cards [1, 2]
 
@@ -87,13 +87,13 @@ RSpec.describe PlayerState, :type => :model do
     end
 
     it 'returns the unkept cards' do
-      player_state.set_potential_route_cards cards
+      player_state.potential_routes = cards
 
       expect(player_state.keep_route_cards([1, 2])).to eq [:carda]
     end
 
     it 'clears the potential_routes list' do
-      player_state.set_potential_route_cards cards
+      player_state.potential_routes = cards
 
       player_state.keep_route_cards [2]
 
@@ -207,5 +207,4 @@ RSpec.describe PlayerState, :type => :model do
       expect(player_state.can_claim?(link, [])).to eq false
     end
   end
-
 end

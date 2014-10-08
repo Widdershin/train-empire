@@ -14,6 +14,10 @@ class Link
     @curve_offset_y = curve_offset_y.to_f
   end
 
+  def inspect
+    "Link from #{city_a} to #{city_b}"
+  end
+
   def set_owner(owner)
     @owner = owner
   end

@@ -8,6 +8,10 @@ class City
     @y = y.to_i
   end
 
+  def inspect
+    to_s
+  end
+
   def to_s
     "#{name}"
   end

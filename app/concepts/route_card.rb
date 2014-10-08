@@ -17,6 +17,10 @@ class RouteCard
     "Connect #{origin} to #{destination} for #{points} points."
   end
 
+  def inspect
+    to_s
+  end
+
   def take_cities!(cities)
     @origin = cities.find { |city| city.id == @origin_id }
     @destination = cities.find { |city| city.id == @destination_id }

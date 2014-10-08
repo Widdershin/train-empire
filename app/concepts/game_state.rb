@@ -67,7 +67,7 @@ class GameState
   def stock_player_routes
     card_count = StateModifiers::DrawRouteCards::ROUTE_DECK_DRAW_COUNT
     players.each do |player|
-      player.set_potential_route_cards(route_deck.draw(card_count))
+      player.potential_routes = route_deck.draw(card_count)
     end
   end
 

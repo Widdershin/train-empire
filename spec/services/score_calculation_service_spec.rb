@@ -25,7 +25,7 @@ describe ScoreCalculationService do
     link.take_cities([wellington, auckland])
 
     [wellington, auckland].each {|city| city.take_links([link])}
-    player.set_potential_route_cards([route_card])
+    player.potential_routes = [route_card]
     player.keep_route_cards([0])
 
     game_state = GameState.new(

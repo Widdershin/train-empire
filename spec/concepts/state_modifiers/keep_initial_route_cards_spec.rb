@@ -14,7 +14,7 @@ describe StateModifiers::KeepInitialRouteCards do
     let(:player) { PlayerState.new('foo', 1) }
 
     before do
-      player.set_potential_route_cards([double(:card)] * 3)
+      player.potential_routes = ([double(:card)] * 3)
     end
 
     it 'is true if the player has drawn two valid cards' do
