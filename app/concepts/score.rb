@@ -1,4 +1,4 @@
-class PlayerScore
+class Score
   attr_reader :player
   delegate :name, to: :player
 

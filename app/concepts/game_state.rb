@@ -84,7 +84,7 @@ class GameState
   end
 
   def scores
-    players.map { |player| PlayerScore.new(self, player) }.sort_by(&:score).reverse
+    players.map { |player| Score.new(self, player) }.sort_by(&:score).reverse
   end
 
 
