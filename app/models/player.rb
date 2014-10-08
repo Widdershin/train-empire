@@ -3,8 +3,9 @@ class Player < ActiveRecord::Base
   belongs_to :game
   has_many :actions, dependent: :destroy
 
-  # TODO - before validate
-  before_create :set_color
+  before_validation :set_color, on: :create
+
+  validate :color, presence: :true
 
   def name
     user.username
