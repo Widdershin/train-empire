@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Turn do
-  let (:turn) { Turn.new [] }
+  let (:turn) { Turn.new }
 
   subject { turn }
 
@@ -26,7 +26,7 @@ describe Turn do
 
   describe "#options" do
     it 'gives a list of all valid next actions' do
-      turn = Turn.new([])
+      turn = Turn.new
 
       expect(turn.options).to eq [
         StateModifiers::ClaimLink,

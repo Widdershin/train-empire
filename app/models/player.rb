@@ -20,7 +20,7 @@ class Player < ActiveRecord::Base
     turn = game.turns.last
 
     if turn.nil? || turn.complete?
-      turn = Turn.new([])
+      turn = Turn.new
     end
 
     turn.options
