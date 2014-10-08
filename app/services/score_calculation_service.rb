@@ -19,11 +19,7 @@ class ScoreCalculationService
 
   def link_score
     @game_state.links.map do |link|
-      if link.owner == @player
-        LINK_COST_TO_SCORE[link.cost]
-      else
-        0
-      end
+      link.owner == @player ? LINK_COST_TO_SCORE[link.cost] : 0
     end.reduce(&:+)
   end
 
