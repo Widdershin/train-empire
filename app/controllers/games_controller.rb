@@ -33,5 +33,8 @@ class GamesController < ApplicationController
   end
 
   def game_over
+    @game = Game.find_by_id params[:id]
+
+    @player_scores = @game.state.scores
   end
 end

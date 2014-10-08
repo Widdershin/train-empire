@@ -19,7 +19,7 @@ class GameSerializerService
 
     game_data[:players].each do |player|
       actions = player.delete("actions")
-      new_player = game.players.find(old_user_ids_to_new[player["user_id"]])
+      new_player = game.players.find_by(user_id: old_user_ids_to_new[player["user_id"]])
 
       actions.each do |action|
         new_player.actions.create!(action)

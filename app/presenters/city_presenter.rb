@@ -1,15 +1,10 @@
 class CityPresenter
   attr_reader :city
+
+  delegate :x, :y, :radius, :name, to: :city
+
   def initialize(city)
     @city = city
-  end
-
-  def method_missing(meth, *args)
-    if city.respond_to? meth
-      city.send(meth, *args)
-    else
-      super
-    end
   end
 
   def svg

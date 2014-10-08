@@ -67,6 +67,7 @@ class PlayerState
     @played_final_turn = true
   end
 
+
   def to_s
     "#{name}. #{hand.size} cards in hand, " +
     "#{trains} trains. Holding #{routes.size} routes"
