@@ -25,4 +25,8 @@ class City
     @links.select { |link| link.owner == player }
       .map { |link| link.other(self) }
   end
+
+  def cost_of_link(city)
+    @links.find { |link| link.other(self) == city }.cost
+  end
 end

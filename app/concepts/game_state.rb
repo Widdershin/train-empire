@@ -84,7 +84,9 @@ class GameState
   end
 
   def scores
-    players.map { |player| Score.new(self, player) }.sort_by(&:score).reverse
+    scores = players.map { |player| Score.new(self, player) }
+    scores.max_by { |score| LongestRouteService.new(self, score.player).longest_route }.mark_longest_route!
+    scores.sort_by(&:score).reverse
   end
 
 
