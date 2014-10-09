@@ -83,10 +83,9 @@ class GameState
 
   def refill_train_deck_from_discards!
     @train_deck = CardDeck.new(
-      discarded_train_cards.shuffle,
-      random: train_deck.random
-    )
-    discarded_train_cards.clear
+      discarded_train_cards.pop(discarded_train_cards.count),
+      random: train_deck.random,
+    ).shuffle
   end
 
   def final_turn?
