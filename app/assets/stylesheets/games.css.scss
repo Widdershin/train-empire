@@ -6,6 +6,8 @@ $card-size: 2;
 
 body {
   background-color: #303030;
+  color: white;
+  font-family: 'Arial';
 }
 
 .links {
@@ -27,6 +29,7 @@ body {
   font-size: 9pt;
   padding: 3px;
   text-align: center;
+  color: black;
 }
 
 $white: white;
@@ -99,7 +102,7 @@ $purple: #CC00CC;
 
 .city-label {
   font-family: 'Arial';
-  font-size: 13pt;
+  font-size: 16pt;
   fill: #F7F7F7;
 
   $shadow: #3D3D3D;

@@ -11,6 +11,10 @@ class CardDeck
     count ? cards.pop(count) : cards.pop
   end
 
+  def draw_random
+    cards.delete cards.sample(random: random)
+  end
+
   def shuffle
     cards.shuffle!(random: random)
 
@@ -41,5 +45,4 @@ class CardDeck
   private def cards
     @cards
   end
-
 end

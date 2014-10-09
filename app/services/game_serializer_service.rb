@@ -6,9 +6,10 @@ class GameSerializerService
     })
   end
 
+  # TODO - transactionize
   def deserialize(string)
     game_data = JSON.parse(string).symbolize_keys
-    game = Game.create!
+    game = Game.create!(seed: game_data[:seed])
 
     old_user_ids_to_new = {}
     game_data[:users].each do |user|
@@ -19,16 +20,14 @@ class GameSerializerService
 
     game_data[:players].each do |player|
       actions = player.delete("actions")
-      new_player = game.players.find(old_user_ids_to_new[player["user_id"]])
+      new_player = game.players.find_by(user_id: old_user_ids_to_new[player["user_id"]])
 
       actions.each do |action|
         new_player.actions.create!(action)
       end
     end
 
-    # TODO - fix nasty saving
     game.save!
-    game.update_attributes!(seed: game_data[:seed])
     game
   end
 end

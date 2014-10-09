@@ -1,7 +1,8 @@
 INITIAL_TRAIN_COUNT = 45
 
 class PlayerState
-  attr_reader :name, :hand, :trains, :routes, :id, :potential_routes, :color
+  attr_accessor :potential_routes
+  attr_reader :name, :hand, :trains, :routes, :id, :color
 
   def self.from_player(player)
     new player.name, player.id, color: player.color
@@ -21,11 +22,6 @@ class PlayerState
   def add_to_hand(card)
     @hand << card
     @hand.sort_by!(&:color)
-  end
-
-  # TODO - attr_writer
-  def set_potential_route_cards(cards)
-    @potential_routes = cards
   end
 
   # TODO - route card manager maybe
@@ -66,6 +62,7 @@ class PlayerState
   def mark_played_final_turn!
     @played_final_turn = true
   end
+
 
   def to_s
     "#{name}. #{hand.size} cards in hand, " +

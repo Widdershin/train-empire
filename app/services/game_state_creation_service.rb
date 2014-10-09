@@ -12,8 +12,8 @@ class GameStateCreationService
       player_states,
       train_deck,
       route_deck,
-      links,
-      cities,
+      links.map {|link| link.take_cities(cities)},
+      cities.map {|city| city.take_links(links)},
     ).prepare
   end
 
@@ -32,8 +32,7 @@ class GameStateCreationService
   end
 
   def links
-    CsvMapper.new(LINKS_CSV_FILE, Link)
-      .load.map { |link| link.take_cities(cities) }
+    @links ||= CsvMapper.new(LINKS_CSV_FILE, Link).load
   end
 
   def cities

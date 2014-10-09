@@ -37,8 +37,7 @@ describe 'end game', type: :feature, js: true do
     visit '/games'
 
     game = load_game('near-end')
-    # TODO - order by id
-    fred, wilma = game.users
+    fred, wilma = game.users.order(:id)
 
     log_in! fred
 

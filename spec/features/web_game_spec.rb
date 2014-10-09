@@ -48,6 +48,13 @@ describe 'web game', type: :feature, js: true do
       end
     end
 
+    it 'lets you draw two random cards' do
+      as fred do
+        draw_train_card_from_deck
+        expect(page).to have_selector('.hand .card', count: 5)
+      end
+    end
+
     it 'lets you claim a link' do
       link_to_claim = 11 # two cost gray link
 

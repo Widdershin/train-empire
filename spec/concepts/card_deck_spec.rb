@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CardDeck do
   let (:card) { double :card }
   let (:cards) { [card] }
-  let (:random) { double :random }
+  let (:random) { Random.new }
   let (:deck) { CardDeck.new cards, random: random }
   let(:bigger_deck) { CardDeck.new cards * 3, random: random }
 
@@ -35,6 +35,11 @@ RSpec.describe CardDeck do
 
   it 'adds cards to the bottom' do
     expect{ deck.add_to_bottom(:card) }.to change {deck.count}.by(1)
+  end
+
+  it 'gives you a random card' do
+    expect(deck.draw_random).to eq card
+    bigger_deck.draw_random
   end
 
   it 'raises an error if you draw from an empty deck' do

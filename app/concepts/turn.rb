@@ -2,8 +2,7 @@ class Turn
   attr_writer :current
   attr_reader :modifiers
 
-  # TODO - empty array of modifiers by default
-  def initialize(state_modifiers, current: false)
+  def initialize(state_modifiers = [], current: false)
     @modifiers = state_modifiers
     @current = current
   end
@@ -29,7 +28,7 @@ class Turn
   end
 
   def options
-    matched_patterns.map { |pattern| pattern.at(modifiers.size) }
+    matched_patterns.map { |pattern| pattern.at(modifiers.size) }.uniq
   end
 
   private
@@ -55,6 +54,9 @@ class Turn
     [
       [StateModifiers::ClaimLink],
       [StateModifiers::DrawWildCard],
+      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
+      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
+      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
       [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
       [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
       [StateModifiers::KeepInitialRouteCards],

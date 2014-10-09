@@ -1,1 +1,7 @@
 Game Over
+<h2>Scores</h2>
+<ol>
+<% @player_scores.each do |player| %>
+  <li><%= "#{player.name}: #{player.score} points" %></li>
+<% end %>
+</ol>

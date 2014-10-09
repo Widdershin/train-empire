@@ -1,6 +1,4 @@
-class StateModifiers::DrawRouteCards
-  ROUTE_DECK_DRAW_COUNT = 3
-
+class StateModifiers::DrawTrainCardFromDeck
   attr_reader :errors, :player_id
 
   def self.from_action(action)
@@ -11,13 +9,11 @@ class StateModifiers::DrawRouteCards
     @player_id = player_id
   end
 
-  def process(player, game_state)
-    route_deck = game_state.route_deck
-    player.potential_routes = route_deck.draw(ROUTE_DECK_DRAW_COUNT)
+  def process(current_player, game_state)
+    current_player.add_to_hand(game_state.train_deck.draw_random)
   end
 
   def valid?(player, state)
     true
   end
-
 end

@@ -67,7 +67,7 @@ class GameState
   def stock_player_routes
     card_count = StateModifiers::DrawRouteCards::ROUTE_DECK_DRAW_COUNT
     players.each do |player|
-      player.set_potential_route_cards(route_deck.draw(card_count))
+      player.potential_routes = route_deck.draw(card_count)
     end
   end
 
@@ -82,6 +82,13 @@ class GameState
   def game_over?
     players.any? && players.all?(&:played_final_turn?)
   end
+
+  def scores
+    scores = players.map { |player| Score.new(self, player) }
+    scores.max_by { |score| LongestRouteService.new(self, score.player).longest_route }.mark_longest_route!
+    scores.sort_by(&:score).reverse
+  end
+
 
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"

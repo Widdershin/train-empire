@@ -4,7 +4,7 @@ class RouteCard
   def initialize(origin:, destination:, points:)
     @origin_id = origin
     @destination_id = destination
-    @points = points
+    @points = points.to_i
   end
 
   def ==(other)
@@ -17,9 +17,12 @@ class RouteCard
     "Connect #{origin} to #{destination} for #{points} points."
   end
 
+  def inspect
+    to_s
+  end
+
   def take_cities!(cities)
     @origin = cities.find { |city| city.id == @origin_id }
     @destination = cities.find { |city| city.id == @destination_id }
   end
-
 end

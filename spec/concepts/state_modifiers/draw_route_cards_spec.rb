@@ -10,14 +10,12 @@ describe StateModifiers::DrawRouteCards do
   it 'draws three route cards' do
     game = double(:game, players: [], seed: 1)
     game_state = GameStateCreationService.new(game).make
-    current_player = double(:player_state)
+    current_player = PlayerState.new('foo', 1)
     allow(game_state).to receive(:current_player).and_return(current_player)
 
     expect(current_player)
-      .to receive(:set_potential_route_cards)
+      .to receive(:potential_routes=)
 
     modifier.process current_player, game_state
   end
-
-
 end
