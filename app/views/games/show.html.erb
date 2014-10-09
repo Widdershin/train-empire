@@ -1,3 +1,6 @@
+<% if not playing_game? @game %>
+  <h1><%= link_to("Join Game", game_players_path(@game), method: :post)%></h1>
+<% end %>
 
 <ul>
   <% @state.players.each do |player| %>
@@ -32,6 +35,12 @@
 
 
 <div class="links">
+
+  <%= form_tag("/games/#{@game.id}/actions/create") do %>
+    <%= hidden_field_tag(:action_type, 'draw_train_card_from_deck') %>
+    <%= submit_tag('Draw from Deck', class: "deck card") %>
+  <% end %>
+
   <div class="cards">
     <% @state.available_train_cards.each_with_index do |train_card, index| %>
       <%= form_tag("/games/#{@game.id}/actions/create") do %>
@@ -77,10 +86,6 @@
       <div class="card route-card" data-from="<%=route.origin.id%>" data-to="<%=route.destination.id%>"><%= route %></div>
     <% end %>
   </div>
-<% end %>
-
-<% if not playing_game? @game %>
-    <%= link_to("Join Game", game_players_path(@game), method: :post) %>
 <% end %>
 
 

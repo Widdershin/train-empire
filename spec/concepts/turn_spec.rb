@@ -31,6 +31,7 @@ describe Turn do
       expect(turn.options).to eq [
         StateModifiers::ClaimLink,
         StateModifiers::DrawWildCard,
+        StateModifiers::DrawTrainCardFromDeck,
         StateModifiers::DrawTrainCard,
         StateModifiers::DrawRouteCards,
         StateModifiers::KeepInitialRouteCards,

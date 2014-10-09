@@ -42,6 +42,8 @@ class ActionsController < ApplicationController
 
   def params_for(action)
     case action
+    when 'draw_train_card_from_deck'
+      {}
     when 'draw_train_card'
       params.permit(:card_index)
     when 'draw_route_cards'

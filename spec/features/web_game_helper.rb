@@ -168,6 +168,10 @@ module WebGameHelper
     end
   end
 
+  def draw_train_card_from_deck
+    first('.deck').click
+  end
+
   def cheapest_link
     link = all('.link.gray').min_by { |link| link['data-cost'].to_i }
     Struct.new(:id, :cost).new(link['data-id'].to_i, link['data-cost'].to_i)

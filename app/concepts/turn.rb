@@ -28,7 +28,7 @@ class Turn
   end
 
   def options
-    matched_patterns.map { |pattern| pattern.at(modifiers.size) }
+    matched_patterns.map { |pattern| pattern.at(modifiers.size) }.uniq
   end
 
   private
@@ -54,6 +54,9 @@ class Turn
     [
       [StateModifiers::ClaimLink],
       [StateModifiers::DrawWildCard],
+      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
+      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
+      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
       [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
       [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
       [StateModifiers::KeepInitialRouteCards],
