@@ -39,8 +39,12 @@ class PlayerState
     spend_cards(cards_to_spend)
   end
 
-  def spend_cards(indices)
-    @hand.select!.with_index { |card, index| indices.exclude? index }
+  def spend_cards(card_indices_to_spend)
+    @hand, spent_cards = @hand.partition.with_index do |_, index|
+      card_indices_to_spend.exclude? index
+    end
+
+    spent_cards
   end
 
   def can_claim?(link, indices)

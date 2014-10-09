@@ -4,6 +4,7 @@ class GameState
   FINAL_TURN_TRAIN_COUNT = 2
 
   attr_reader :players, :train_deck, :available_train_cards, :route_deck, :links, :cities
+  attr_accessor :discarded_train_cards
 
   def initialize(player_states, train_deck, route_deck, links, cities)
     @players = PlayerManager.new player_states
@@ -13,6 +14,7 @@ class GameState
     @links = links
     @cities = cities
     @final_turn = false
+    @discarded_train_cards = []
   end
 
   def replenish_available_cards
@@ -36,6 +38,10 @@ class GameState
 
     if any_player_train_count_below_threshold?
       @final_turn = true
+    end
+
+    if train_deck.empty?
+      refill_train_deck_from_discards!
     end
 
     players.advance_current_player
@@ -73,6 +79,14 @@ class GameState
 
   def any_player_train_count_below_threshold?
     players.map(&:trains).min <= FINAL_TURN_TRAIN_COUNT
+  end
+
+  def refill_train_deck_from_discards!
+    @train_deck = CardDeck.new(
+      discarded_train_cards.shuffle,
+      random: train_deck.random
+    )
+    discarded_train_cards.clear
   end
 
   def final_turn?

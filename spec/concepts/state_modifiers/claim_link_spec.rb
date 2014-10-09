@@ -22,6 +22,10 @@ describe StateModifiers::ClaimLink do
       expect(player)
         .to receive(:claim)
         .with(kind_of(Link), cards_to_spend)
+        .and_return([:card])
+
+      expect(game_state)
+        .to receive(:discarded_train_cards=)
 
       modifier.process(player, game_state)
     end

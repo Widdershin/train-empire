@@ -5,7 +5,7 @@ RSpec.describe GameState do
   let (:player_state2) { PlayerState.new 'bar', 2 }
 
   let (:player_states) { [player_state, player_state2] }
-  let (:train_deck) { double :train_deck, count: 105 }
+  let (:train_deck) { CardDeck.new([:card] * 105, random: Random.new(1)) }
   let (:route_deck) { double :route_deck, draw: :route_card }
   let (:link) { double :link, id: 1, owner: nil }
   let (:link2) { double :link2, id: 2, owner: nil }
@@ -74,6 +74,23 @@ RSpec.describe GameState do
       end
 
       it {should eq true}
+    end
+  end
+
+  describe 'refill_train_deck_from_discards!' do
+    it 'replaces the train deck with the shuffled discards' do
+      cards = [:red, :blue, :green]
+
+      game_state.discarded_train_cards += cards
+      until game_state.train_deck.empty?
+        game_state.train_deck.draw
+      end
+
+      expect(game_state.train_deck.count).to eq 0
+
+      game_state.refill_train_deck_from_discards!
+
+      expect(game_state.train_deck.count).to eq cards.size
     end
   end
 end
