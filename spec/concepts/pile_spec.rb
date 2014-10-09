@@ -63,4 +63,14 @@ describe Pile do
 
     expect(pile.take 2).to eq 3
   end
+
+  describe "#take_all" do
+    it 'gives you all the cards' do
+      cards = [:red, :blue, :green]
+      small_pile = Pile.new(cards.dup)
+
+      expect(small_pile.take_all).to eq cards
+      expect(small_pile.cards).to be_empty
+    end
+  end
 end

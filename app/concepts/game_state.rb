@@ -31,6 +31,18 @@ class GameState
     players.current_player
   end
 
+  def after_action
+    if train_deck.empty?
+      refill_train_deck_from_discards!
+    end
+
+    if three_available_train_cards_are_wild?
+      discard_available_train_cards!
+    end
+
+    replenish_available_cards
+  end
+
   def end_turn
     if final_turn?
       current_player.mark_played_final_turn!
@@ -38,10 +50,6 @@ class GameState
 
     if any_player_train_count_below_threshold?
       @final_turn = true
-    end
-
-    if train_deck.empty?
-      refill_train_deck_from_discards!
     end
 
     players.advance_current_player
@@ -86,6 +94,14 @@ class GameState
       discarded_train_cards.pop(discarded_train_cards.count),
       random: train_deck.random,
     ).shuffle
+  end
+
+  def discard_available_train_cards!
+    @discarded_train_cards += available_train_cards.take_all
+  end
+
+  def three_available_train_cards_are_wild?
+    available_train_cards.cards.count { |card| card.color == :wild } >= 3
   end
 
   def final_turn?
