@@ -78,7 +78,7 @@ class LinkPresenter
   end
 
   def dash_array
-    if owner
+    if owner.nil?
       segment_length = (line_length / cost) * 0.9
       "#{segment_length}, 7"
     end
