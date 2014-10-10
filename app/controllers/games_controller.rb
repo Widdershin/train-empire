@@ -1,9 +1,8 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
+  before_filter :find_game
 
   def show
-    @game = Game.find_by_id params[:id]
-
     redirect_to :game_over_game if @game.state.game_over?
 
     @users = @game.users
@@ -15,7 +14,7 @@ class GamesController < ApplicationController
   end
 
   def action_count
-    render text: Game.find(params[:id]).turns.flat_map(&:modifiers).size
+    render text: @game.actions.size
   end
 
   def new
@@ -33,8 +32,12 @@ class GamesController < ApplicationController
   end
 
   def game_over
-    @game = Game.find_by_id params[:id]
-
     @player_scores = @game.state.scores
+  end
+
+  private
+
+  def find_game
+    @game = Game.find_by_id(params[:id])
   end
 end

@@ -1,6 +1,7 @@
 class ActionsController < ApplicationController
   protect_from_forgery except: :create
 
+  # TODO - action creation service
   def create
     game = Game.find params[:id]
 
