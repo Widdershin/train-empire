@@ -69,7 +69,6 @@ class PlayerState
 
 
   def to_s
-    "#{name}. #{hand.size} cards in hand, " +
-    "#{trains} trains. Holding #{routes.size} routes"
+    "#{name} - #{trains} trains"
   end
 end

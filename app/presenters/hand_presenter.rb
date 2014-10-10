@@ -5,7 +5,7 @@ class HandPresenter
 
   def svg
     <<-SVG.strip_heredoc.html_safe
-      <foreignObject width="950" height="100" y="615">
+      <foreignObject width="950" height="200" y="615" x="10">
         <div class="hand">
           #{cards}
         </div>

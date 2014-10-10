@@ -2,11 +2,6 @@
   <h1><%= link_to("Join Game", game_players_path(@game), method: :post)%></h1>
 <% end %>
 
-<ul>
-  <% @state.players.each do |player| %>
-    <li style="color:#<%=player.color%>;"><%= 'Your turn: ' if player == @state.current_player %><%= player %></li>
-  <% end %>
-</ul>
 
 <% if @player %>
 
@@ -36,50 +31,59 @@
 
 <div class="links">
 
-  <%= form_tag("/games/#{@game.id}/actions/create") do %>
-    <%= hidden_field_tag(:action_type, 'draw_train_card_from_deck') %>
-    <%= submit_tag('Draw from Deck', class: "deck card") %>
-  <% end %>
-
-  <div class="cards">
-    <% @state.available_train_cards.each_with_index do |train_card, index| %>
-      <%= form_tag("/games/#{@game.id}/actions/create") do %>
-        <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
-        <%= hidden_field_tag(:card_index, index) %>
-        <%= submit_tag('Draw', class: "card #{train_card.color}") %>
-      <% end %>
-    <% end %>
-  </div>
   <svg
     width="950"
-    height="700">
+    height="800"
+    viewBox="-100 -100 1000 900">
+
+    <text x="900" text-anchor="end" class="big-text white"><%= @player %></text>
+
+    <% if @player.id == @state.current_player.id %>
+      <text x="900" y="25" text-anchor="end" class="big-text white">It's your turn</text>
+    <% end %>
 
     <% @state.links.each do |link| %>
       <%= link_svg(link) %>
-
     <% end %>
 
     <% @state.cities.each do |city| %>
       <%= city_svg(city) %>
     <% end %>
 
-    <rect x="0" y="600" width="950" height="100"/>
-    <text y="620" x="10" fill="white">Hand</text>
+    <rect x="-150" y="-43" width="170" height="900"/>
+    <rect x="-150" y="600" width="1100" height="200"/>
+    <text y="620" x="30" fill="white">Hand</text>
 
     <% if @player %>
       <%= hand_svg(@player.hand) %>
     <% end %>
 
+    <foreignObject width="170" height="1100" x="-110" y="-20">
+      <%= form_tag("/games/#{@game.id}/actions/create") do %>
+        <%= hidden_field_tag(:action_type, 'draw_train_card_from_deck') %>
+        <%= submit_tag('Draw from Deck', class: "deck card extra-vgap") %>
+      <% end %>
+
+      <div class="cards">
+        <% @state.available_train_cards.each_with_index do |train_card, index| %>
+          <%= form_tag("/games/#{@game.id}/actions/create") do %>
+            <%= hidden_field_tag(:action_type, train_card_action_type(train_card)) %>
+            <%= hidden_field_tag(:card_index, index) %>
+            <%= submit_tag('Draw', class: "card #{train_card.color}") %>
+          <% end %>
+        <% end %>
+      </div>
+    </foreignObject>
+
+    <foreignObject x="-120" y="600" width="170" height="500">
+        <% @state.scores.each do |score| %>
+          <span class="small-text" style="color:#<%=score.player.color%>;"><%= "#{score.player.name}: #{score.score} points" %></span>
+        <% end %>
+    </foreignObject>
   </svg>
 </div>
 
 <% if @player %>
-  <h3><%= @player.name %></h3>
-  <% if @player.id == @state.current_player.id %>
-    <h4>It's your turn.</h4>
-  <% end %>
-
-
   <h4>Claimed route cards:</h4>
   <div class="claimed-route-cards">
     <% @player.routes.each do |route| %>
