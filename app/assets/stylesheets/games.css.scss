@@ -37,6 +37,9 @@ $white: white;
 .white {
   background-color: $white;
   stroke: $white;
+}
+
+.white-svg-text {
   fill: #FFF;
 }
 
@@ -154,6 +157,13 @@ svg .card.black {
   margin-bottom: 25px;
 }
 
+.sidebar {
+  fill: #121212;
+}
+
+a:link {
+  color: #FF0DF7;
+}
 
 svg {
   background: url(/map.png) no-repeat scroll -90px 50px / 130% auto transparent;

@@ -1,5 +1,5 @@
 class LinkPresenter
-  UNOWNED_WIDTH = 6
+  UNOWNED_WIDTH = 7
   OWNED_WIDTH = 10
   OUTLINE_BUFFER = 4
 
