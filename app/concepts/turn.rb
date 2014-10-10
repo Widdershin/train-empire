@@ -10,7 +10,7 @@ class Turn
   def process(game_state)
     modifiers.reduce(game_state) do |game_state, modifier|
       apply_modifier(game_state, modifier)
-      game_state.replenish_available_cards
+      game_state.after_action
       game_state
     end
   end

@@ -30,6 +30,6 @@ class ScoreCalculationService
         .connected_by?(@player) ? 1 : -1
 
       route.points * score_modifier
-    end.reduce(&:+)
+    end.reduce(&:+).to_i
   end
 end

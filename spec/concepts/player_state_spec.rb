@@ -138,6 +138,12 @@ RSpec.describe PlayerState, :type => :model do
         .to change { player_state.hand.size }
         .by(-gray_route.cost)
     end
+
+    it 'returns the spent cards' do
+      gray_route = double(:route, cost: 1, color: :gray, set_owner: nil)
+
+      expect(player_state.claim(gray_route, [0])).to eq [card]
+    end
   end
 
   describe '#spend_cards' do

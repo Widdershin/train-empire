@@ -1,5 +1,5 @@
 class LinkPresenter
-  UNOWNED_WIDTH = 6
+  UNOWNED_WIDTH = 7
   OWNED_WIDTH = 10
   OUTLINE_BUFFER = 4
 
@@ -18,10 +18,6 @@ class LinkPresenter
             d="#{path}" fill="transparent" stroke="#{owner_color}"
             stroke-dasharray="#{dash_array}" stroke-width="#{line_width}"/>
     SVG
-  end
-
-  def dash_array
-    dasharray if owner.nil?
   end
 
   private
@@ -81,8 +77,10 @@ class LinkPresenter
     Math.sqrt((w ** 2) + (h ** 2))
   end
 
-  def dasharray
-    segment_length = (line_length / cost) * 0.9
-    "#{segment_length}, 7"
+  def dash_array
+    if owner.nil?
+      segment_length = (line_length / cost) * 0.9
+      "#{segment_length}, 7"
+    end
   end
 end

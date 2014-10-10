@@ -22,6 +22,7 @@ body {
   border-radius: 5px * $card-size;
   display: inline-block;
   vertical-align: middle;
+  margin: 3px;
 }
 
 .route-card {
@@ -36,6 +37,10 @@ $white: white;
 .white {
   background-color: $white;
   stroke: $white;
+}
+
+.white-svg-text {
+  fill: #FFF;
 }
 
 $yellow: yellow;
@@ -126,7 +131,7 @@ $purple: #CC00CC;
   margin-right: -80px;
 }
 
-.hand .card.black {
+svg .card.black {
   border: 1px solid white;
 }
 
@@ -139,9 +144,29 @@ $purple: #CC00CC;
   text-align: center;
 }
 
+.big-text {
+  font-family: 'Arial';
+  font-size: 16pt;
+}
+
+.small-text {
+  font-size: 10pt;
+}
+
+.extra-vgap {
+  margin-bottom: 25px;
+}
+
+.sidebar {
+  fill: #121212;
+}
+
+a:link {
+  color: #FF0DF7;
+}
 
 svg {
-  background: url(/map.png) no-repeat scroll -220px 0px / 145% auto transparent;
+  background: url(/map.png) no-repeat scroll -90px 50px / 130% auto transparent;
   display: inline-block;
   text-align: left;
 //  background: url(/game.png);

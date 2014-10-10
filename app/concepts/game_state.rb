@@ -4,6 +4,7 @@ class GameState
   FINAL_TURN_TRAIN_COUNT = 2
 
   attr_reader :players, :train_deck, :available_train_cards, :route_deck, :links, :cities
+  attr_accessor :discarded_train_cards
 
   def initialize(player_states, train_deck, route_deck, links, cities)
     @players = PlayerManager.new player_states
@@ -13,6 +14,7 @@ class GameState
     @links = links
     @cities = cities
     @final_turn = false
+    @discarded_train_cards = []
   end
 
   def replenish_available_cards
@@ -27,6 +29,18 @@ class GameState
 
   def current_player
     players.current_player
+  end
+
+  def after_action
+    if train_deck.empty?
+      refill_train_deck_from_discards!
+    end
+
+    if three_available_train_cards_are_wild?
+      discard_available_train_cards!
+    end
+
+    replenish_available_cards
   end
 
   def end_turn
@@ -75,6 +89,21 @@ class GameState
     players.map(&:trains).min <= FINAL_TURN_TRAIN_COUNT
   end
 
+  def refill_train_deck_from_discards!
+    @train_deck = CardDeck.new(
+      discarded_train_cards.pop(discarded_train_cards.count),
+      random: train_deck.random,
+    ).shuffle
+  end
+
+  def discard_available_train_cards!
+    @discarded_train_cards += available_train_cards.take_all
+  end
+
+  def three_available_train_cards_are_wild?
+    available_train_cards.cards.count { |card| card.color == :wild } >= 3
+  end
+
   def final_turn?
     @final_turn
   end
@@ -88,7 +117,6 @@ class GameState
     scores.max_by { |score| LongestRouteService.new(self, score.player).longest_route }.mark_longest_route!
     scores.sort_by(&:score).reverse
   end
-
 
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"

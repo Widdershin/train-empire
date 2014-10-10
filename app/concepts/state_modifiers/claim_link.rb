@@ -14,7 +14,8 @@ class StateModifiers::ClaimLink
 
   def process(player, game_state)
     link = game_state.link(@link_id)
-    player.claim link, @cards_to_spend
+    spent_cards = player.claim link, @cards_to_spend
+    game_state.discarded_train_cards += spent_cards
   end
 
   def valid?(player, game_state)

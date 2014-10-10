@@ -5,8 +5,8 @@ class Pile
 
   attr_reader :cards
 
-  def initialize
-    @cards = []
+  def initialize(cards = [])
+    @cards = cards
   end
 
   def each(&block)
@@ -29,5 +29,9 @@ class Pile
 
   def take(index)
     cards.delete_at index
+  end
+
+  def take_all
+    cards.pop(cards.count)
   end
 end
