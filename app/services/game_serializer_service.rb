@@ -6,7 +6,6 @@ class GameSerializerService
     })
   end
 
-  # TODO - transactionize
   def deserialize(string)
     Game.transaction do
       game_data = JSON.parse(string).symbolize_keys

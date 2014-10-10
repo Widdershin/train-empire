@@ -12,29 +12,24 @@ class ActionsController < ApplicationController
       return redirect_to game
     end
 
-    extra_params = {action: params[:action_type]}
-
-    action = player.actions.new(
-      params_for(params[:action_type]).merge(extra_params)
+    action_creation_service = ActionCreationService.new(
+      player,
+      params_for(params[:action_type]).merge({action: params[:action_type]})
     )
 
-    unless player.can_perform? action
-      flash[:error] = "Action can't be performed. Must perform one of these: #{player.options.join(', ')}"
-      return redirect_to game
+    action_creation_service.on(:must_draw_route_cards) do
+      flash[:error] = "You must draw route cards to begin"
     end
 
-    if game.initial_round? && params[:action_type] != 'keep_initial_route_cards'
-      flash[:error] = "You must draw route cards to start."
-      return redirect_to game
+    action_creation_service.on(:invalid_action) do |errors|
+      flash[:error] = "Invalid Action - #{errors.join(', ')}"
     end
 
-    modifier = action.to_modifier
-
-    if modifier.valid? game.state.current_player, game.state
-      action.save!
-    else
-      flash[:error] = "Invalid Action: #{modifier.errors.join ','}"
+    action_creation_service.on(:wrong_action) do |options|
+      flash[:error] = "Action can't be performed - You must do one of #{options.join(',')}"
     end
+
+    action_creation_service.call
 
     redirect_to game
   end
