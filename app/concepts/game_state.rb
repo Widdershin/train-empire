@@ -118,7 +118,6 @@ class GameState
     scores.sort_by(&:score).reverse
   end
 
-
   def to_s
     "#{self.class.name} - #{players.size} players, #{train_deck.count} cards in deck, #{available_train_cards.count} cards available"
   end

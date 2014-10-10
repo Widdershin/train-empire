@@ -8,7 +8,7 @@ class CityConnectionCheckerService
     current_city = @origin
     visited_cities = [current_city]
 
-    cities_to_visit = @origin.neighbours_connected_by(player)
+    cities_to_visit = current_city.neighbours_connected_by(player)
 
     while cities_to_visit.any? do
       current_city = cities_to_visit.pop

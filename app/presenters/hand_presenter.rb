@@ -13,6 +13,8 @@ class HandPresenter
     SVG
   end
 
+  private
+
   def cards
     @hand.chunk {|card| card.color}.map do |_, cards|
       *most, last = cards

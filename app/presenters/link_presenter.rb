@@ -20,10 +20,6 @@ class LinkPresenter
     SVG
   end
 
-  def dash_array
-    dasharray if owner.nil?
-  end
-
   private
 
   def method_missing(meth, *args)
@@ -81,8 +77,10 @@ class LinkPresenter
     Math.sqrt((w ** 2) + (h ** 2))
   end
 
-  def dasharray
-    segment_length = (line_length / cost) * 0.9
-    "#{segment_length}, 7"
+  def dash_array
+    if owner
+      segment_length = (line_length / cost) * 0.9
+      "#{segment_length}, 7"
+    end
   end
 end

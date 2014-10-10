@@ -1,8 +1,6 @@
 class Link
   attr_reader :id, :owner, :cost, :color, :city_a, :city_b, :curve_offset_x, :curve_offset_y
 
-  DEFAULT_CURVE_OFFSET = 0
-
   def initialize(id:, city_a_id:, city_b_id:, cost:, color:, curve_offset_x: 0, curve_offset_y: 0)
     @id = id.to_i
     @owner = nil
