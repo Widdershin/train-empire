@@ -14,11 +14,11 @@ class ActionsController < ApplicationController
 
     action_creation_service = ActionCreationService.new(
       player,
-      params_for(params[:action_type]).merge({action: params[:action_type]})
+      params_for(params[:action_type]),
     )
 
     action_creation_service.on(:must_draw_route_cards) do
-      flash[:error] = "You must draw route cards to begin"
+      flash[:error] = "You must draw route cards to start"
     end
 
     action_creation_service.on(:invalid_action) do |errors|
@@ -52,6 +52,6 @@ class ActionsController < ApplicationController
       params.permit(:link_id, cards_to_spend: [])
     when 'draw_wild_card'
       params.permit(:card_index)
-    end
+    end.merge({action: params[:action_type]})
   end
 end
