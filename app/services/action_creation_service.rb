@@ -15,7 +15,7 @@ class ActionCreationService
   def call
     action = player.actions.new(@args)
 
-    if game.initial_round? && args[:action_type] != 'keep_initial_route_cards'
+    if game.initial_round? && args[:action] != 'keep_initial_route_cards'
       return broadcast(:must_draw_route_cards)
     end
 
