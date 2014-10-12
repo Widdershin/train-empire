@@ -26,17 +26,17 @@ describe GameSerializerService do
       player = game.players.first
 
       player.actions.create!(
-        action: 'keep_route_cards',
+        name: 'keep_route_cards',
         route_cards_to_keep: [0, 1],
       )
 
       game.players.last.actions.create!(
-        action: 'keep_route_cards',
+        name: 'keep_route_cards',
         route_cards_to_keep: [1, 0],
       )
 
       player.actions.create!(
-        action: 'draw_train_card',
+        name: 'draw_train_card',
         card_index: 0
       )
 

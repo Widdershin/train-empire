@@ -38,7 +38,7 @@ describe 'playing a game' do
       end
 
       player.actions.create!(
-        action: 'draw_train_card',
+        name: 'draw_train_card',
         card_index: card_index,
       )
       update_state
@@ -51,7 +51,7 @@ describe 'playing a game' do
     expect(@state.current_player).to eq p1
 
     @player_1.actions.create!(
-      action: 'keep_initial_route_cards',
+      name: 'keep_initial_route_cards',
       route_cards_to_keep: [0, 1]
     )
 
@@ -63,7 +63,7 @@ describe 'playing a game' do
     expect(p2.potential_routes.size).to eq 3
 
     @player_2.actions.create!(
-      action: 'keep_initial_route_cards',
+      name: 'keep_initial_route_cards',
       route_cards_to_keep: [0, 1]
     )
 
@@ -87,7 +87,7 @@ describe 'playing a game' do
 
     link_id = 27
     @player_1.actions.create!(
-      action: 'claim_link',
+      name: 'claim_link',
       link_id: link_id,
       cards_to_spend: [4]
     )
@@ -126,7 +126,7 @@ describe 'playing a game' do
     update_state
 
     @player_1.actions.create(
-      action: 'draw_wild_card',
+      name: 'draw_wild_card',
       card_index: 2
     )
 

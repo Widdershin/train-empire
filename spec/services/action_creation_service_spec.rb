@@ -11,7 +11,7 @@ describe ActionCreationService do
       player = game.players.first
 
       args = {
-        action: 'draw_route_cards'
+        name: 'draw_route_cards'
       }
 
       creation_service = ActionCreationService.new(player, args)

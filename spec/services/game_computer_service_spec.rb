@@ -15,7 +15,7 @@ describe GameComputerService do
       player = game.players.first
 
       player.actions.create!(
-        action: 'draw_route_cards'
+        name: 'draw_route_cards'
       )
 
       computer = GameComputerService.new(

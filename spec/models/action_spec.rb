@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Action, :type => :model do
-  it { should validate_presence_of :action }
+  it { should validate_presence_of :name }
   it { should belong_to :player }
   it { should respond_to :cards_to_spend }
 
@@ -11,7 +11,7 @@ describe Action, :type => :model do
 
     it 'returns an instance of a state modifier modifier (words?)' do
       action = Action.create(
-        action: 'draw_train_card',
+        name: 'draw_train_card',
         player: player,
         card_index: card_index,
       )
@@ -22,7 +22,7 @@ describe Action, :type => :model do
 
     it 'defrosts DrawRouteCards' do
       action = Action.create(
-        action: 'draw_route_cards',
+        name: 'draw_route_cards',
         player: player,
       )
 
@@ -33,7 +33,7 @@ describe Action, :type => :model do
       cards_to_keep = [0, 2, 3]
 
       action = Action.create(
-        action: 'keep_route_cards',
+        name: 'keep_route_cards',
         player: player,
         route_cards_to_keep: cards_to_keep
       )
@@ -46,7 +46,7 @@ describe Action, :type => :model do
       link_id = 5
 
       action = Action.create(
-        action: 'claim_link',
+        name: 'claim_link',
         player: player,
         link_id: link_id
       )

@@ -116,7 +116,7 @@ RSpec.describe ActionsController, :type => :controller do
 
       player = game.players.first
 
-      player.actions.create!(action: 'draw_route_cards')
+      player.actions.create!(name: 'draw_route_cards')
 
       post :create, action_type: 'draw_train_card', id: game.id, card_index: card_index
       expect(request.flash[:error]).to include "Action can't be performed"

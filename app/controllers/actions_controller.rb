@@ -52,6 +52,6 @@ class ActionsController < ApplicationController
       params.permit(:link_id, cards_to_spend: [])
     when 'draw_wild_card'
       params.permit(:card_index)
-    end.merge({action: params[:action_type]})
+    end.merge({name: params[:action_type]})
   end
 end
