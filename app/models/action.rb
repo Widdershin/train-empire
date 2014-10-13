@@ -16,7 +16,7 @@ class Action < ActiveRecord::Base
       .chunk(&:player_id)
       .map { |_, chunk| Turn.new(chunk) }
 
-    turns.last.current = true if turns.any?
+    turns.last.mark_as_current if turns.any?
 
     turns
   end

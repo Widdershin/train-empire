@@ -18,13 +18,13 @@ class GameState
   end
 
   def replenish_available_cards
-    available_train_cards.refill_from train_deck
+    available_train_cards.refill_from(train_deck)
 
     self
   end
 
   def take_available_train_card index
-    available_train_cards.take index
+    available_train_cards.take(index)
   end
 
   def current_player
@@ -32,25 +32,17 @@ class GameState
   end
 
   def after_action
-    if train_deck.empty?
-      refill_train_deck_from_discards!
-    end
+    refill_train_deck_from_discards! if train_deck.empty?
 
-    if three_available_train_cards_are_wild?
-      discard_available_train_cards!
-    end
+    discard_available_train_cards! if three_available_train_cards_are_wild?
 
     replenish_available_cards
   end
 
   def end_turn
-    if final_turn?
-      current_player.mark_played_final_turn!
-    end
+    current_player.mark_played_final_turn! if final_turn?
 
-    if any_player_train_count_below_threshold?
-      @final_turn = true
-    end
+    @final_turn = any_player_train_count_below_threshold?
 
     players.advance_current_player
     self
@@ -60,12 +52,14 @@ class GameState
     link(link_id).set_owner player
   end
 
+  # TODO - rename to find_link or links.find
   def link(link_id)
     @links.find { |link| link.id == link_id }
   end
 
   def prepare
     replenish_available_cards
+    # TODO - stock is the wrong word
     stock_player_hands
     stock_player_routes
 

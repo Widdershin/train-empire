@@ -1,5 +1,4 @@
 class Turn
-  attr_writer :current
   attr_reader :modifiers
 
   PATTERNS = [
@@ -13,9 +12,9 @@ class Turn
     [StateModifiers::KeepInitialRouteCards],
   ]
 
-  def initialize(state_modifiers = [], current: false)
+  def initialize(state_modifiers = [])
     @modifiers = state_modifiers
-    @current = current
+    @current = false
   end
 
   def process(game_state)
@@ -40,6 +39,10 @@ class Turn
 
   def options
     matched_patterns.map { |pattern| pattern.at(modifiers.size) }.uniq
+  end
+
+  def mark_as_current
+    @current = true
   end
 
   private
