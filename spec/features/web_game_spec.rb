@@ -23,20 +23,20 @@ describe 'web game', type: :feature, js: true do
   end
 
   it 'lets you draw at least two route cards' do
-    keep_route_cards! [0, 1]
+    keep_route_cards [0, 1]
     expect(page).to have_no_selector('.flash.error')
   end
 
   describe 'after the initial round' do
     before do
       as fred do
-        keep_route_cards! [0, 1]
+        keep_route_cards [0, 1]
       end
 
       as wilma do
         click_link 'Join Game'
 
-        keep_route_cards! [0, 1]
+        keep_route_cards [0, 1]
       end
     end
 

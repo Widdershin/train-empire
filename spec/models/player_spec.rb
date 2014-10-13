@@ -5,17 +5,16 @@ RSpec.describe Player, :type => :model do
   it { should belong_to :game }
   it { should have_many :actions }
 
-  # TODO - bang creates
   it 'has a name' do
     user = create :user
-    player = user.players.create
+    player = user.players.create!
 
     expect(player.name).to eq user.username
   end
 
   describe 'can_perform?' do
     let(:user) { create :user }
-    let(:game) { Game.create }
+    let(:game) { Game.create! }
     let(:player) { game.players.find_by(user: user) }
 
     before do
@@ -30,7 +29,7 @@ RSpec.describe Player, :type => :model do
     end
 
     it 'returns false if the action cant be performed' do
-      player.actions << Action.create!(action: 'draw_train_card')
+      player.actions << Action.create!(name: 'draw_train_card')
       action = double :action, to_modifier: StateModifiers::KeepRouteCards.new(1, [1])
 
       expect(player.can_perform?(action)).to eq false

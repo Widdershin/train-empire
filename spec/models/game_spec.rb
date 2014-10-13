@@ -28,20 +28,20 @@ RSpec.describe Game, :type => :model do
     let(:current_player) { game.state.current_player }
 
     it 'can process a draw_train_card action' do
-      player.actions.create(action: 'draw_train_card', card_index: 1)
+      player.actions.create(name: 'draw_train_card', card_index: 1)
 
       expect(current_player.hand.first).to be_a TrainCard
     end
 
     it 'can process a draw_route_cards action' do
-      player.actions.create(action: 'draw_route_cards')
+      player.actions.create(name: 'draw_route_cards')
 
       expect(current_player.potential_routes.size).to_not eq []
     end
 
     it 'can process a keep_route_cards action' do
-      player.actions.create(action: 'draw_route_cards')
-      player.actions.create(action: 'keep_route_cards', route_cards_to_keep: [1, 2])
+      player.actions.create(name: 'draw_route_cards')
+      player.actions.create(name: 'keep_route_cards', route_cards_to_keep: [1, 2])
       expect(game.state.current_player.routes.size).to eq 2
     end
   end
@@ -56,25 +56,25 @@ RSpec.describe Game, :type => :model do
       player2 = game.players.last
 
       player1.actions.create(
-        action: 'draw_train_card',
+        name: 'draw_train_card',
         card_index: 0,
       )
 
       player1.actions.create(
-        action: 'draw_train_card',
+        name: 'draw_train_card',
         card_index: 2,
       )
 
       player2.actions.create(
-        action: 'draw_route_cards',
+        name: 'draw_route_cards',
       )
 
       player2.actions.create(
-        action: 'keep_route_cards',
+        name: 'keep_route_cards',
       )
 
       player1.actions.create(
-        action: 'draw_route_cards',
+        name: 'draw_route_cards',
       )
 
       turns = game.turns

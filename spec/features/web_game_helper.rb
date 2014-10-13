@@ -65,7 +65,7 @@ module WebGameHelper
     click_button 'Draw Route Cards'
   end
 
-  def keep_route_cards!(indices)
+  def keep_route_cards(indices)
     checkboxes = all('.route-cards input[type=checkbox]')
     expect(checkboxes.count).to eq 3
 
@@ -162,8 +162,8 @@ module WebGameHelper
           colors << nil
         end
 
-        draw_train_card!(colors.shift)
-        draw_train_card!(colors.shift)
+        draw_train_card(colors.shift)
+        draw_train_card(colors.shift)
       end
     end
   end

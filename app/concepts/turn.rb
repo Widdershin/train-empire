@@ -1,10 +1,20 @@
 class Turn
-  attr_writer :current
   attr_reader :modifiers
 
-  def initialize(state_modifiers = [], current: false)
+  PATTERNS = [
+    [StateModifiers::ClaimLink],
+    [StateModifiers::DrawWildCard],
+    [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
+    [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
+    [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
+    [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
+    [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
+    [StateModifiers::KeepInitialRouteCards],
+  ]
+
+  def initialize(state_modifiers = [])
     @modifiers = state_modifiers
-    @current = current
+    @current = false
   end
 
   def process(game_state)
@@ -31,14 +41,18 @@ class Turn
     matched_patterns.map { |pattern| pattern.at(modifiers.size) }.uniq
   end
 
+  def mark_as_current
+    @current = true
+  end
+
   private
 
   def matched_patterns
-    patterns.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
+    PATTERNS.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
   end
 
   def valid_modifier_pattern?
-    patterns.include? modifier_classes
+    PATTERNS.include? modifier_classes
   end
 
   def start_of_pattern?
@@ -47,20 +61,6 @@ class Turn
 
   def modifier_classes
     modifiers.map(&:class)
-  end
-
-  # TODO - constantize
-  def patterns
-    [
-      [StateModifiers::ClaimLink],
-      [StateModifiers::DrawWildCard],
-      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
-      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
-      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
-      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
-      [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
-      [StateModifiers::KeepInitialRouteCards],
-    ]
   end
 
   def apply_modifier(game_state, modifier)

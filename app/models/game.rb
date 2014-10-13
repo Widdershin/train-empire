@@ -1,7 +1,8 @@
 class Game < ActiveRecord::Base
+  # TODO - why was source here in the first place
   has_many :players, dependent: :destroy
-  has_many :actions, through: :players, source: :actions
-  has_many :users, through: :players, source: :user, dependent: :destroy
+  has_many :actions, through: :players, dependent: :destroy, source: :actions
+  has_many :users, through: :players, dependent: :destroy
 
   before_validation :set_seed, on: :create
 

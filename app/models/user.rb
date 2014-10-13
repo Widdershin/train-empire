@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :players
-  has_many :games, through: :players, source: :game
+  has_many :games, through: :players
 
   validates :username, presence: true, uniqueness: true
 
@@ -18,9 +18,11 @@ class User < ActiveRecord::Base
 
     games << game
     save
+    # TODO - save!?
   end
 
   def in_game?(game)
+    # TODO - vanquish
     games.include? game
   end
 end

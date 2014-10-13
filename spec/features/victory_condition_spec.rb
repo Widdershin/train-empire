@@ -4,8 +4,35 @@ require_relative 'web_game_helper'
 describe 'end game', type: :feature, js: true do
   include WebGameHelper
 
+  let(:fred) { create :user }
+  let(:wilma) { create :user }
+
   it 'can be won', slow: true do
     pending 'being worth running'
+    fail 'no need to run'
+
+    log_in! fred
+
+    visit '/games'
+
+    click_link 'Host Game'
+    Game.last.update_attributes!(seed: 1)
+    @game_path = current_path
+
+    as wilma do
+      click_link 'Join Game'
+    end
+
+    as fred do
+      draw_route_cards
+      keep_route_cards [0, 1]
+    end
+
+    as wilma do
+      draw_route_cards
+      keep_route_cards [0, 1]
+    end
+
     until smallest_train_count <= 3 do
       as fred do
         claim_or_draw

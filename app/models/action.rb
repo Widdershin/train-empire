@@ -5,8 +5,7 @@ class Action < ActiveRecord::Base
 
   scope :by_creation, -> { order :id }
 
-  # TODO - rename to name maybe
-  validates :action, presence: true
+  validates :name, presence: true
 
   def self.as_modifiers
     by_creation.map(&:to_modifier)
@@ -17,7 +16,7 @@ class Action < ActiveRecord::Base
       .chunk(&:player_id)
       .map { |_, chunk| Turn.new(chunk) }
 
-    turns.last.current = true if turns.any?
+    turns.last.mark_as_current if turns.any?
 
     turns
   end
@@ -29,6 +28,6 @@ class Action < ActiveRecord::Base
   private
 
   def modifier_class
-    "StateModifiers::#{action.camelize}".constantize
+    "StateModifiers::#{name.camelize}".constantize
   end
 end

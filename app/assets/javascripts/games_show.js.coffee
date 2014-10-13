@@ -15,10 +15,12 @@ TrainEmpire = do ->
       if newTurn > currentTurn
         location.reload()
 
+
   publik.startGame = ->
     getTurn (newTurn) ->
       currentTurn = newTurn
       setInterval(publik.updateIfNeeded, 1000)
+
 
   $('.link').on 'click', ->
     linkToClaim = $(this).data('id')
@@ -38,11 +40,13 @@ TrainEmpire = do ->
 
     form.submit()
 
+
   $('.hand .card').on 'click', (e) ->
     $checkbox = $(this).find('input[type=checkbox]')
 
     if e.target == this
       $checkbox.prop('checked', not $checkbox.prop('checked'))
+
 
   $('.city-label').css('display', 'none')
 
@@ -52,12 +56,14 @@ TrainEmpire = do ->
   hideLabel = (id) ->
     $(".city-label[data-id='#{id}']").hide()
 
+
   $('.route-card').mouseenter ->
     fromCity = $(this).data('from')
     toCity = $(this).data('to')
 
     displayLabel(fromCity)
     displayLabel(toCity)
+
 
   $('.route-card').mouseleave ->
     fromCity = $(this).data('from')
@@ -66,11 +72,14 @@ TrainEmpire = do ->
     hideLabel(fromCity)
     hideLabel(toCity)
 
+
   $('circle').mouseenter ->
     $(this).parent().find('.city-label').show()
 
+
   $('circle').mouseleave ->
     $(this).parent().find('.city-label').hide()
+
 
   publik.startGame()
 

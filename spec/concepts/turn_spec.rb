@@ -37,7 +37,7 @@ describe Turn do
         StateModifiers::KeepInitialRouteCards,
       ]
 
-      turn = Turn.new([StateModifiers::DrawRouteCards.new(nil)], current: true)
+      turn = Turn.new([StateModifiers::DrawRouteCards.new(nil)])
 
       expect(turn.options).to eq [
         StateModifiers::KeepRouteCards,
