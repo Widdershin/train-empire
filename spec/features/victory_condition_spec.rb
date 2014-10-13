@@ -7,11 +7,10 @@ describe 'end game', type: :feature, js: true do
   let(:fred) { create :user }
   let(:wilma) { create :user }
 
-  before do
-  end
-
   it 'can be won', slow: true do
     pending 'being worth running'
+    fail 'no need to run'
+
     log_in! fred
 
     visit '/games'

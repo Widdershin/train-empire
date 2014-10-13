@@ -2,6 +2,17 @@ class Turn
   attr_writer :current
   attr_reader :modifiers
 
+  PATTERNS = [
+    [StateModifiers::ClaimLink],
+    [StateModifiers::DrawWildCard],
+    [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
+    [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
+    [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
+    [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
+    [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
+    [StateModifiers::KeepInitialRouteCards],
+  ]
+
   def initialize(state_modifiers = [], current: false)
     @modifiers = state_modifiers
     @current = current
@@ -34,11 +45,11 @@ class Turn
   private
 
   def matched_patterns
-    patterns.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
+    PATTERNS.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
   end
 
   def valid_modifier_pattern?
-    patterns.include? modifier_classes
+    PATTERNS.include? modifier_classes
   end
 
   def start_of_pattern?
@@ -47,20 +58,6 @@ class Turn
 
   def modifier_classes
     modifiers.map(&:class)
-  end
-
-  # TODO - constantize
-  def patterns
-    [
-      [StateModifiers::ClaimLink],
-      [StateModifiers::DrawWildCard],
-      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCardFromDeck],
-      [StateModifiers::DrawTrainCardFromDeck, StateModifiers::DrawTrainCard],
-      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCardFromDeck],
-      [StateModifiers::DrawTrainCard, StateModifiers::DrawTrainCard],
-      [StateModifiers::DrawRouteCards, StateModifiers::KeepRouteCards],
-      [StateModifiers::KeepInitialRouteCards],
-    ]
   end
 
   def apply_modifier(game_state, modifier)
