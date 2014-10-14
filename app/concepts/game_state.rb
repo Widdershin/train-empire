@@ -31,6 +31,7 @@ class GameState
     players.current_player
   end
 
+  # TODO - name after what it actually does
   def after_action
     refill_train_deck_from_discards! if train_deck.empty?
 

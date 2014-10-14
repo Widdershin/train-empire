@@ -26,19 +26,20 @@ class Turn
   end
 
   def valid?
-    valid_modifier_pattern? or (current? and start_of_pattern?)
+    valid_modifier_pattern? || (current? && start_of_pattern?)
   end
 
   def current?
     @current
   end
 
+  # TODO - vanquish (unneeded)
   def complete?
     valid_modifier_pattern?
   end
 
   def options
-    matched_patterns.map { |pattern| pattern.at(modifiers.size) }.uniq
+    matched_patterns.map { |pattern| pattern[modifiers.size] }.uniq
   end
 
   def mark_as_current
@@ -51,10 +52,12 @@ class Turn
     PATTERNS.select { |pattern| pattern.first(modifiers.size) == modifier_classes }
   end
 
+  # TODO - reconsider name
   def valid_modifier_pattern?
     PATTERNS.include? modifier_classes
   end
 
+  # TODO - more descriptive name
   def start_of_pattern?
     matched_patterns.any?
   end
@@ -64,12 +67,6 @@ class Turn
   end
 
   def apply_modifier(game_state, modifier)
-    raise error_message(modifier) unless modifier.valid? game_state.current_player, game_state
     modifier.process(game_state.current_player, game_state)
   end
-
-  def error_message(modifier)
-    "Invalid Modifier: #{modifier.inspect}"
-  end
-
 end

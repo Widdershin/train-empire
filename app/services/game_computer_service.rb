@@ -5,19 +5,16 @@ class GameComputerService
   end
 
   def process
+    # TODO - should be an each
     turns.reduce(game_state) do |game_state, turn|
-      raise "Invalid turn: #{error_message(turn)}" unless turn.valid?
       turn.process game_state
+      # TODO - use current? instead of complete?
       game_state.end_turn if turn.complete?
       game_state
     end
   end
 
   private
-
-  def error_message(turn)
-    "#{turn.modifiers.map(&:class).join(', ')}, current: #{turn.current?}"
-  end
 
   def turns
     @turns
