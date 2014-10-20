@@ -97,9 +97,13 @@ $purple: #CC00CC;
 .link-outline
 {
   stroke: white;
-  opacity: 0.05;
+  opacity: 0.07;
 }
 
+.link-outline.owned
+{
+  opacity: 0.7;
+}
 
 .cards form {
   display: inline-block;
@@ -163,6 +167,10 @@ svg .card.black {
 
 a:link {
   color: #FF0DF7;
+}
+
+.connected {
+  background: lime;
 }
 
 svg {

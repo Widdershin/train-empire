@@ -14,6 +14,10 @@ class Score
     ScoreCalculationService.new(@game_state, player).score + longest_route_score
   end
 
+  def longest_route?
+    @longest_route
+  end
+
   def mark_longest_route!
     @longest_route = true
   end

@@ -68,6 +68,6 @@ class PlayerState
   end
 
   def to_s
-    "#{name} - #{trains} trains"
+    "#{name}: #{trains} trains"
   end
 end

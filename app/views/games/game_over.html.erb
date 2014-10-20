@@ -1,7 +1,18 @@
 Game Over
 <h2>Scores</h2>
 <ol>
-<% @player_scores.each do |player| %>
-  <li><%= "#{player.name}: #{player.score} points" %></li>
+<% @player_scores.each do |score| %>
+  <li><%= "#{score.name}: #{score.score} points" %></li>
 <% end %>
 </ol>
+
+<% @player_scores.each do |score| %>
+  <p>
+    <%= score.name %> <%= ' - Longest Route' if score.longest_route? %>
+    <% score.player.routes.each do |route| %>
+      <div class="card route-card <%= 'connected' if route.connected_by_player?(score.player) %>">
+        <%= route %>
+     </div>
+    <% end %>
+  </p>
+<% end %>

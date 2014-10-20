@@ -11,7 +11,7 @@ class LinkPresenter
 
   def svg
     <<-SVG.strip_heredoc.html_safe
-      <path class="link-outline"
+      <path class="link-outline #{'owned' if owner}"
             d="#{path}" fill="transparent"
             stroke-width="#{line_width + OUTLINE_BUFFER}"/>
       <path class="link #{line_color}" data-id="#{id}" data-cost="#{cost}"

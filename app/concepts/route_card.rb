@@ -13,6 +13,10 @@ class RouteCard
       points == other.points
   end
 
+  def connected_by_player?(player)
+    CityConnectionCheckerService.new(origin, destination).connected_by?(player)
+  end
+
   def to_s
     "Connect #{origin} to #{destination} for #{points} points."
   end
