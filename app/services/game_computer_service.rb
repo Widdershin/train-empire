@@ -5,13 +5,13 @@ class GameComputerService
   end
 
   def process
-    # TODO - should be an each
-    turns.reduce(game_state) do |game_state, turn|
+    turns.each do |turn|
       turn.process game_state
       # TODO - use current? instead of complete?
       game_state.end_turn if turn.complete?
-      game_state
     end
+
+    game_state
   end
 
   private

@@ -18,11 +18,12 @@ class Turn
   end
 
   def process(game_state)
-    modifiers.reduce(game_state) do |game_state, modifier|
+    modifiers.each do |modifier|
       apply_modifier(game_state, modifier)
       game_state.after_action
-      game_state
     end
+
+    game_state
   end
 
   def valid?
