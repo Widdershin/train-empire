@@ -8,6 +8,7 @@ class Game < ActiveRecord::Base
 
   validates :seed, presence: true
 
+  MAX_SEED = 100000000
 
   def state
     GameComputerService.new(initial_state, turns).process
@@ -28,6 +29,6 @@ class Game < ActiveRecord::Base
   private
 
   def set_seed
-    self.seed ||= Random.new_seed
+    self.seed ||= rand(MAX_SEED)
   end
 end
