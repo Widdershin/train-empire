@@ -41,6 +41,7 @@ gem 'rails_12factor', group: :production
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'

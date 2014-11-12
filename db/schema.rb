@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012212053) do
+ActiveRecord::Schema.define(version: 20141112032054) do
 
   create_table "actions", force: true do |t|
     t.string   "type"
