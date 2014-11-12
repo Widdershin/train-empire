@@ -1,4 +1,3 @@
-<a href='http://cdn1.daysofwonder.com/tickettoride/en/img/tt_rules_2013_en.pdf'>The Rules</a>
 <% if not playing_game? @game %>
   <h1><%= link_to("Join Game", game_players_path(@game), method: :post)%></h1>
 <% end %>
