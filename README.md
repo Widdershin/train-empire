@@ -7,6 +7,7 @@ Setup
 -----
 
     git clone https://github.com/Widdershin/train-empire.git
+    bundle install
     rake db:create db:migrate
     rails s
 
