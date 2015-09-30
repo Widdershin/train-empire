@@ -21,4 +21,4 @@ License
 
 All code is property of Powershop. Feel free to peruse and learn from the code.
 
-![Powershop](http://www.powershop.co.nz/images/powershop-logo.svg)
+![Powershop](http://www.powershop.co.nz/assets/images/nav/powershop-logo.min.svg)
